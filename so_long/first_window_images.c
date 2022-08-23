@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_window_images.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:27:16 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/04/29 18:49:42 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/23 17:43:06 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	replace_field(t_board **matrix, int row, int col, t_data data)
 	replace_player_img(matrix, row, col, data);
 	replace_col_img(matrix, row, col, data);
 	replace_exit_img(matrix, row, col, data);
-	print_steps(data);
+	//print_steps(data);
 }

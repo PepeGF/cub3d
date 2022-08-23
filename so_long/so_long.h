@@ -44,6 +44,7 @@ typedef struct s_cont {
 typedef struct s_player {
 	int	x;
 	int	y;
+	int	direction;
 }	t_player;
 
 typedef struct s_data

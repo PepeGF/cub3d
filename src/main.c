@@ -6,11 +6,23 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:23:07 by josgarci          #+#    #+#             */
-/*   Updated: 2022/08/23 17:11:50 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/23 17:19:11 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	print_list(t_list **list)
+{
+	t_list	*aux;
+
+	aux = (*list);
+	while (aux)
+	{
+		printf("%s", aux->content);
+		aux = aux->next;
+	}
+}
 
 void	free_variables(t_list **list)
 {
@@ -83,7 +95,9 @@ int main(int argc, char *argv[])
 
 	list = 0;
 	list = ft_read_map(argv[1], cont);
+	print_list(&list);
 	
 	printf("Paola guapa!\n");
+	printf("filas-> %d\ncolumnas-> %d\n", cont[0], cont[1]);
 	return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/05/11 19:21:12 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:42:36 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	initialize_images(t_data *data, int cont[2])
 	data->px = 80;
 	data->mlx = mlx_init();
 	data->field = mlx_xpm_file_to_image(data->mlx,
-			"./img/field.xpm", &data->px, &data->px);
+			"./img/gris.xpm", &data->px, &data->px);
 	data->dino = mlx_xpm_file_to_image(data->mlx,
-			"./img/1.xpm", &data->px, &data->px);
+			"./img/amarillo.xpm", &data->px, &data->px);
 	data->food = mlx_xpm_file_to_image(data->mlx,
-			"./img/polloesc2.xpm", &data->px, &data->px);
+			"./img/azul.xpm", &data->px, &data->px);
 	data->border = mlx_xpm_file_to_image(data->mlx,
-			"./img/border.xpm", &data->px, &data->px);
+			"./img/rojo.xpm", &data->px, &data->px);
 	data->obs = mlx_xpm_file_to_image(data->mlx,
-			"./img/obs2.xpm", &data->px, &data->px);
+			"./img/rosa.xpm", &data->px, &data->px);
 	data->end = mlx_xpm_file_to_image(data->mlx,
-			"./img/cave.xpm", &data->px, &data->px);
+			"./img/verde.xpm", &data->px, &data->px);
 	data->mlx_win = mlx_new_window(data->mlx, data->px * cont[1],
 			data->px * cont[0], "so_long");
 }

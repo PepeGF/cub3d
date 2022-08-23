@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 12:01:35 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 17:03:41 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/23 17:26:20 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	check_file(char *file)
 	int	i;
 
 	i = ft_strlen(file) - 1;
-	if (file[i] != 'b' || file[i - 1] != 'u'
-		|| file[i - 2] != 'c' || file[i - 3] != '.')
+	if (file[i] != 'r' || file[i - 1] != 'e'
+		|| file[i - 2] != 'b' || file[i - 3] != '.')
 	{
 		printf("Error\nIncorrect file extension\n");
 		exit (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_imgs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:51:58 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/04/27 20:52:21 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:40:35 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	replace_player_img(t_board **matrix, int row, int col, t_data data)
 		j = 0;
 		while (j < row)
 		{
-			if (matrix[i][j].type == 'P')
+			if (matrix[i][j].type == 'N' || matrix[i][j].type == 'S'
+				|| matrix[i][j].type == 'E' || matrix[i][j].type == 'W')
 				mlx_put_image_to_window(data.mlx, data.mlx_win, data.dino,
 					(matrix[i][j].col * data.px),
 					(matrix[i][j].row * data.px));
