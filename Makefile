@@ -14,7 +14,7 @@ LIB_GNL = -I$(LIBGNL_PATH) -L$(LIBGNL_PATH) -lgnl
 LIB_FT = -I$(LIBFT_PATH) -L$(LIBFT_PATH) -lft
 
 SRCS_PATH = src/
-INCS_PATH = include/
+INCS_PATH = inc/
 BIN_PATH = bin/
 LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/

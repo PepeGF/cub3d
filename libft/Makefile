@@ -14,20 +14,21 @@ GCC	= gcc
 
 RM	= rm -f
 
-.c.o:
-	${GCC} ${CFLAGS} -c $< -o $@
-
-${NAME}:	${OBJS}
-		ar rc ${NAME} ${OBJS}
-		ranlib ${NAME} 
-
 all:		${NAME}
 
+.c.o:
+	@${GCC} ${CFLAGS} -c $< -o $@
+
+${NAME}:	${OBJS}
+		@ar rc ${NAME} ${OBJS}
+		@ranlib ${NAME}
+		@echo "libft.a successfully compiled"
+
 clean:		
-	${RM} ${OBJS}
+	@${RM} ${OBJS}
 
 fclean:		clean
-		${RM} ${NAME}
+		@${RM} ${NAME}
 
 re:		fclean all
 
