@@ -6,11 +6,46 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:23:07 by josgarci          #+#    #+#             */
-/*   Updated: 2022/08/23 17:03:07 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/23 17:11:50 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	free_variables(t_list **list)
+{
+	t_list	*aux;
+
+	aux = *list;
+	while (*list)
+	{
+		aux = (*list)->next;
+		if ((*list)->content != NULL)
+			free((*list)->content);
+		free(*list);
+		*list = aux;
+	}
+}
+
+void	free_if_error(int fd, t_list **aux)
+{
+	free_variables(aux);
+	close(fd);
+	exit (0);
+}
+
+void	check_file(char *file)
+{
+	int	i;
+
+	i = ft_strlen(file) - 1;
+	if (file[i] != 'b' || file[i - 1] != 'u'
+		|| file[i - 2] != 'c' || file[i - 3] != '.')
+	{
+		printf("Error\nIncorrect file extension\n");
+		exit (0);
+	}
+}
 
 t_list	*ft_read_map(char *file, int cont[2])
 {
@@ -39,7 +74,7 @@ t_list	*ft_read_map(char *file, int cont[2])
 	return (aux);
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
 	(void)argc;
 	(void)argv;
