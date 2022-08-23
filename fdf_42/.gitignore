@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+*.o
+*.a
+fdf
+a.out
+man3printf.pdf
