@@ -1,0 +1,5 @@
+Cambiado en player_funcion.C
+    53: añadido player.direction
+    15: creada ft_player_direction
+    29: modificaddo 'P' por NSWE
+

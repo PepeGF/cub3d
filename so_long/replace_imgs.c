@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:51:58 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 18:40:35 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/23 20:40:51 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	replace_exit_img(t_board **matrix, int row, int col, t_data data)
 		while (j < row)
 		{
 			if (matrix[i][j].type == 'E')
-				mlx_put_image_to_window(data.mlx, data.mlx_win, data.end,
+				mlx_put_image_to_window(data.mlx, data.mlx_win, data.dino,//cambiado data.end por dta.dino
 					(matrix[i][j].col * data.px),
 					(matrix[i][j].row * data.px));
 			j++;

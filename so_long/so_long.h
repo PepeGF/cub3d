@@ -30,7 +30,7 @@ typedef struct s_board {
 	int		is_border;
 	int		jug;
 	int		coll;
-	int		end;
+	// int		end;
 }	t_board;
 
 typedef struct s_cont {
@@ -56,7 +56,7 @@ typedef struct s_data
 	void		*food;
 	void		*obs;
 	void		*border;
-	void		*end;
+	// void		*end;
 	int			px;
 	int			mov_cont;
 	t_board		**board;
