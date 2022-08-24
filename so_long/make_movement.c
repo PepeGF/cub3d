@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 17:44:28 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:23:33 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	move_player(t_data *data, int x, int y)
 		(data->board[data->player.x][data->player.y].row * data->px));
 	data->player.x += x;
 	data->player.y += y;
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->field,
-		(data->board[data->player.x][data->player.y].col * data->px),
-		(data->board[data->player.x][data->player.y].row * data->px));
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->dino,
 		(data->board[data->player.x][data->player.y].col * data->px),
 		(data->board[data->player.x][data->player.y].row * data->px));

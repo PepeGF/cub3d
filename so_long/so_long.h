@@ -64,6 +64,21 @@ typedef struct s_data
 	t_player	player;	
 }	t_data;
 
+enum e_keycodes
+{
+	key_a = 0,
+	key_s = 1,
+	key_d = 2,
+	key_q = 12,
+	key_w = 13,
+	key_space = 49,
+	key_esc = 53,
+	key_up = 126,
+	key_down = 125,
+	key_left = 123,
+	key_right = 124
+};
+
 // check_matrix_cont.c
 void		check_player(t_cont *cont);
 void		check_end(t_cont *cont);
