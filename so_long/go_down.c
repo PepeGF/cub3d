@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   go_down.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:38:05 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/05/11 19:08:03 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:36:43 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	go_down(t_data *data)
 	{
 		if (data->board[data->player.x + 1][data->player.y].type != '1')
 		{
-			if (data->board[data->player.x + 1][data->player.y].type == 'E')
+			/* if (data->board[data->player.x + 1][data->player.y].type == 'E')
 			{
 				if (data->cont->coll == 0)
 					end_game(data, 1, 0);
 			}
-			else
+			else */
 			{
 				move_player(data, 1, 0);
-				check_if_colleccionable(data);
+				// check_if_colleccionable(data);
 			}
 		}
 	}
