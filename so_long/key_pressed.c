@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/24 18:20:15 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/24 19:13:29 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,56 @@ void	steps(t_data *data)
 	printf("\rSteps: %d\n", data->mov_cont);
 }
 
+void	*choose_img(t_data *data)
+{
+	if (data->player.direction == NORTH)
+		data->dino = mlx_xpm_file_to_image(data->mlx,
+		"./img/arrow_90.xpm", &data->px, &data->px);
+	else if (data->player.direction == EAST)
+		data->dino = mlx_xpm_file_to_image(data->mlx,
+		"./img/arrow_0.xpm", &data->px, &data->px);
+	else if (data->player.direction == SOUTH)
+		data->dino = mlx_xpm_file_to_image(data->mlx,
+		"./img/arrow_270.xpm", &data->px, &data->px);
+	else
+		data->dino = mlx_xpm_file_to_image(data->mlx,
+		"./img/arrow_180.xpm", &data->px, &data->px);
+	return (data->dino);
+}
+
+void	turn_left(t_data *data)
+{
+
+	mlx_put_image_to_window(data->mlx, data->mlx_win, choose_img(data),
+		(data->board[data->player.x][data->player.y].col * data->px),
+		(data->board[data->player.x][data->player.y].row * data->px));
+}
+
+void	turn_right(t_data *data)
+{
+	mlx_put_image_to_window(data->mlx, data->mlx_win, choose_img(data),
+		(data->board[data->player.x][data->player.y].col * data->px),
+		(data->board[data->player.x][data->player.y].row * data->px));
+}
 
 int	key_hook(int keycode, t_data *data)
 {
-	if (keycode == 53 || keycode == 49 || keycode == 12)
+	if (keycode == key_esc || keycode == key_space || keycode == key_q)
 		exit_game(data);
+	if (keycode == key_left)
+	{
+		data->player.direction += 90;
+		data->player.direction %= 360;
+		printf("Nueva orientación %d\n", data->player.direction);
+		turn_left(data);
+	}
+	if (keycode == key_right)
+	{
+		data->player.direction += 270;
+		data->player.direction %= 360;
+		printf("Nueva orientación %d\n", data->player.direction);
+		turn_right(data);
+	}
 	if (data->player.direction == 0)
 	{
 		if (keycode == key_s)
@@ -67,6 +112,7 @@ int	key_hook(int keycode, t_data *data)
 		if (keycode == key_s)
 			go_up(data);
 	}
+
 /* 	if (keycode == 1 || keycode == 125)
 		go_down(data);
 	if (keycode == 13 || keycode == 126)

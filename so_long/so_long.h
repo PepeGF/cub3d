@@ -79,6 +79,14 @@ enum e_keycodes
 	key_right = 124
 };
 
+enum e_cardinal_points
+{
+	NORTH = 90,
+	SOUTH = 270,
+	EAST = 0,
+	WEST = 180
+};
+
 // check_matrix_cont.c
 void		check_player(t_cont *cont);
 void		check_end(t_cont *cont);
