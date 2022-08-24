@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 18:35:13 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:17:44 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_player	where_is_the_player(t_board **board, int x, int y)
 				player.y = j;
 				player.x = i;
 				player.direction = ft_player_direction(board, player);
-				printf("Esta orientado hacia %d\n", player.direction);
 				break ;
 			}	
 			j++;

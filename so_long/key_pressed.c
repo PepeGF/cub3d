@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/24 19:13:29 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:16:45 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ int	key_hook(int keycode, t_data *data)
 	{
 		data->player.direction += 90;
 		data->player.direction %= 360;
-		printf("Nueva orientación %d\n", data->player.direction);
 		turn_left(data);
 	}
 	if (keycode == key_right)
 	{
 		data->player.direction += 270;
 		data->player.direction %= 360;
-		printf("Nueva orientación %d\n", data->player.direction);
 		turn_right(data);
 	}
 	if (data->player.direction == 0)
