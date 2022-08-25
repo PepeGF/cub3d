@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/24 20:16:45 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/25 18:54:17 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	key_hook(int keycode, t_data *data)
 	}
 	if (data->player.direction == 0)
 	{
-		if (keycode == key_s)
+		if (keycode == key_s || keycode == key_down)
 			go_left(data);
-		if (keycode == key_w)
+		if (keycode == key_w || keycode == key_up)
 			go_right(data);
 		if (keycode == key_d)
 			go_down(data);
@@ -83,16 +83,16 @@ int	key_hook(int keycode, t_data *data)
 			go_left(data);
 		if (keycode == key_d)
 			go_right(data);
-		if (keycode == key_s)
+		if (keycode == key_s || keycode == key_down)
 			go_down(data);
-		if (keycode == key_w)
+		if (keycode == key_w || keycode == key_up)
 			go_up(data);
 	}
 	if (data->player.direction == 180)
 	{
-		if (keycode == key_w)
+		if (keycode == key_w || keycode == key_up)
 			go_left(data);
-		if (keycode == key_s)
+		if (keycode == key_s || keycode == key_down)
 			go_right(data);
 		if (keycode == key_a)
 			go_down(data);
@@ -105,9 +105,9 @@ int	key_hook(int keycode, t_data *data)
 			go_left(data);
 		if (keycode == key_a)
 			go_right(data);
-		if (keycode == key_w)
+		if (keycode == key_w || keycode == key_up)
 			go_down(data);
-		if (keycode == key_s)
+		if (keycode == key_s || keycode == key_down)
 			go_up(data);
 	}
 

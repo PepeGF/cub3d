@@ -45,6 +45,8 @@ typedef struct s_player {
 	int	x;
 	int	y;
 	int	direction;
+	int	position[2];
+	int	dir_vector[2];
 }	t_player;
 
 typedef struct s_data
@@ -85,6 +87,13 @@ enum e_cardinal_points
 	SOUTH = 270,
 	EAST = 0,
 	WEST = 180
+};
+
+enum e_constant_values
+{
+	vision_angle = 90,
+	window_height = 720,
+	window_width = 1280
 };
 
 // check_matrix_cont.c
