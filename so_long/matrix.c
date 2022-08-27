@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 20:51:28 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 20:34:19 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:03:27 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_board	ft_add_line_to_list(char c, int row, int col)
 	elem.type = c;
 	if (c == '1')
 		elem.is_border = 1;
-	else if (c == 'C')
+	// else if (c == 'C')
 		elem.coll = 1;
 	/* else if (c == 'E')
 		elem.end = 1; */
@@ -52,12 +52,12 @@ t_board	**ft_final_matrix(t_list **list, int cont[2])
 
 	i = 0;
 	aux = *list;
-	board = malloc(sizeof(t_board *) * (cont[0]));
-	while (i < cont[0])
+	board = malloc(sizeof(t_board *) * (cont[1])); //bien
+	while (i < cont[1])
 	{
 		j = 0;
-		board[i] = malloc(sizeof(t_board) * (cont[1]));
-		while (j < cont[1])
+		board[i] = malloc(sizeof(t_board) * (cont[0])); //bien
+		while (j < cont[0])
 		{
 			board[i][j] = ft_add_line_to_list(aux->content[j], i, j);
 			j++;

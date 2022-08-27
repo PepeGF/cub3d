@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/25 18:54:17 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:00:57 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ void	turn_left(t_data *data)
 {
 
 	mlx_put_image_to_window(data->mlx, data->mlx_win, choose_img(data),
-		(data->board[data->player.x][data->player.y].col * data->px),
-		(data->board[data->player.x][data->player.y].row * data->px));
+		(data->board[data->player.y][data->player.x].col * data->px),
+		(data->board[data->player.y][data->player.x].row * data->px));
 }
 
 void	turn_right(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx, data->mlx_win, choose_img(data),
-		(data->board[data->player.x][data->player.y].col * data->px),
-		(data->board[data->player.x][data->player.y].row * data->px));
+		(data->board[data->player.y][data->player.x].col * data->px),
+		(data->board[data->player.y][data->player.x].row * data->px));
 }
 
 int	key_hook(int keycode, t_data *data)
@@ -66,6 +66,7 @@ int	key_hook(int keycode, t_data *data)
 		data->player.direction %= 360;
 		turn_right(data);
 	}
+	
 	if (data->player.direction == 0)
 	{
 		if (keycode == key_s || keycode == key_down)

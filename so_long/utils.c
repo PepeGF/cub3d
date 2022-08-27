@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 18:31:44 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/04/11 18:39:58 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:04:21 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	print_matrix(t_board **matrix, int x, int y)
 
 	i = -1;
 	printf("Matrix: x = %d, y = %d\n", x, y);
-	while (++i < x)
+	while (++i < y)
 	{
 		j = 0;
-		while (j < y)
+		while (j < x)
 		{
 			printf("%c", matrix[i][j].type);
 			j++;

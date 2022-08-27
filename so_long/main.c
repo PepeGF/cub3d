@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 20:36:05 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:59:49 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char *ft_select_player_orientation(t_data *data)
 {
-	if (data->board[data->player.x][data->player.y].type == 'N')
+	if (data->board[data->player.y][data->player.x].type == 'N')
 		return (ft_strdup("./img/arrow_90.xpm"));
-	if (data->board[data->player.x][data->player.y].type == 'S')
+	if (data->board[data->player.y][data->player.x].type == 'S')
 		return (ft_strdup("./img/arrow_270.xpm"));
-	if (data->board[data->player.x][data->player.y].type == 'E')
+	if (data->board[data->player.y][data->player.x].type == 'E')
 		return (ft_strdup("./img/arrow_0.xpm"));
-	if (data->board[data->player.x][data->player.y].type == 'W')
+	if (data->board[data->player.y][data->player.x].type == 'W')
 		return (ft_strdup("./img/arrow_180.xpm"));
 	else
 		return (NULL);
@@ -46,8 +46,8 @@ void	initialize_images(t_data *data, int cont[2])
 			"./img/rosa.xpm", &data->px, &data->px);
 /* 	data->end = mlx_xpm_file_to_image(data->mlx,
 	 		"./img/amarillo.xpm", &data->px, &data->px); */
-	data->mlx_win = mlx_new_window(data->mlx, data->px * cont[1],
-			data->px * cont[0], "so_long");
+	data->mlx_win = mlx_new_window(data->mlx, data->px * cont[0],//bien
+			data->px * cont[1], "so_long");//bien
 }
 
 void	initialize_main_vars(t_data *data, int cont[2])
@@ -85,13 +85,13 @@ int	main(int argc, char **argv)
 	data.cont = sum_cont(data.board, cont);
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
-	data.player = where_is_the_player(data.board, data.cont->y, data.cont->x);
+	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);
 	replace_field(data.board, cont[1], cont[0], data);
 	mlx_key_hook(data.mlx_win, &key_hook, &data);
 	mlx_hook(data.mlx_win, 17, (1L << 17), &exit_game, &data.mlx);
 	mlx_loop(data.mlx);
-	free_main_vars(&data, &list, cont[0]);
+	free_main_vars(&data, &list, cont[1]);
 	return (0);
 }

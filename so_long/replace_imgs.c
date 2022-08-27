@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:51:58 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 20:40:51 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:58:10 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	replace_player_img(t_board **matrix, int row, int col, t_data data)
 	int	j;
 
 	i = -1;
-	while (++i < col)
+	while (++i < row)
 	{
 		j = 0;
-		while (j < row)
+		while (j < col)
 		{
 			if (matrix[i][j].type == 'N' || matrix[i][j].type == 'S'
 				|| matrix[i][j].type == 'E' || matrix[i][j].type == 'W')
@@ -33,7 +33,7 @@ void	replace_player_img(t_board **matrix, int row, int col, t_data data)
 	}
 }
 
-void	replace_exit_img(t_board **matrix, int row, int col, t_data data)
+/* void	replace_exit_img(t_board **matrix, int row, int col, t_data data)
 {
 	int	i;
 	int	j;
@@ -51,9 +51,9 @@ void	replace_exit_img(t_board **matrix, int row, int col, t_data data)
 			j++;
 		}
 	}
-}
+} */
 
-void	replace_col_img(t_board **matrix, int row, int col, t_data data)
+/* void	replace_col_img(t_board **matrix, int row, int col, t_data data)
 {
 	int	i;
 	int	j;
@@ -71,7 +71,7 @@ void	replace_col_img(t_board **matrix, int row, int col, t_data data)
 			j++;
 		}
 	}
-}
+} */
 
 void	replace_border_img(t_board **matrix, int row, int col, t_data data)
 {
@@ -79,14 +79,14 @@ void	replace_border_img(t_board **matrix, int row, int col, t_data data)
 	int	j;
 
 	i = -1;
-	while (++i < col)
+	while (++i < row)
 	{
 		j = 0;
-		while (j < row)
+		while (j < col)
 		{
 			if (matrix[i][j].type == '1')
 			{
-				if (i == 0 || j == 0 || i == col - 1 || j == row - 1)
+				if (i == 0 || j == 0 || i == row - 1 || j == col - 1)
 					mlx_put_image_to_window(data.mlx, data.mlx_win, data.border,
 						(matrix[i][j].col * data.px),
 						(matrix[i][j].row * data.px));

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 12:01:35 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/23 17:26:20 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 12:21:08 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ t_list	*ft_read_map(char *file, int cont[2])
 	line = get_next_line(fd);
 	if (line == 0)
 		exit(0);
-	cont[1] = ft_strlen(line) - 1;
+	cont[0] = ft_strlen(line) - 1;
 	aux = 0;
 	while (line)
 	{
 		len = ft_strlen(line) - 1;
-		if (cont[1] != len)
+		if (cont[0] != len)
 			free_if_error(fd, &aux);
 		ft_lstadd_back(&aux, ft_lstnew(line));
 		line = get_next_line(fd);
-		cont[0]++;
+		cont[1]++;
 	}
 	close(fd);
 	return (aux);
