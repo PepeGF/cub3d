@@ -45,7 +45,8 @@ typedef struct s_player {
 	int	x;
 	int	y;
 	int	direction;
-	int	position[2];
+	int	x_position;
+	int	y_position;
 	int	dir_vector[2];
 }	t_player;
 
@@ -149,7 +150,7 @@ t_board		**ft_final_matrix(t_list **list, int cont[2]);
 
 // player_functions.c
 int			is_player(t_board **board, int i, int j);
-t_player	where_is_the_player(t_board **board, int x, int y);
+t_player	where_is_the_player(t_board **board, int x, int y, t_data);
 
 // utils.c
 void		print_list(t_list **list);
@@ -172,5 +173,9 @@ void		replace_border_img(t_board **matrix, int row, int col, t_data data);
 // utils.c
 void		print_list(t_list **list);
 void		print_matrix(t_board **matrix, int x, int y);
+
+// hay que ordenar esto
+int	ft_get_player_x_position(t_player player, t_data data);
+int	ft_get_player_y_position(t_player player, t_data data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 14:04:02 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:26:43 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,25 @@ int	is_player(t_board **board, int i, int j)
 	return (0);
 }
 
-// int	*ft_get_player_position(board, player)
-// {
-// 	int	aux[2];
+int	ft_get_player_x_position(t_player player, t_data data)
+{
+	int	aux;
 
-// 	aux[0] = 
-// }
+	// aux = malloc(sizeof(int) * 2);
+	aux = player.x * data.px + data.px / 2;
+	printf ("Posición del jugador:\n\tx: %d\n", aux);
+	return (aux);//no se cuándo hay que liberar esto...
+}
 
-t_player	where_is_the_player(t_board **board, int x, int y)
+int	ft_get_player_y_position(t_player player, t_data data)
+{
+	int	aux;
+
+	aux = player.y * data.px + data.px / 2;
+	printf ("\ty: %d\n", aux);
+	return (aux);//no se cuándo hay que liberar esto...
+}
+t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
 {
 	int			i;
 	int			j;
@@ -55,8 +66,10 @@ t_player	where_is_the_player(t_board **board, int x, int y)
 			{
 				player.x = j;
 				player.y = i;
+				printf("player.x: %d\tplayer.y: %d\tpx: %d", player.x, player.y, data.px);
 				player.direction = ft_player_direction(board, player);
-				// player.position = ft_get_player_position(board, player);
+				player.x_position = ft_get_player_x_position(player, data);
+				player.y_position = ft_get_player_y_position(player, data);
 				// player.dir_vector = ft_get_player_direction(board, player);
 				break ;
 			}	

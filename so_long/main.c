@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 13:59:49 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:29:08 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	main(int argc, char **argv)
 	data.cont = sum_cont(data.board, cont);
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
-	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y);
+	data.px = 16;
+	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y, data);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);
 	replace_field(data.board, cont[1], cont[0], data);
