@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 14:26:43 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 17:59:01 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,21 @@ int	is_player(t_board **board, int i, int j)
 	return (0);
 }
 
-int	ft_get_player_x_position(t_player player, t_data data)
+void	ft_get_player_position(t_player *player, t_data data)
 {
-	int	aux;
-
-	// aux = malloc(sizeof(int) * 2);
-	aux = player.x * data.px + data.px / 2;
-	printf ("Posición del jugador:\n\tx: %d\n", aux);
-	return (aux);//no se cuándo hay que liberar esto...
+	player->x_position = player->x * data.px + data.px / 2;
+	player->y_position = player->y * data.px + data.px / 2;
+	// printf ("Posición del jugador:\n\tx: %d\n\ty: %d\n", player->x, player->y);
+	return ;
 }
 
-int	ft_get_player_y_position(t_player player, t_data data)
+void	ft_get_player_dir_vector(t_player *player, t_data data)
 {
-	int	aux;
-
-	aux = player.y * data.px + data.px / 2;
-	printf ("\ty: %d\n", aux);
-	return (aux);//no se cuándo hay que liberar esto...
+	player->x_dir_vect = cos(player->direction * 2 * M_PI / 360);
+	player->y_dir_vect = -1 * sin(player->direction * 2 * M_PI / 360);
+	gt_get_camera_vector(&data, player);
 }
+
 t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
 {
 	int			i;
@@ -66,11 +63,10 @@ t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
 			{
 				player.x = j;
 				player.y = i;
-				printf("player.x: %d\tplayer.y: %d\tpx: %d", player.x, player.y, data.px);
+				printf("player.x: %d\tplayer.y: %d\tpx: %d\n", player.x, player.y, data.px);
 				player.direction = ft_player_direction(board, player);
-				player.x_position = ft_get_player_x_position(player, data);
-				player.y_position = ft_get_player_y_position(player, data);
-				// player.dir_vector = ft_get_player_direction(board, player);
+				ft_get_player_position(&player, data);
+				ft_get_player_dir_vector(&player, data);
 				break ;
 			}	
 			j++;

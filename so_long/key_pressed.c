@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 14:00:57 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:14:06 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,14 @@ int	key_hook(int keycode, t_data *data)
 		data->player.direction += 90;
 		data->player.direction %= 360;
 		turn_left(data);
+		ft_get_player_dir_vector(&data->player, *data);
 	}
 	if (keycode == key_right)
 	{
 		data->player.direction += 270;
 		data->player.direction %= 360;
 		turn_right(data);
+		ft_get_player_dir_vector(&data->player, *data);
 	}
 	
 	if (data->player.direction == 0)

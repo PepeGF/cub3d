@@ -4,7 +4,7 @@ SRCS	= gnl/get_next_line_utils.c gnl/get_next_line.c \
 			check_matrix.c check_matrix_cont.c check_matrix_values.c \
 			exit_game.c go_down.c go_up.c go_right.c go_left.c make_movement.c \
 			key_pressed.c first_window_images.c replace_imgs.c player_function.c \
-			print_steps.c utils.c
+			print_steps.c utils.c raycasting.c
 			
 
 LIBFT_PATH = libft/

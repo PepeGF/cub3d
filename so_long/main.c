@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 14:29:08 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:20:02 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	main(int argc, char **argv)
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
 	data.px = 16;
+	data.camera = initialize_camera();//para raycast
 	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y, data);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);

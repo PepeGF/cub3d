@@ -22,6 +22,15 @@
 # include "libft.h"
 # include "gnl/get_next_line.h"
 # include <mlx.h>
+# include <math.h>
+
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1920
+# endif
+
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 1042
+# endif
 
 typedef struct s_board {
 	int		col;
@@ -41,14 +50,25 @@ typedef struct s_cont {
 	int	y;
 }	t_cont;
 
-typedef struct s_player {
+typedef struct s_player 
+{
 	int	x;
 	int	y;
 	int	direction;
 	int	x_position;
 	int	y_position;
-	int	dir_vector[2];
+	int	x_dir_vect;
+	int	y_dir_vect;
 }	t_player;
+
+typedef struct s_camera
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_camera;
 
 typedef struct s_data
 {
@@ -64,7 +84,8 @@ typedef struct s_data
 	int			mov_cont;
 	t_board		**board;
 	t_cont		*cont;
-	t_player	player;	
+	t_player	player;
+	t_camera	*camera;
 }	t_data;
 
 enum e_keycodes
@@ -175,7 +196,12 @@ void		print_list(t_list **list);
 void		print_matrix(t_board **matrix, int x, int y);
 
 // hay que ordenar esto
-int	ft_get_player_x_position(t_player player, t_data data);
-int	ft_get_player_y_position(t_player player, t_data data);
+	// player_funcions.c
+void	ft_get_player_position(t_player *player, t_data data);
+void	ft_get_player_dir_vector(t_player *player, t_data data);
+
+	// raycast.c
+t_camera	*initialize_camera(void);
+void	gt_get_camera_vector(t_data *data, t_player *player);
 
 #endif
