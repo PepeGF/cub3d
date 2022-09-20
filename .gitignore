@@ -5,6 +5,7 @@ cub3D
 *.a
 a.out
 wololo
+so_long/so_long
 
 # Prerequisites
 *.d
