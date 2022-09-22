@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <sys/errno.h>
 # include <errno.h>
-# include "libft.h"
+# include "libft/libft.h"
 # include "gnl/get_next_line.h"
 # include <mlx.h>
 # include <math.h>

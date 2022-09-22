@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/20 09:17:16 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:52:25 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ atexit(leakss);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);
 	replace_field(data.board, cont[1], cont[0], data);
-	mlx_key_hook(data.mlx_win, &key_hook, &data);
-	mlx_hook(data.mlx_win, 17, (1L << 17), &exit_game, &data.mlx);
+	// mlx_key_hook(data.mlx_win, &key_hook, &data);
+	mlx_hook(data.mlx_win, 2, 0/* (1L << 17) */, &key_hook, &data.mlx);
+	mlx_hook(data.mlx_win, 17, 0/* (1L << 17) */, &exit_game, &data.mlx);
 	mlx_loop(data.mlx);
 	free_main_vars(&data, &list, cont[1]);
 	return (0);

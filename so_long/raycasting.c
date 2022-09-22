@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:01:10 by josgarci          #+#    #+#             */
-/*   Updated: 2022/09/20 10:04:56 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:44:09 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_calculate_distance_to_wall(t_data *data)
 	// hay que definir el plano de proyección y su distancia al jugador...no?
 	
 	// el ángulo de cada rayo es angulo_de_vision(90º?)/resolución_horizontal_ventana
-	int	x;
+	/* int	x;
 
 	x = 0;
 	while (x < WIN_WIDTH)
@@ -34,7 +34,7 @@ int	ft_calculate_distance_to_wall(t_data *data)
 		data->camera->ray_dir_x = data->player.x_dir_vect + data->camera->camera_x;
 		data->camera->ray_dir_y = data->player.y_dir_vect + data->camera->camera_y;
 		x++;
-	}
+	} */
 	(void)data;
 	return (0);
 }
