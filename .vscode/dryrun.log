@@ -15,6 +15,7 @@ echo '\033[1;35m'"[Creating libft]"'\033[1;34m'
 /Library/Developer/CommandLineTools/usr/bin/make -C libft/ --silent
 make[1]: Entering directory `/Users/JoseGF/Documents/cub3d/libft'
 gcc -Wall -Werror -Wextra -c  -c ft_isalnum.c -o ft_isalnum.o
+ 
 gcc -Wall -Werror -Wextra -c  -c ft_isalpha.c -o ft_isalpha.o
 gcc -Wall -Werror -Wextra -c  -c ft_isascii.c -o ft_isascii.o
 gcc -Wall -Werror -Wextra -c  -c ft_isdigit.c -o ft_isdigit.o
@@ -62,7 +63,8 @@ ranlib libft.a
 echo "libft.a successfully compiled"
 make[1]: Leaving directory `/Users/JoseGF/Documents/cub3d/libft'
 echo '\033[1;35m'"[Creating cub3D]"'\033[1;34m'
-gcc -o cub3D bin/main.o -lmlx -framework OpenGL -framework AppKit  -Ignl/ -Lgnl/ -lgnl -Ilibft/ -Llibft/ -lft -o cub3D #-fsanitize=address
+ 
+gcc -o cub3D bin/main.o -lmlx -framework OpenGL -framework AppKit  -Ignl/ -Lgnl/ -lgnl -Ilibft/ -Llibft/ -lft -o cub3D -fsanitize=address
 echo '\033[1;32m'"cub3D: ready to be executed"'\033[1;37m'
 make: Leaving directory `/Users/JoseGF/Documents/cub3d'
  

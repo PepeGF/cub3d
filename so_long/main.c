@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 18:20:02 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:17:16 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,17 @@ void	free_main_vars(t_data *data, t_list **list, int x)
 	free_variables_board(data->board, x);
 }
 
+void leakss(void)
+{
+	system("leaks so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_list	*list;
 	int		cont[2];
-
+atexit(leakss);
 	list = 0;
 	initialize_main_vars(&data, cont);
 	if (argc != 2)
