@@ -196,6 +196,8 @@ void		replace_exit_img(t_board **matrix, int row, int col, t_data data);
 void		replace_col_img(t_board **matrix, int row, int col, t_data data);
 void		replace_border_img(t_board **matrix, int row, int col, t_data data);
 
+void		draw_player(t_data data);
+
 // utils.c
 void		print_list(t_list **list);
 void		print_matrix(t_board **matrix, int x, int y);

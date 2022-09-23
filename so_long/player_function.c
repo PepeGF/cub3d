@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 17:59:01 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:31:37 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
 			{
 				player.x = j;
 				player.y = i;
-				printf("player.x: %d\tplayer.y: %d\tpx: %d\n", player.x, player.y, data.px);
+				// printf("player.x: %d\tplayer.y: %d\tpx: %d\n", player.x, player.y, data.px);
 				player.direction = ft_player_direction(board, player);
-				ft_get_player_position(&player, data);
+				ft_get_player_position(&player, data); //con movimiento fluido esta función no valdrá
 				ft_get_player_dir_vector(&player, data);
 				break ;
 			}	

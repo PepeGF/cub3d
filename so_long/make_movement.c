@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 16:19:23 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:38:04 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@
 } */
 
 void	move_player(t_data *data, int y, int x)
-{
+{	
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->field,
 		(data->board[data->player.y][data->player.x].col * data->px),
 		(data->board[data->player.y][data->player.x].row * data->px));
 	data->player.x += x;
 	data->player.y += y;
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->dino,
-		(data->board[data->player.y][data->player.x].col * data->px),
-		(data->board[data->player.y][data->player.x].row * data->px));
+	draw_player(*data);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->dino,
+	// 	(data->board[data->player.y][data->player.x].col * data->px),
+	// 	(data->board[data->player.y][data->player.x].row * data->px));
 	data->mov_cont += 1;
 	ft_get_player_position(&data->player, *data);
 	printf("Nueva posición: x: %d\ty: %d\n", data->player.x_position, data->player.y_position);
