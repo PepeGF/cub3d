@@ -6,17 +6,35 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:51:58 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 13:58:10 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:17:59 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	draw_player(t_data data)
+{
+	int	i;
+	int j;
+
+	i = -2;
+	while (i <= 2)
+	{
+		j = -2;
+		while (j <= 2)
+		{
+			mlx_pixel_put(data.mlx, data.mlx_win, data.player.x * data.px + data.px / 2 + i, data.player.y * data.px + data.px / 2 + j, 00000000);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	replace_player_img(t_board **matrix, int row, int col, t_data data)
 {
 	int	i;
 	int	j;
-
+(void)data;
 	i = -1;
 	while (++i < row)
 	{
@@ -25,9 +43,11 @@ void	replace_player_img(t_board **matrix, int row, int col, t_data data)
 		{
 			if (matrix[i][j].type == 'N' || matrix[i][j].type == 'S'
 				|| matrix[i][j].type == 'E' || matrix[i][j].type == 'W')
-				mlx_put_image_to_window(data.mlx, data.mlx_win, data.dino,
-					(matrix[i][j].col * data.px),
-					(matrix[i][j].row * data.px));
+				draw_player(data);
+				// mlx_put_image_to_window(data.mlx, data.mlx_win, data.dino,
+				// 	(matrix[i][j].col * data.px),
+				// 	(matrix[i][j].row * data.px));
+				printf("\n");
 			j++;
 		}
 	}
