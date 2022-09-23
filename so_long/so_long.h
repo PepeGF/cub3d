@@ -52,13 +52,18 @@ typedef struct s_cont {
 
 typedef struct s_player 
 {
-	int	x;
+	int	x;				//posicion cuadricula
 	int	y;
-	int	direction;
-	int	x_position;
+	int	direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
+	int	x_position;		//posicion pixeles
 	int	y_position;
-	int	x_dir_vect;
+	int	x_dir_vect;		//vector dirección
 	int	y_dir_vect;
+	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
+	int	turn_on;		//-1 = giro Izq, 1 = giro Dcha
+	int	move_speed;		// velocidad desplazamiento en pixeles ¿3?
+	int	turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
+
 }	t_player;
 
 typedef struct s_camera
