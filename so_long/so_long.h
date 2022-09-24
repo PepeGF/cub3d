@@ -205,7 +205,7 @@ void		print_matrix(t_board **matrix, int x, int y);
 
 // hay que ordenar esto
 	// player_funcions.c
-void	ft_get_player_position(t_player *player, t_data data);
+void	ft_get_player_initial_position(t_player *player, t_data data);
 void	ft_get_player_dir_vector(t_player *player, t_data data);
 
 	// raycast.c

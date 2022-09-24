@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/08/27 18:14:06 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/24 11:51:22 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	steps(t_data *data)
 	printf("\rSteps: %d\n", data->mov_cont);
 }
 
-void	*choose_img(t_data *data)
+void	*choose_img(t_data *data)	//esta tanpoco va a valer
 {
 	if (data->player.direction == NORTH)
 		data->dino = mlx_xpm_file_to_image(data->mlx,
@@ -68,7 +68,8 @@ int	key_hook(int keycode, t_data *data)
 		turn_right(data);
 		ft_get_player_dir_vector(&data->player, *data);
 	}
-	
+/* //esto servía para movimientos de 90º, ahora hay que calcular la direccion
+	//cada vez dependiendo de la dirección a la que mira el jugador	
 	if (data->player.direction == 0)
 	{
 		if (keycode == key_s || keycode == key_down)
@@ -113,7 +114,7 @@ int	key_hook(int keycode, t_data *data)
 		if (keycode == key_s || keycode == key_down)
 			go_up(data);
 	}
-
+ */
 /* 	if (keycode == 1 || keycode == 125)
 		go_down(data);
 	if (keycode == 13 || keycode == 126)

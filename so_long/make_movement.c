@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/23 13:38:04 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:18:23 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	move_player(t_data *data, int y, int x)
 	// 	(data->board[data->player.y][data->player.x].col * data->px),
 	// 	(data->board[data->player.y][data->player.x].row * data->px));
 	data->mov_cont += 1;
-	ft_get_player_position(&data->player, *data);
-	printf("Nueva posición: x: %d\ty: %d\n", data->player.x_position, data->player.y_position);
+	// ft_get_player_position(&data->player, *data);
+	// printf("Nueva posición: x: %d\ty: %d\n", data->player.x_position, data->player.y_position);
 	// steps(data);
 }
 

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/22 15:52:25 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/24 11:57:22 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ atexit(leakss);
 	data.px = 16;
 	data.camera = initialize_camera();//para raycast
 	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y, data);
+	printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);
 	replace_field(data.board, cont[1], cont[0], data);

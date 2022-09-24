@@ -6,13 +6,13 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/23 13:31:37 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:16:53 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_player_direction(t_board **board, t_player player)
+int	ft_player_initial_direction(t_board **board, t_player player)
 {
 	if (board[player.y][player.x].type == 'N')
 		return (90);
@@ -20,8 +20,10 @@ int	ft_player_direction(t_board **board, t_player player)
 		return (270);
 	if (board[player.y][player.x].type == 'W')
 		return (180);
+	if (board[player.y][player.x].type == 'E')
+		return (0);
 	else
-		return (0);	
+		return (-1);	
 }
 
 int	is_player(t_board **board, int i, int j)
@@ -32,7 +34,7 @@ int	is_player(t_board **board, int i, int j)
 	return (0);
 }
 
-void	ft_get_player_position(t_player *player, t_data data)
+void	ft_get_player_initial_position(t_player *player, t_data data)
 {
 	player->x_position = player->x * data.px + data.px / 2;
 	player->y_position = player->y * data.px + data.px / 2;
@@ -64,8 +66,8 @@ t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
 				player.x = j;
 				player.y = i;
 				// printf("player.x: %d\tplayer.y: %d\tpx: %d\n", player.x, player.y, data.px);
-				player.direction = ft_player_direction(board, player);
-				ft_get_player_position(&player, data); //con movimiento fluido esta función no valdrá
+				player.direction = ft_player_initial_direction(board, player);
+				ft_get_player_initial_position(&player, data); //con movimiento fluido esto solo vale para el inicio
 				ft_get_player_dir_vector(&player, data);
 				break ;
 			}	
