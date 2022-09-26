@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/24 11:51:22 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:45:37 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	steps(t_data *data)
 	print_steps(*data);
 	printf("\rSteps: %d\n", data->mov_cont);
 }
-
+/* 
 void	*choose_img(t_data *data)	//esta tanpoco va a valer
 {
 	if (data->player.direction == NORTH)
@@ -33,8 +33,8 @@ void	*choose_img(t_data *data)	//esta tanpoco va a valer
 		data->dino = mlx_xpm_file_to_image(data->mlx,
 		"./img/arrow_180.xpm", &data->px, &data->px);
 	return (data->dino);
-}
-
+} */
+/* 
 void	turn_left(t_data *data)
 {
 
@@ -49,11 +49,18 @@ void	turn_right(t_data *data)
 		(data->board[data->player.y][data->player.x].col * data->px),
 		(data->board[data->player.y][data->player.x].row * data->px));
 }
-
+ */
 int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == key_esc || keycode == key_space || keycode == key_q)
 		exit_game(data);
+
+	if (keycode == key_left || keycode == key_right)
+		turn(data, keycode);
+
+	if (keycode == key_w || keycode == key_s || keycode == key_up || keycode == key_down)
+		front_back(data, keycode);
+/* 
 	if (keycode == key_left)
 	{
 		data->player.direction += 90;
@@ -68,6 +75,7 @@ int	key_hook(int keycode, t_data *data)
 		turn_right(data);
 		ft_get_player_dir_vector(&data->player, *data);
 	}
+ */	
 /* //esto servía para movimientos de 90º, ahora hay que calcular la direccion
 	//cada vez dependiendo de la dirección a la que mira el jugador	
 	if (data->player.direction == 0)

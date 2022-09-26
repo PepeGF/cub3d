@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:51:58 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/23 13:30:03 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:23:40 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_player(t_data data)
 		j = -2;
 		while (j <= 2)
 		{
-			mlx_pixel_put(data.mlx, data.mlx_win, data.player.x * data.px + data.px / 2 + i, data.player.y * data.px + data.px / 2 + j, 00000000);
+			mlx_pixel_put(data.mlx, data.mlx_win, data.player.x_position + i, data.player.y_position + j, 00000000);
 			j++;
 		}
 		i++;

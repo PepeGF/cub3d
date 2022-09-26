@@ -61,7 +61,7 @@ typedef struct s_player
 	int	y_dir_vect;
 	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
 	int	turn_on;		//-1 = giro Izq, 1 = giro Dcha
-	int	sideway_on;		//0 = parad0, 1 = derecha, -1 = izquierda
+	int	sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
 	int	move_speed;		// velocidad desplazamiento en pixeles ¿3?
 	int	turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
 
@@ -169,6 +169,9 @@ int			key_hook(int keycode, t_data *data);
 void		end_game(t_data *data, int x, int y);
 void		move_player(t_data *data, int x, int y);
 void		check_if_colleccionable(t_data *data);
+
+void		turn(t_data *data, int keycode);
+void		front_back(t_data *data, int keycode);
 
 // matrix.c
 void		ft_initialize_pos(t_board *elem);
