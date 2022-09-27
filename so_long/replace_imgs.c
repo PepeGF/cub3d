@@ -6,11 +6,29 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:51:58 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/26 20:23:40 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:44:48 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	draw_floor2d(t_data	data)
+{
+	int	i;
+	int j;
+//un cuadradito de 5x5 pix del color de fondo
+	i = -2;
+	while (i <= 2)
+	{
+		j = -2;
+		while (j <= 2)
+		{
+			mlx_pixel_put(data.mlx, data.mlx_win, data.player.x_position + i, data.player.y_position + j, 0xC3C3C3);
+			j++;
+		}
+		i++;
+	}
+}
 
 void	draw_player(t_data data)
 {
@@ -23,7 +41,7 @@ void	draw_player(t_data data)
 		j = -2;
 		while (j <= 2)
 		{
-			mlx_pixel_put(data.mlx, data.mlx_win, data.player.x_position + i, data.player.y_position + j, 00000000);
+			mlx_pixel_put(data.mlx, data.mlx_win, data.player.x_position + i, data.player.y_position + j, 0x000000);
 			j++;
 		}
 		i++;

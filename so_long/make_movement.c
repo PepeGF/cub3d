@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/26 20:22:28 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:49:53 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	turn(t_data *data, int keycode)
 
 void	front_back(t_data *data, int keycode)
 {
+	draw_floor2d(*data);
 	data->player.move_speed = 3;
 	if (keycode == key_w || keycode == key_up)
 		data->player.turn_on = 1;
