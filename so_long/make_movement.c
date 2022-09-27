@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/27 17:49:53 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:26:22 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	front_back(t_data *data, int keycode)
 		data->player.turn_on = 1;
 	else
 		data->player.turn_on = -1;
-	data->player.x_position += cos(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.turn_on;
-	data->player.y_position += -1 * sin(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.turn_on; //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
-	printf("Nueva X: %d\tnueva y: %d\n", data->player.x_position, data->player.y_position);
+	data->player.x_position += (cos(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.turn_on);
+	data->player.y_position += (-1 * sin(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.turn_on); //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
+	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);
 }
 

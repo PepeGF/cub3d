@@ -55,8 +55,8 @@ typedef struct s_player
 	int	x;				//posicion cuadricula
 	int	y;
 	int	direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
-	int	x_position;		//posicion pixeles
-	int	y_position;
+	double	x_position;		//posicion pixeles
+	double	y_position;
 	int	x_dir_vect;		//vector dirección
 	int	y_dir_vect;
 	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
