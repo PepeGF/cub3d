@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/24 11:57:22 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:55:59 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	initialize_main_vars(t_data *data, int cont[2])
 	data->cont = 0;
 	cont[0] = 0;
 	cont[1] = 0;
-	data->mov_cont = 0;
+	data->mov_cont = 0;//no hace falta
 }
 
 void	free_main_vars(t_data *data, t_list **list, int x)
@@ -85,20 +85,20 @@ atexit(leakss);
 		printf("Error en el número de argumentos\n");
 		exit (0);
 	}
-	list = ft_read_map(argv[1], cont);
+	list = ft_read_map(argv[1], cont);//algunas cosas de esta no valen
 	data.board = ft_final_matrix(&list, cont);
-	data.cont = sum_cont(data.board, cont);
+	data.cont = sum_cont(data.board, cont);//esta no va a hacer falta, creo
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
 	data.px = 16;
-	data.camera = initialize_camera();//para raycast
-	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y, data);
-	printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
+	data.camera = initialize_camera();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
+	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y, data);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
+	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);
 	replace_field(data.board, cont[1], cont[0], data);
 	// mlx_key_hook(data.mlx_win, &key_hook, &data);
-	mlx_hook(data.mlx_win, 2, 0/* (1L << 17) */, &key_hook, &data.mlx);
+	mlx_hook(data.mlx_win, 2, 0/* (1L << 17) */, &key_hook, &data.mlx);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
 	mlx_hook(data.mlx_win, 17, 0/* (1L << 17) */, &exit_game, &data.mlx);
 	mlx_loop(data.mlx);
 	free_main_vars(&data, &list, cont[1]);

@@ -172,6 +172,8 @@ void		check_if_colleccionable(t_data *data);
 
 void		turn(t_data *data, int keycode);
 void		front_back(t_data *data, int keycode);
+void		side_move(t_data *data, int keycode);
+
 
 // matrix.c
 void		ft_initialize_pos(t_board *elem);

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:18:32 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/26 19:45:37 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:03:59 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ int	key_hook(int keycode, t_data *data)
 
 	if (keycode == key_w || keycode == key_s || keycode == key_up || keycode == key_down)
 		front_back(data, keycode);
+	
+	if (keycode == key_a || keycode == key_d)
+		side_move(data, keycode);
 /* 
 	if (keycode == key_left)
 	{
