@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/01 19:54:29 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/01 21:46:28 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,35 @@
 	exit (0);
 } */
 
+int get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp, int player_pos_y_temp)
+{
+	(void)player_pos_x_temp;
+	(void)player_pos_y_temp;
+	int	x_grid;
+	int	y_grid;
+
+	x_grid = player_pos_x_temp / data->px;
+	y_grid = player_pos_y_temp / data->px;
+	// printf("Cuadricula X: %d\tY: %d\n", x_grid, y_grid); //funciona bien
+
+	return (0);
+}
+
+int	check_x_collision(t_data *data, int	player_pos_x_temp)
+{
+	(void)data;
+	(void)player_pos_x_temp;
+	//calcular la cuadrícula a partir del pixel
+	return (0);
+}
+
+int	check_y_collision(t_data *data, int	player_pos_y_temp)
+{
+	(void)data;
+	(void)player_pos_y_temp;
+	return (0);
+}
+
 void	turn(t_data *data, int keycode)
 {
 	data->player.turn_speed = 5;//ajusta la velocidad de giro
@@ -35,7 +64,6 @@ void	turn(t_data *data, int keycode)
 	else
 		data->player.turn_on = 1;
 	data->player.direction += data->player.turn_speed * data->player.turn_on;//establece nueva direccion
-	// printf("%d, %d, %d\n", data->player.direction, data->player.turn_speed, data->player.turn_on);
 	data->player.direction %= 360;//quita vueltas si es necesario
 	if (data->player.direction < 0)
 		data->player.direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
@@ -44,6 +72,9 @@ void	turn(t_data *data, int keycode)
 
 void	front_back(t_data *data, int keycode)
 {
+	double	player_pos_x_temp;
+	double	player_pos_y_temp;
+
 	draw_floor2d(*data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player.move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_w || keycode == key_up)
@@ -51,27 +82,38 @@ void	front_back(t_data *data, int keycode)
 	else
 		data->player.move_on = -1;
 	//aquí faltaría el control de colisiones
+	player_pos_x_temp = data->player.x_position + cos(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.move_on;
+	player_pos_y_temp = data->player.y_position + (-1 * sin(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.move_on);
+	get_future_pos_from_player_pixel(data, player_pos_x_temp, player_pos_y_temp);
 	//habría que plantear si hay colisión no se mueve nada o se puede mover en paralelo al muro con el que colisiona
-	data->player.x_position += (cos(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.move_on);	//nueva posicion en x
-	data->player.y_position += (-1 * sin(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.move_on);//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
+	if (check_x_collision(data, player_pos_x_temp) == 0)  //no hace falta else, si hay colisión x_position mantiene su valor, idem para los demás if de colisiones
+		data->player.x_position = player_pos_x_temp;	//nueva posicion en x
+	if (check_y_collision(data, player_pos_x_temp) == 0)
+		data->player.y_position = player_pos_y_temp;//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
 }
 
 void	side_move(t_data *data, int keycode)
 {
+	double	player_pos_x_temp;
+	double	player_pos_y_temp;
+
 	draw_floor2d(*data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player.move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_d)
 		data->player.sideway_on = 1;
 	else
 		data->player.sideway_on = -1;
-	data->player.x_position += cos(((data->player.direction + 270) % 360) * M_PI / 180) * data->player.move_speed * data->player.sideway_on;
-	data->player.y_position += (-1 * sin(((data->player.direction + 270) % 360) * M_PI / 180) * data->player.move_speed * data->player.sideway_on);//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
+	player_pos_x_temp = data->player.x_position + cos(((data->player.direction + 270) % 360) * M_PI / 180) * data->player.move_speed * data->player.sideway_on;
+	player_pos_y_temp = data->player.y_position + (-1 * sin(((data->player.direction + 270) % 360) * M_PI / 180) * data->player.move_speed * data->player.sideway_on);
+	get_future_pos_from_player_pixel(data, player_pos_x_temp, player_pos_y_temp);
+	if (check_x_collision(data, player_pos_x_temp) == 0)
+		data->player.x_position = player_pos_x_temp;
+	if (check_y_collision(data, player_pos_x_temp) == 0)
+		data->player.y_position = player_pos_y_temp;
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
-	//creo que tengo q cambiar cos por sin en x e y, pero no tengo claro que sea tan sencillo
-
 }
 
 void	move_player(t_data *data, int y, int x)//creo que ya no se usa para nada, no la comento del todo x si acaso

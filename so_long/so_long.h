@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <sys/errno.h>
 # include <errno.h>
 # include "libft/libft.h"
@@ -54,9 +55,13 @@ typedef struct s_player
 {
 	int	x;				//posicion cuadricula
 	int	y;
+	int	x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
+	int	y_fut;
 	int	direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
 	double	x_position;		//posicion pixeles
 	double	y_position;
+	double	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
+	double	y_fut_pos;
 	int	x_dir_vect;		//vector dirección
 	int	y_dir_vect;
 	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
@@ -204,10 +209,6 @@ void		replace_border_img(t_board **matrix, int row, int col, t_data data);
 
 void		draw_player(t_data data);
 void		draw_floor2d(t_data	data);
-
-// utils.c
-void		print_list(t_list **list);
-void		print_matrix(t_board **matrix, int x, int y);
 
 // hay que ordenar esto
 	// player_funcions.c

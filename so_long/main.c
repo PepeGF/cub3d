@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/30 18:55:59 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/01 21:38:49 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ atexit(leakss);
 	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
 	initialize_images(&data, cont);
 	put_field(data.board, cont[1], cont[0], data);
+	// print_matrix(data.board, cont[0], cont[1]);
 	replace_field(data.board, cont[1], cont[0], data);
 	// mlx_key_hook(data.mlx_win, &key_hook, &data);
 	mlx_hook(data.mlx_win, 2, 0/* (1L << 17) */, &key_hook, &data.mlx);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás

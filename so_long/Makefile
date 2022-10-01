@@ -27,7 +27,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 	make -C $(LIBFT_PATH) --silent
 	$(CC) -o $(NAME) $(OBJS) -Imlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -I./libft -L./libft -lft \
-	#-fsanitize=address
+	-fsanitize=address
 
 clean:		
 	$(RM) $(OBJS)
