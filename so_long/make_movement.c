@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/30 19:13:00 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:54:29 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,29 @@ void	front_back(t_data *data, int keycode)
 	draw_floor2d(*data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player.move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_w || keycode == key_up)
-		data->player.turn_on = 1;
+		data->player.move_on = 1;
 	else
-		data->player.turn_on = -1;
+		data->player.move_on = -1;
 	//aquí faltaría el control de colisiones
 	//habría que plantear si hay colisión no se mueve nada o se puede mover en paralelo al muro con el que colisiona
-	data->player.x_position += (cos(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.turn_on);	//nueva posicion en x
-	data->player.y_position += (-1 * sin(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.turn_on);//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
+	data->player.x_position += (cos(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.move_on);	//nueva posicion en x
+	data->player.y_position += (-1 * sin(data->player.direction * M_PI / 180) * data->player.move_speed * data->player.move_on);//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
 }
 
 void	side_move(t_data *data, int keycode)
 {
+	draw_floor2d(*data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
+	data->player.move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_d)
 		data->player.sideway_on = 1;
 	else
 		data->player.sideway_on = -1;
+	data->player.x_position += cos(((data->player.direction + 270) % 360) * M_PI / 180) * data->player.move_speed * data->player.sideway_on;
+	data->player.y_position += (-1 * sin(((data->player.direction + 270) % 360) * M_PI / 180) * data->player.move_speed * data->player.sideway_on);//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
+	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
+	draw_player(*data);//dibuja al jugador en su nueva posicion
 	//creo que tengo q cambiar cos por sin en x e y, pero no tengo claro que sea tan sencillo
 
 }

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:01:10 by josgarci          #+#    #+#             */
-/*   Updated: 2022/09/22 15:44:09 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:44:51 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,11 @@ t_camera	*initialize_camera(void)//temporal para tener todo inicializado
 void	gt_get_camera_vector(t_data *data, t_player *player)
 {
 	//calcula vector positivo del plano de la cámara a partir del vector de vision del jugador
-	
-	data->camera->plane_x = player->y_dir_vect * 0.66 * (-1);
-	data->camera->plane_y = player->x_dir_vect * 0.66;
-	printf("vector camera: (%f,%f)\n", data->camera->plane_x, data->camera->plane_y);
-	/* 
-	N (0 ,-1) (0.66 , 0)
-	S (0 , 1) (-0.66, 0)
-	E (1 , 0) (0, 0.66)
-	W (-1, 0) (0, -0.66)
-	 */
+	(void)data;
+	(void)player;
+	// data->camera->plane_x = player->y_dir_vect * 0.66 * (-1);
+	// data->camera->plane_y = player->x_dir_vect * 0.66;
+	// printf("vector camera: (%f,%f)\n", data->camera->plane_x, data->camera->plane_y);
 }
 
 void	raycast(t_data *data)
