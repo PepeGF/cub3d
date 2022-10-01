@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/01 21:46:28 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/01 23:16:12 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,10 @@
 
 int get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp, int player_pos_y_temp)
 {
-	(void)player_pos_x_temp;
-	(void)player_pos_y_temp;
-	int	x_grid;
-	int	y_grid;
 
-	x_grid = player_pos_x_temp / data->px;
-	y_grid = player_pos_y_temp / data->px;
-	// printf("Cuadricula X: %d\tY: %d\n", x_grid, y_grid); //funciona bien
+	data->player.x_fut = player_pos_x_temp / data->px;
+	data->player.y_fut = player_pos_y_temp / data->px;
+	printf("Cuadricula X: %d\tY: %d\n", data->player.x_fut, data->player.y_fut); //funciona bien
 
 	return (0);
 }
@@ -45,7 +41,11 @@ int	check_x_collision(t_data *data, int	player_pos_x_temp)
 {
 	(void)data;
 	(void)player_pos_x_temp;
-	//calcular la cuadrícula a partir del pixel
+	//calcular la cuadrícula a partir del pixel -> hecho
+/* mirar si la cuadricula a la que se movería si solo se desplaza en x
+	¿¿¿también??? es muro
+	si es muro return 1 y si no, return 0
+*/
 	return (0);
 }
 
@@ -53,6 +53,10 @@ int	check_y_collision(t_data *data, int	player_pos_y_temp)
 {
 	(void)data;
 	(void)player_pos_y_temp;
+/* mirar si la cuadricula a la que se movería si solo se desplaza en y
+	¿¿¿también??? es muro
+	si es muro return 1 y si no, return 0
+*/
 	return (0);
 }
 

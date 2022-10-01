@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/09/24 12:16:53 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/01 23:05:04 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_get_player_initial_position(t_player *player, t_data data)
 	player->x_position = player->x * data.px + data.px / 2;
 	player->y_position = player->y * data.px + data.px / 2;
 	// printf ("Posición del jugador:\n\tx: %d\n\ty: %d\n", player->x, player->y);
+	// printf ("Posición del jugador:\n\tx: %f px\n\ty: %f px\n", player->x_position, player->y_position);
 	return ;
 }
 
