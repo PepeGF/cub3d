@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/01 23:16:12 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:04:51 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,33 @@ int	check_x_collision(t_data *data, int	player_pos_x_temp)
 {
 	(void)data;
 	(void)player_pos_x_temp;
+	data->player.x_fut = player_pos_x_temp / data->px;
+	data->player.y_fut = data->player.y_position / data->px;
+	if (data->board[data->player.x_fut][data->player.y_fut].type == '1')
+	{
+		printf("Me voy contra el muro en X\n");
+		return (1);
+	}
 	//calcular la cuadrícula a partir del pixel -> hecho
 /* mirar si la cuadricula a la que se movería si solo se desplaza en x
 	¿¿¿también??? es muro
 	si es muro return 1 y si no, return 0
 */
-	return (0);
+	else
+		return (0);
 }
 
 int	check_y_collision(t_data *data, int	player_pos_y_temp)
 {
 	(void)data;
 	(void)player_pos_y_temp;
+	data->player.y_fut = player_pos_y_temp / data->px;
+	data->player.x_fut = data->player.x_position / data->px;
+	if (data->board[data->player.x_fut][data->player.y_fut].type == '1')
+	{
+		printf("Me voy contra el muro en Y\n");
+		return (1);
+	}
 /* mirar si la cuadricula a la que se movería si solo se desplaza en y
 	¿¿¿también??? es muro
 	si es muro return 1 y si no, return 0
@@ -92,7 +107,7 @@ void	front_back(t_data *data, int keycode)
 	//habría que plantear si hay colisión no se mueve nada o se puede mover en paralelo al muro con el que colisiona
 	if (check_x_collision(data, player_pos_x_temp) == 0)  //no hace falta else, si hay colisión x_position mantiene su valor, idem para los demás if de colisiones
 		data->player.x_position = player_pos_x_temp;	//nueva posicion en x
-	if (check_y_collision(data, player_pos_x_temp) == 0)
+	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player.y_position = player_pos_y_temp;//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
@@ -114,7 +129,7 @@ void	side_move(t_data *data, int keycode)
 	get_future_pos_from_player_pixel(data, player_pos_x_temp, player_pos_y_temp);
 	if (check_x_collision(data, player_pos_x_temp) == 0)
 		data->player.x_position = player_pos_x_temp;
-	if (check_y_collision(data, player_pos_x_temp) == 0)
+	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player.y_position = player_pos_y_temp;
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
