@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/01 23:05:04 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:11:31 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,14 @@ void	ft_get_player_dir_vector(t_player *player, t_data data)
 	gt_get_camera_vector(&data, player);
 }
 
-t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
+void	ft_set_player_intial_geometry(t_data data, t_player *player)
+{
+	player->direction = ft_player_initial_direction(data.board, *player);
+	ft_get_player_initial_position(player, data); //con movimiento fluido esto solo vale para el inicio
+	ft_get_player_dir_vector(player, data);
+}
+
+t_player	where_is_the_player(t_board **board, int x, int y)
 {
 	int			i;
 	int			j;
@@ -67,9 +74,9 @@ t_player	where_is_the_player(t_board **board, int x, int y, t_data data)
 				player.x = j;
 				player.y = i;
 				// printf("player.x: %d\tplayer.y: %d\tpx: %d\n", player.x, player.y, data.px);
-				player.direction = ft_player_initial_direction(board, player);
-				ft_get_player_initial_position(&player, data); //con movimiento fluido esto solo vale para el inicio
-				ft_get_player_dir_vector(&player, data);
+				// player.direction = ft_player_initial_direction(board, player);
+				// ft_get_player_initial_position(&player, data); //con movimiento fluido esto solo vale para el inicio
+				// ft_get_player_dir_vector(&p layer, data);
 				break ;
 			}	
 			j++;

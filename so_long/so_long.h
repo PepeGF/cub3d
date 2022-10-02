@@ -96,7 +96,7 @@ typedef struct s_data
 	t_board		**board;
 	t_cont		*cont;
 	t_player	player;
-	t_camera	*camera;
+	// t_camera	*camera;
 }	t_data;
 
 enum e_keycodes
@@ -187,7 +187,10 @@ t_board		**ft_final_matrix(t_list **list, int cont[2]);
 
 // player_functions.c
 int			is_player(t_board **board, int i, int j);
-t_player	where_is_the_player(t_board **board, int x, int y, t_data);
+t_player	where_is_the_player(t_board **board, int x, int y);
+
+void	ft_set_player_intial_geometry(t_data data, t_player *player);
+
 
 // utils.c
 void		print_list(t_list **list);

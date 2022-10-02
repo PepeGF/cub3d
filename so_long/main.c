@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/01 21:38:49 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:21:03 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	initialize_main_vars(t_data *data, int cont[2])
 	cont[0] = 0;
 	cont[1] = 0;
 	data->mov_cont = 0;//no hace falta
+	data->px = 16;
 }
 
 void	free_main_vars(t_data *data, t_list **list, int x)
@@ -90,11 +91,12 @@ atexit(leakss);
 	data.cont = sum_cont(data.board, cont);//esta no va a hacer falta, creo
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
-	data.px = 16;
-	data.camera = initialize_camera();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
-	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y, data);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
-	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
+	// data.px = 16; //metido en función de initializa_main_vars
+	// data.camera = initialize_camera();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
+	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
 	initialize_images(&data, cont);
+	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
+	ft_set_player_intial_geometry(data, &(data.player));
 	put_field(data.board, cont[1], cont[0], data);
 	// print_matrix(data.board, cont[0], cont[1]);
 	replace_field(data.board, cont[1], cont[0], data);

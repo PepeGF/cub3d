@@ -13,7 +13,7 @@ OBJS	= $(SRCS:.c=.o)
 
 NAME	= so_long
 
-CFLAGS	= -Wall -Werror -Wextra -g
+CFLAGS	= -Wall -Werror -Wextra -g #--analyze
 
 GCC	= gcc
 
@@ -27,7 +27,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 	make -C $(LIBFT_PATH) --silent
 	$(CC) -o $(NAME) $(OBJS) -Imlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -I./libft -L./libft -lft \
-	-fsanitize=address
+	#-fsanitize=address
 
 clean:		
 	$(RM) $(OBJS)
