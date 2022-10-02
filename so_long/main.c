@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/02 16:21:03 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/02 19:14:20 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,3 +107,6 @@ atexit(leakss);
 	free_main_vars(&data, &list, cont[1]);
 	return (0);
 }
+
+// continuar con raycasting, min 0:00 de este video:
+// https://www.youtube.com/watch?v=awXyP0g91mE

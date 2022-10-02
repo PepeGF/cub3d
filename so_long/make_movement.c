@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/02 17:04:51 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:22:33 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_x_collision(t_data *data, int	player_pos_x_temp)
 	(void)player_pos_x_temp;
 	data->player.x_fut = player_pos_x_temp / data->px;
 	data->player.y_fut = data->player.y_position / data->px;
-	if (data->board[data->player.x_fut][data->player.y_fut].type == '1')
+	if (data->board[data->player.y_fut][data->player.x_fut].type == '1')
 	{
 		printf("Me voy contra el muro en X\n");
 		return (1);
@@ -63,7 +63,7 @@ int	check_y_collision(t_data *data, int	player_pos_y_temp)
 	(void)player_pos_y_temp;
 	data->player.y_fut = player_pos_y_temp / data->px;
 	data->player.x_fut = data->player.x_position / data->px;
-	if (data->board[data->player.x_fut][data->player.y_fut].type == '1')
+	if (data->board[data->player.y_fut][data->player.x_fut].type == '1')
 	{
 		printf("Me voy contra el muro en Y\n");
 		return (1);
