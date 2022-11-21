@@ -78,6 +78,7 @@ typedef struct s_ray
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_direction; // angulo en radianes
+	double	delta_angle; //angulo desde el rayo central en radianes
 	int		ray_up;		// para hacer la colisión correctamente cuando sube
 	int		ray_left;	// idem para cuando va hacia la izquierda
 	int		collision_x; // x del punto de colision
@@ -162,18 +163,6 @@ void		replace_field(t_board **matrix, int row, int col, t_data data);
 void		free_variables(t_list **list);
 void		free_variables_board(t_board **list, int fil);
 
-// go_down.c
-void		go_down(t_data *data);
-
-// go_left.c
-void		go_left(t_data *data);
-
-// go_right.c
-void		go_right(t_data *data);
-
-// go_up.c
-void		go_up(t_data *data);
-
 // key_pressed.c
 void		steps(t_data *data);
 int			key_hook(int keycode, t_data *data);
@@ -229,5 +218,7 @@ void	ft_get_player_dir_vector(t_player *player, t_data data);
 	// raycast.c
 t_ray	*initialize_ray(void);
 void	raycast(t_data *data);
+void	calculate_collisions_horizontal(t_data *data);
+
 
 #endif

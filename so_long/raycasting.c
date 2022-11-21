@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:01:10 by josgarci          #+#    #+#             */
-/*   Updated: 2022/11/21 19:54:09 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:30:19 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 	ray->ray_dir_x = 0;
 	ray->ray_dir_y = 0;
 	ray->ray_direction = 0;
+	ray->delta_angle = 0;
 	ray->ray_up = 0;
 	ray->ray_left = 0;
 	ray->collision_x = 0;
@@ -69,28 +70,40 @@ void	raycast(t_data *data)
 		// elegir el más cercano
 		// dibujar el rayo (bresenham)
 
-	if (data->player.direction >= 0 && data->player.direction <= 180)
-		data->ray->ray_up = true;
+	if (data->player.direction < 180 && data->player.direction != 0)
+		data->ray->ray_up = 1;
+	else if (data->player.direction > 180)
+		data->ray->ray_up = -1;
 	else
-		data->ray->ray_up = false;
-	if (data->player.direction >= 90 && data->player.direction <= 270)
-		data->ray->ray_left = true;
+		data->ray->ray_up = 0;
+	if (data->player.direction > 90 && data->player.direction < 270)
+		data->ray->ray_left = 1;
+	else if (data->player.direction == 90 || data->player.direction == 270)
+		data->ray->ray_left = 0;
 	else
-		data->ray->ray_left = false;
-	printf("Rayo arriba 1/0: %d\t\t\tRayo izq 1/0: %d\n", data->ray->ray_up, data->ray->ray_left);
+		data->ray->ray_left = -1;
+	// printf("Rayo arriba: %d\t\t\tRayo izq: %d\n", data->ray->ray_up, data->ray->ray_left);
+	calculate_collisions_horizontal(data);
 }
 
 void	calculate_collisions_horizontal(t_data *data)
 {
 	(void) data;
-	int		intercept_y;
-	int		intercept_x;
-	double angle_radians;
+	data->ray->ray_direction = data->player.direction * M_PI / 180;
+	if (data->ray->ray_up == 1)
+		data->ray->collision_y_h = data->player.y * data->px;
+	else if (data->ray->ray_up == -1)
+		data->ray->collision_y_h = (data->player.y + 1) * data->px;
+	else
+		data->ray->collision_y_h = data->player.y_position;
+	if (data->ray->ray_up == 1)
+		data->ray->collision_x_h = data->player.x_position + (data->player.y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
+	else if (data->ray->ray_up == -1)
+		data->ray->collision_x_h = data->player.x_position - (data->player.y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
+	else
+		data->ray->collision_x_h = 1000000;
+	// printf("%f\n", tan(data->ray->ray_direction));
+	printf("Coord primera inter horiz:\nx: %d\ty: %d\n\
+	-----------------------------------------------\n", data->ray->collision_x_h, data->ray->collision_y_h);
 
-// buscamos la (primera?) intersección con una cuadrícula horizontal
-	angle_radians = data->player.direction * 2 * M_PI / 360;
-	intercept_y = data->player.y * data->px; //tiene pinta de estar mal
-	if (sin(angle_radians) < 0)
-		intercept_y += data->player.y;
-		intercept_x =  data->player.x_position + cos((data->player.direction) * M_PI * 2 / 360);
 }
