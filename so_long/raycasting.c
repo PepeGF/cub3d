@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:01:10 by josgarci          #+#    #+#             */
-/*   Updated: 2022/11/21 21:30:19 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/11/21 22:06:05 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 	ray->collision_x_v = 0;
 	ray->collision_y_v = 0;
 	ray->column = 0;
+	ray->h_crash = false;
+	ray->v_crash = false;
 	return (ray); //hay que liberar esto
 }
 
@@ -83,12 +85,11 @@ void	raycast(t_data *data)
 	else
 		data->ray->ray_left = -1;
 	// printf("Rayo arriba: %d\t\t\tRayo izq: %d\n", data->ray->ray_up, data->ray->ray_left);
-	calculate_collisions_horizontal(data);
+	calculate_first_ray_collision_horizontal(data);
 }
 
-void	calculate_collisions_horizontal(t_data *data)
+void	calculate_first_ray_collision_horizontal(t_data *data)
 {
-	(void) data;
 	data->ray->ray_direction = data->player.direction * M_PI / 180;
 	if (data->ray->ray_up == 1)
 		data->ray->collision_y_h = data->player.y * data->px;
@@ -105,5 +106,15 @@ void	calculate_collisions_horizontal(t_data *data)
 	// printf("%f\n", tan(data->ray->ray_direction));
 	printf("Coord primera inter horiz:\nx: %d\ty: %d\n\
 	-----------------------------------------------\n", data->ray->collision_x_h, data->ray->collision_y_h);
+	calculate_ray_wall_collision_horizontal(data);
+}
 
+void	calculate_ray_wall_collision_horizontal(t_data *data)
+{
+	data->ray->y_step = data->px;
+	data->ray->x_step = data->ray->y_step / tan(data->ray->ray_direction + data->ray->delta_angle);
+	if (data->ray->ray_up == 1)
+		data->ray->y_step *= -1;
+	if ((data->ray->ray_left == 1 && data->ray->x_step > 0) || (data->ray->ray_left == -1 && data->ray->x_step < 0))
+		data->ray->x_step *= -1; //cambiar el signo de x_step, hay que comprobarlo
 }
