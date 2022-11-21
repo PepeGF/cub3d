@@ -72,14 +72,22 @@ typedef struct s_player
 
 }	t_player;
 
-typedef struct s_camera
+typedef struct s_ray
 {
-	double	camera_x;
+	double	ray_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	double	plane_x;
-	double	plane_y;
-}	t_camera;
+	double	ray_direction; // angulo en radianes
+	int		ray_up;		// para hacer la colisión correctamente cuando sube
+	int		ray_left;	// idem para cuando va hacia la izquierda
+	int		collision_x; // x del punto de colision
+	int		collision_y; // y del punto de colision
+	int		collision_x_h; // x del punto de colision horizontal
+	int		collision_y_h; // y del punto de colision horizontal
+	int		collision_x_v; // x del punto de colision vertical
+	int		collision_y_v; // y del punto de colision vertical
+	int		column;
+}	t_ray;
 
 typedef struct s_data
 {
@@ -96,7 +104,7 @@ typedef struct s_data
 	t_board		**board;
 	t_cont		*cont;
 	t_player	player;
-	// t_camera	*camera;
+	t_ray		*ray;
 }	t_data;
 
 enum e_keycodes
@@ -172,7 +180,7 @@ int			key_hook(int keycode, t_data *data);
 
 // make_movement.c
 void		end_game(t_data *data, int x, int y);
-void		move_player(t_data *data, int x, int y);
+// void		move_player(t_data *data, int x, int y);
 void		check_if_colleccionable(t_data *data);
 
 void		turn(t_data *data, int keycode);
@@ -219,7 +227,7 @@ void	ft_get_player_initial_position(t_player *player, t_data data);
 void	ft_get_player_dir_vector(t_player *player, t_data data);
 
 	// raycast.c
-t_camera	*initialize_camera(void);
-void	gt_get_camera_vector(t_data *data, t_player *player);
+t_ray	*initialize_ray(void);
+void	raycast(t_data *data);
 
 #endif

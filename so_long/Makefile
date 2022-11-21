@@ -2,10 +2,10 @@ SRCS	= gnl/get_next_line_utils.c gnl/get_next_line.c \
 			main.c leaks.c \
 			read_file.c free_variables.c matrix.c \
 			check_matrix.c check_matrix_cont.c check_matrix_values.c \
-			exit_game.c go_down.c go_up.c go_right.c go_left.c make_movement.c \
+			exit_game.c  make_movement.c \
 			key_pressed.c first_window_images.c replace_imgs.c player_function.c \
 			print_steps.c utils.c raycasting.c
-			
+# go_down.c go_up.c go_right.c go_left.c
 
 LIBFT_PATH = libft/
 
@@ -27,7 +27,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 	make -C $(LIBFT_PATH) --silent
 	$(CC) -o $(NAME) $(OBJS) -Imlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -I./libft -L./libft -lft \
-	#git status-fsanitize=address
+	-fsanitize=address
 
 clean:		
 	$(RM) $(OBJS)

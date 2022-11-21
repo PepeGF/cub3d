@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:07:57 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/02 17:22:33 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:51:32 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int	check_x_collision(t_data *data, int	player_pos_x_temp)
 		printf("Me voy contra el muro en X\n");
 		return (1);
 	}
+	else
+		return (0);
+}
 	//calcular la cuadrícula a partir del pixel -> hecho
 /* mirar si la cuadricula a la que se movería si solo se desplaza en x
 	¿¿¿también??? es muro
 	si es muro return 1 y si no, return 0
 */
-	else
-		return (0);
-}
 
 int	check_y_collision(t_data *data, int	player_pos_y_temp)
 {
@@ -87,6 +87,7 @@ void	turn(t_data *data, int keycode)
 	if (data->player.direction < 0)
 		data->player.direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
 	printf("Direccion: %d\n", data->player.direction);
+	raycast(data);
 }
 
 void	front_back(t_data *data, int keycode)
@@ -111,6 +112,7 @@ void	front_back(t_data *data, int keycode)
 		data->player.y_position = player_pos_y_temp;//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
+	raycast(data);
 }
 
 void	side_move(t_data *data, int keycode)
@@ -133,8 +135,10 @@ void	side_move(t_data *data, int keycode)
 		data->player.y_position = player_pos_y_temp;
 	printf("Nueva X: %f\tnueva y: %f\n", round(data->player.x_position), round(data->player.y_position));
 	draw_player(*data);//dibuja al jugador en su nueva posicion
+	raycast(data);
 }
 
+/* 
 void	move_player(t_data *data, int y, int x)//creo que ya no se usa para nada, no la comento del todo x si acaso
 {	
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->field,
@@ -151,7 +155,7 @@ void	move_player(t_data *data, int y, int x)//creo que ya no se usa para nada, n
 	// printf("Nueva posición: x: %d\ty: %d\n", data->player.x_position, data->player.y_position);
 	// steps(data);
 }
-
+ */
 void	check_if_colleccionable(t_data *data)
 {
 	if (data->board[data->player.x][data->player.y].type == 'C')

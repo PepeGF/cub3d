@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:19:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/02 16:11:31 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:53:32 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_get_player_dir_vector(t_player *player, t_data data)
 {
 	player->x_dir_vect = cos(player->direction * 2 * M_PI / 360);
 	player->y_dir_vect = -1 * sin(player->direction * 2 * M_PI / 360);
-	gt_get_camera_vector(&data, player);
+	(void)data;
 }
 
 void	ft_set_player_intial_geometry(t_data data, t_player *player)

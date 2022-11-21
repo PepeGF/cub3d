@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/10/02 19:14:20 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:24:23 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 	t_list	*list;
 	int		cont[2];
-atexit(leakss);
+// atexit(leakss);
 	list = 0;
 	initialize_main_vars(&data, cont);
 	if (argc != 2)
@@ -92,7 +92,7 @@ atexit(leakss);
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
 	// data.px = 16; //metido en función de initializa_main_vars
-	// data.camera = initialize_camera();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
+	data.ray = initialize_ray();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
 	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
 	initialize_images(&data, cont);
 	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
