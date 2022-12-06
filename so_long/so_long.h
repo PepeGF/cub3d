@@ -87,11 +87,17 @@ typedef struct s_ray
 	int		collision_y_h; // y del punto de colision horizontal
 	int		collision_x_v; // x del punto de colision vertical
 	int		collision_y_v; // y del punto de colision vertical
+	int		next_x_h;
+	int		next_y_h;
+	int		next_x_v;
+	int		next_y_v;
 	int		column;	//pixel de la ventana 
 	int		h_crash; //booleano de si la colision es horizontal
 	int		v_crash; //booleano de si la colision es vertical
 	int		x_step;	//distancia en px entre las colisiones parciales en x
 	int		y_step;	//distancia en px entre las colisiones parciales en y
+	int		tile_x;
+	int		tile_y;
 }	t_ray;
 
 typedef struct s_data
@@ -224,6 +230,8 @@ t_ray	*initialize_ray(void);
 void	raycast(t_data *data);
 void	calculate_first_ray_collision_horizontal(t_data *data);
 void	calculate_ray_wall_collision_horizontal(t_data *data);
+bool	collision(t_board **t_board, int tile_x, int tile_y);
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:01:10 by josgarci          #+#    #+#             */
-/*   Updated: 2022/11/21 22:06:05 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/12/06 10:47:13 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,38 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 void	calculate_ray_wall_collision_horizontal(t_data *data)
 {
 	data->ray->y_step = data->px;
-	data->ray->x_step = data->ray->y_step / tan(data->ray->ray_direction + data->ray->delta_angle);
+	data->ray->x_step = data->ray->y_step / tan(data->ray->ray_direction + data->ray->delta_angle);// este cálculo no contempla dirección, solo es el valor absoluto
 	if (data->ray->ray_up == 1)
 		data->ray->y_step *= -1;
 	if ((data->ray->ray_left == 1 && data->ray->x_step > 0) || (data->ray->ray_left == -1 && data->ray->x_step < 0))
-		data->ray->x_step *= -1; //cambiar el signo de x_step, hay que comprobarlo
+		data->ray->x_step *= -1; //cambiar el signo de x_step si no es correcto
+	if (data->ray->ray_up)
+		data->ray->collision_y_h -= 1;
+
+	/* while (!data->ray->h_crash)
+	{ */
+		data->ray->tile_x = data->ray->collision_x_h / data->px;
+		data->ray->tile_y = data->ray->collision_y_h / data->px;
+		printf("Casilla X colision: %d\n", data->ray->tile_x);
+		printf("Casilla Y colision: %d\n", data->ray->tile_y);
+		/* 
+		if (collision(data->board, data->ray->tile_x, data->ray->tile_y) == true)
+		{
+			printf("Se chocó contra mura horizontal\n");
+			data->ray->h_crash = true;
+		}
+		else
+		{
+			printf("Despejado\n");
+			break;
+		} */
+	// }
+}
+
+bool	collision(t_board **board, int tile_x, int tile_y)
+{
+	if (board[tile_x][tile_y].is_border == 1)
+		return (true);
+	else
+		return (false);
 }
