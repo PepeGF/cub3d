@@ -25,6 +25,7 @@ t_board	**ft_final_matrix(t_list **list, t_data *data)
 		i++;
 		aux = aux->next;
 	}
+	printf("board[0][0].type: %c\n", board[0][0].type);
 	return (board);
 }
 

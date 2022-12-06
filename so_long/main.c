@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/12/06 17:58:38 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:49:14 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int argc, char **argv)
 	data.player = where_is_the_player(data.board, cont[0], cont[1]);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
 	initialize_images(&data, cont);
 	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
-	ft_set_player_intial_geometry(data, &(data.player));
+	// ft_set_player_intial_geometry(data, &(data.player));
 	put_field(data.board, cont[1], cont[0], data);
 	// print_matrix(data.board, cont[0], cont[1]);
 	replace_field(data.board, cont[1], cont[0], data);

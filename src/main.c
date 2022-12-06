@@ -5,7 +5,6 @@ int	main(int argc, char **argv)
 	t_data	*data;
 	t_list	*list;
 // atexit(leakss);
-(void)argv;
 	list = 0;
 	ft_check_argc(argc);
 	data = (t_data *)malloc(sizeof(t_data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
@@ -23,7 +22,6 @@ int	main(int argc, char **argv)
 	mlx_hook(data->mlx_win, 2, 0/* (1L << 17) */, &key_hook, data->mlx);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
 	mlx_hook(data->mlx_win, 17, 0/* (1L << 17) */, &exit_game, data->mlx);
 	mlx_loop(data->mlx);
-	write(1, "ADIOS\n", 6);
 	return (0);
 }
 

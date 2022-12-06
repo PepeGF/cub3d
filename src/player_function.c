@@ -5,8 +5,9 @@ t_player	*where_is_the_player(t_board **board, int x, int y)
 	int			i;
 	int			j;
 	t_player	*player;
-
+// int k = 1;
 	player = malloc(sizeof(t_player));
+
 	*player = (t_player){}; //inicializar todo lo de player en 0 o NULL
 	i = -1;
 	while (++i < y)
@@ -14,13 +15,16 @@ t_player	*where_is_the_player(t_board **board, int x, int y)
 		j = 0;
 		while (j < x)
 		{
+	// printf("Checking %d: %d\t%d\n",k, i, j);
 			if (is_player(board, i, j))
 			{
+				// printf("Soy player, estoy en (%d,%d)\n", i, j);
 				player->x = j;
 				player->y = i;
 				break ;
 			}	
 			j++;
+			// k++;
 		}
 	}
 	return (player);//hay que liberar esto
