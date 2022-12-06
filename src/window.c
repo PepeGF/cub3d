@@ -101,6 +101,8 @@ void	draw_floor2d(t_data	*data)
 	int	i;
 	int j;
 //un cuadradito de 5x5 pix del color de fondo
+printf("\t+x+x+x+x+x+x+x+x+x\n\t   %p\n\t+x+x+x+x+x+x+x+x+\n", &(data->player->x_position));
+printf("Player en: (%f, %f)\n", data->player->x_position, data->player->y_position);
 	i = -2;
 	while (i <= 2)
 	{

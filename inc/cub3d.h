@@ -140,51 +140,51 @@ typedef struct s_data
 }	t_data;
 
 // main.c
-void	initialize_main_vars(t_data *data);
-void	ft_check_argc(int argc);
+void		initialize_main_vars(t_data *data);
+void		ft_check_argc(int argc);
 
 // read_file.c
-t_list	*ft_read_map(char *file, t_data *data);
-void	check_file(char *file);
+t_list		*ft_read_map(char *file, t_data *data);
+void		check_file(char *file);
 
 // matrix.c
-t_board	**ft_final_matrix(t_list **list, t_data *data);
-t_board	ft_add_line_to_list(char c, int row, int col);
-void	ft_initialize_pos(t_board *elem);
+t_board		**ft_final_matrix(t_list **list, t_data *data);
+t_board		ft_add_line_to_list(char c, int row, int col);
+void		ft_initialize_pos(t_board *elem);
 
 // raycast.c
-t_ray	*initialize_ray(void);
+t_ray		*initialize_ray(void);
 
 // player_function.c
 t_player	*where_is_the_player(t_board **board, int x, int y);
-int	is_player(t_board **board, int i, int j);
-void	ft_set_player_intial_geometry(t_data *data, t_player *player);
-int	ft_player_initial_direction(t_board **board, t_player player);
+int			is_player(t_board **board, int i, int j);
+void		ft_set_player_intial_geometry(t_data *data, t_player *player);
+int			ft_player_initial_direction(t_board **board, t_player player);
 
 // images.c
-void	initialize_images(t_data *data);
+void		initialize_images(t_data *data);
 
 // window.c
-void	put_field(t_board **matrix, int row, int col, t_data *data);
-void	replace_field(t_board **matrix, int row, int col, t_data *data);
-void	draw_full_map(t_board **matrix, int row, int col, t_data *data);
-void	replace_border_img(t_board **matrix, int row, int col, t_data *data);
-void	replace_player_img(t_board **matrix, int row, int col, t_data *data);
-void	draw_player(t_data *data);
-void	draw_floor2d(t_data	*data);
+void		put_field(t_board **matrix, int row, int col, t_data *data);
+void		replace_field(t_board **matrix, int row, int col, t_data *data);
+void		draw_full_map(t_board **matrix, int row, int col, t_data *data);
+void		replace_border_img(t_board **matrix, int row, int col, t_data *data);
+void		replace_player_img(t_board **matrix, int row, int col, t_data *data);
+void		draw_player(t_data *data);
+void		draw_floor2d(t_data	*data);
 
 // key_pressed.c
-int	key_hook(int keycode, t_data *data);
+int			key_hook(int keycode, t_data *data);
 
 // movement.c
-void	turn(t_data *data, int keycode);
-void	front_back(t_data *data, int keycode);
-void	side_move(t_data *data, int keycode);
-int		get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp,
-			int player_pos_y_temp);
-int	check_x_collision(t_data *data, int	player_pos_x_temp);
-int	check_y_collision(t_data *data, int	player_pos_y_temp);
-void	set_current_grid(t_data *data);
+void		turn(t_data *data, int keycode);
+void		front_back(t_data *data, int keycode);
+void		side_move(t_data *data, int keycode);
+int			get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp,
+			int	 player_pos_y_temp);
+int			check_x_collision(t_data *data, int	player_pos_x_temp);
+int			check_y_collision(t_data *data, int	player_pos_y_temp);
+void		set_current_grid(t_data *data);
 
 
 
