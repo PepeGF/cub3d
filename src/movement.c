@@ -19,7 +19,7 @@ void	front_back(t_data *data, int keycode)
 	double	player_pos_x_temp;
 	double	player_pos_y_temp;
 
-	draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
+	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_w || keycode == key_up)
 		data->player->move_on = 1;
@@ -35,7 +35,8 @@ void	front_back(t_data *data, int keycode)
 	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player->y_position = player_pos_y_temp;//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	set_current_grid(data);
-	draw_player(data);//dibuja al jugador en su nueva posicion
+	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
+	// draw_player(data);//dibuja al jugador en su nueva posicion
 	// raycast(data);
 }
 
@@ -44,7 +45,7 @@ void	side_move(t_data *data, int keycode)
 	double	player_pos_x_temp;
 	double	player_pos_y_temp;
 
-	draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
+	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_d)
 		data->player->sideway_on = 1;
@@ -58,7 +59,8 @@ void	side_move(t_data *data, int keycode)
 	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player->y_position = player_pos_y_temp;
 	set_current_grid(data);
-	draw_player(data);//dibuja al jugador en su nueva posicion
+	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
+	// draw_player(data);//dibuja al jugador en su nueva posicion
 	// raycast(data);
 }
 
