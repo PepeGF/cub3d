@@ -17,8 +17,11 @@ t_board	**ft_final_matrix(t_list **list, t_data *data)
 		while (j < data->map_x_tot)
 		{
 			board[i][j] = ft_add_line_to_list(aux->content[j], i, j);
+			// printf("%c", board[i][j].type);
+			// fflush(0);
 			j++;
 		}
+		// printf("\n");
 		i++;
 		aux = aux->next;
 	}

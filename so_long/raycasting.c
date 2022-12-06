@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:01:10 by josgarci          #+#    #+#             */
-/*   Updated: 2022/12/06 10:47:13 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/12/06 15:31:07 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 	t_ray *ray;
 
 	ray = malloc(sizeof(t_ray));
-	ray->ray_x = 0;
+	*ray = (t_ray){};
+	/* ray->ray_x = 0;
 	ray->ray_dir_x = 0;
 	ray->ray_dir_y = 0;
 	ray->ray_direction = 0;
@@ -59,7 +60,7 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 	ray->collision_y_v = 0;
 	ray->column = 0;
 	ray->h_crash = false;
-	ray->v_crash = false;
+	ray->v_crash = false; */
 	return (ray); //hay que liberar esto
 }
 

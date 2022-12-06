@@ -20,7 +20,7 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c read_file.c matrix.c
+SRCS = main.c read_file.c matrix.c raycast.c player_function.c images.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

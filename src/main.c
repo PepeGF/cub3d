@@ -8,11 +8,16 @@ int	main(int argc, char **argv)
 (void)argv;
 	list = 0;
 	ft_check_argc(argc);
-	data = (t_data *)malloc(sizeof(*data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
+	data = (t_data *)malloc(sizeof(t_data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
 	initialize_main_vars(data);
 	list = ft_read_map(argv[1], data);//algunas cosas de esta no valen
 	data->board = ft_final_matrix(&list, data);
-
+	//aquí iba data->cont, pero los contadores no van a hacer falta, así q pasando.
+	data->ray = initialize_ray();
+	data->player = where_is_the_player(data->board, data->map_x_tot, data->map_y_tot);//una vez me ha dado segfault, pero todas las variables están bien inicializadas, echar un ojo x si acaso
+	// printf("Mapa X: %d\tY: %d\n", data->map_x_tot, data->map_y_tot);
+	// initialize_images(data);
+	// ft_set_player_intial_geometry(data, data->player);
 	write(1, "ADIOS\n", 6);
 	return (0);
 }
@@ -20,7 +25,7 @@ int	main(int argc, char **argv)
 void	initialize_main_vars(t_data *data)
 {
 	data->board = 0;
-	data->cont = 0;
+	// data->cont = 0;
 	data->map_x_tot = 0;
 	data->map_y_tot = 0;
 	data->mov_cont = 0;//no hace falta

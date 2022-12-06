@@ -32,14 +32,14 @@ typedef struct s_board {
 	// int		end;
 }	t_board;
 
-typedef struct s_cont {
+/* typedef struct s_cont {
 	int	jug;
 	int	coll;
 	int	end;
 	int	x;
 	int	y;
 }	t_cont;
-
+ */
 typedef struct s_player 
 {
 	int	x;				//posicion cuadricula
@@ -94,8 +94,8 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_win;
 	void		*field;
-	void		*dino;
-	void		*food;
+	// void		*dino;
+	// void		*food;
 	void		*obs;
 	void		*border;
 	// void		*end;
@@ -104,8 +104,8 @@ typedef struct s_data
 	int			px;
 	int			mov_cont;
 	t_board		**board;
-	t_cont		*cont;
-	t_player	player;
+	// t_cont		*cont;
+	t_player	*player;
 	t_ray		*ray;
 }	t_data;
 
@@ -122,8 +122,19 @@ t_board	**ft_final_matrix(t_list **list, t_data *data);
 t_board	ft_add_line_to_list(char c, int row, int col);
 void	ft_initialize_pos(t_board *elem);
 
+// raycast.c
+t_ray	*initialize_ray(void);
+
+// player_function.c
+t_player	*where_is_the_player(t_board **board, int x, int y);
+int	is_player(t_board **board, int i, int j);
+void	ft_set_player_intial_geometry(t_data *data, t_player *player);
+int	ft_player_initial_direction(t_board **board, t_player player);
 
 
+
+// images.c
+void	initialize_images(t_data *data);
 
 
 #endif
