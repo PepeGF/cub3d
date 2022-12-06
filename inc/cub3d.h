@@ -22,6 +22,36 @@
 #  define WIN_HEIGHT 1042
 # endif
 
+enum e_keycodes
+{
+	key_a = 0,
+	key_s = 1,
+	key_d = 2,
+	key_q = 12,
+	key_w = 13,
+	key_space = 49,
+	key_esc = 53,
+	key_up = 126,
+	key_down = 125,
+	key_left = 123,
+	key_right = 124
+};
+
+enum e_cardinal_points
+{
+	NORTH = 90,
+	SOUTH = 270,
+	EAST = 0,
+	WEST = 180
+};
+
+enum e_constant_values
+{
+	vision_angle = 90,
+	window_height = 720,
+	window_width = 1280
+};
+
 typedef struct s_board {
 	int		col;
 	int		row;
@@ -131,10 +161,42 @@ int	is_player(t_board **board, int i, int j);
 void	ft_set_player_intial_geometry(t_data *data, t_player *player);
 int	ft_player_initial_direction(t_board **board, t_player player);
 
-
-
 // images.c
 void	initialize_images(t_data *data);
 
+// window.c
+void	put_field(t_board **matrix, int row, int col, t_data *data);
+void	replace_field(t_board **matrix, int row, int col, t_data *data);
+void	draw_full_map(t_board **matrix, int row, int col, t_data *data);
+void	replace_border_img(t_board **matrix, int row, int col, t_data *data);
+void	replace_player_img(t_board **matrix, int row, int col, t_data *data);
+void	draw_player(t_data *data);
+void	draw_floor2d(t_data	*data);
+
+// key_pressed.c
+int	key_hook(int keycode, t_data *data);
+
+// movement.c
+void	turn(t_data *data, int keycode);
+void	front_back(t_data *data, int keycode);
+void	side_move(t_data *data, int keycode);
+int		get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp,
+			int player_pos_y_temp);
+int	check_x_collision(t_data *data, int	player_pos_x_temp);
+int	check_y_collision(t_data *data, int	player_pos_y_temp);
+void	set_current_grid(t_data *data);
+
+
+
+
+
+
+
+
+
+
+
+// exit_game.c
+int	exit_game(t_data *data);
 
 #endif

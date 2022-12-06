@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/11/21 19:24:23 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:58:38 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 	// check_counters(data.cont);
 	// data.px = 16; //metido en función de initializa_main_vars
 	data.ray = initialize_ray();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
-	data.player = where_is_the_player(data.board, data.cont->x, data.cont->y);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
+	data.player = where_is_the_player(data.board, cont[0], cont[1]);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
 	initialize_images(&data, cont);
 	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
 	ft_set_player_intial_geometry(data, &(data.player));
