@@ -1,103 +1,36 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 16:23:07 by josgarci          #+#    #+#             */
-/*   Updated: 2022/08/23 17:19:11 by josgarci         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../inc/cub3d.h"
 
-void	print_list(t_list **list)
+int	main(int argc, char **argv)
 {
-	t_list	*aux;
-
-	aux = (*list);
-	while (aux)
-	{
-		printf("%s", aux->content);
-		aux = aux->next;
-	}
-}
-
-void	free_variables(t_list **list)
-{
-	t_list	*aux;
-
-	aux = *list;
-	while (*list)
-	{
-		aux = (*list)->next;
-		if ((*list)->content != NULL)
-			free((*list)->content);
-		free(*list);
-		*list = aux;
-	}
-}
-
-void	free_if_error(int fd, t_list **aux)
-{
-	free_variables(aux);
-	close(fd);
-	exit (0);
-}
-
-void	check_file(char *file)
-{
-	int	i;
-
-	i = ft_strlen(file) - 1;
-	if (file[i] != 'b' || file[i - 1] != 'u'
-		|| file[i - 2] != 'c' || file[i - 3] != '.')
-	{
-		printf("Error\nIncorrect file extension\n");
-		exit (0);
-	}
-}
-
-t_list	*ft_read_map(char *file, int cont[2])
-{
-	int		fd;
-	char	*line;
-	int		len;
-	t_list	*aux;
-
-	check_file(file);
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	if (line == 0)
-		exit(0);
-	cont[1] = ft_strlen(line) - 1;
-	aux = 0;
-	while (line)
-	{
-		len = ft_strlen(line) - 1;
-		if (cont[1] != len)
-			free_if_error(fd, &aux);
-		ft_lstadd_back(&aux, ft_lstnew(line));
-		line = get_next_line(fd);
-		cont[0]++;
-	}
-	close(fd);
-	return (aux);
-}
-
-int main(int argc, char *argv[])
-{
-	(void)argc;
-	(void)argv;
+	t_data	*data;
 	t_list	*list;
-	int		cont[2];//solo para pruebas iniciales
-
+// atexit(leakss);
+(void)argv;
 	list = 0;
-	list = ft_read_map(argv[1], cont);
-	print_list(&list);
-	
-	printf("Paola guapa!\n");
-	printf("filas-> %d\ncolumnas-> %d\n", cont[0], cont[1]);
-	return 0;
+	ft_check_argc(argc);
+	data = (t_data *)malloc (sizeof(data));
+	initialize_main_vars(data);
+	list = ft_read_map(argv[1], data);//algunas cosas de esta no valen
+
+
+	return (0);
+}
+
+void	initialize_main_vars(t_data *data)
+{
+	data->board = 0;
+	data->cont = 0;
+	data->map_x_tot = 0;
+	data->map_y_tot = 0;
+	data->mov_cont = 0;//no hace falta
+	data->px = 16;
+}
+
+void	ft_check_argc(int argc)
+{
+	if (argc != 2)
+	{
+		printf("Error en el número de argumentos\n");
+		exit (1);
+	}
 }

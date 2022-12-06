@@ -20,7 +20,7 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c
+SRCS = main.c read_file.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
