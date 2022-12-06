@@ -8,6 +8,8 @@ wololo
 so_long/so_long
 .vscode/
 .vscode/*
+./vscode/
+./vscode/*
 
 # Prerequisites
 *.d
