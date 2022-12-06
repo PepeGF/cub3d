@@ -14,13 +14,12 @@ int	main(int argc, char **argv)
 	//aquí iba data->cont, pero los contadores no van a hacer falta, así q pasando.
 	data->ray = initialize_ray();
 	data->player = where_is_the_player(data->board, data->map_x_tot, data->map_y_tot);//una vez me ha dado segfault, pero todas las variables están bien inicializadas, echar un ojo x si acaso
-	// printf("Mapa X: %d\tY: %d\n", data->map_x_tot, data->map_y_tot);
 	initialize_images(data);
-	ft_set_player_intial_geometry(data, data->player);
+	set_player_initial_geometry(data, data->player);
 	put_field(data->board, data->map_y_tot, data->map_x_tot, data);
 	replace_field(data->board, data->map_y_tot, data->map_x_tot, data);
-	mlx_hook(data->mlx_win, 2, 0/* (1L << 17) */, &key_hook, data->mlx);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
-	mlx_hook(data->mlx_win, 17, 0/* (1L << 17) */, &exit_game, data->mlx);
+	mlx_hook(data->mlx_win, 2, 0/* (1L << 17) */, &key_hook, data);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
+	mlx_hook(data->mlx_win, 17, 0/* (1L << 17) */, &exit_game, data);
 	mlx_loop(data->mlx);
 	return (0);
 }

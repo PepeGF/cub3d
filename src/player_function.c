@@ -5,7 +5,6 @@ t_player	*where_is_the_player(t_board **board, int x, int y)
 	int			i;
 	int			j;
 	t_player	*player;
-// int k = 1;
 	player = malloc(sizeof(t_player));
 
 	*player = (t_player){}; //inicializar todo lo de player en 0 o NULL
@@ -15,16 +14,13 @@ t_player	*where_is_the_player(t_board **board, int x, int y)
 		j = 0;
 		while (j < x)
 		{
-	// printf("Checking %d: %d\t%d\n",k, i, j);
 			if (is_player(board, i, j))
 			{
-				// printf("Soy player, estoy en (%d,%d)\n", i, j);
 				player->x = j;
 				player->y = i;
 				break ;
 			}	
 			j++;
-			// k++;
 		}
 	}
 	return (player);//hay que liberar esto
@@ -38,7 +34,7 @@ int	is_player(t_board **board, int i, int j)
 	return (0);
 }
 
-void	ft_set_player_intial_geometry(t_data *data, t_player *player)
+void	set_player_initial_geometry(t_data *data, t_player *player)
 {
 	player->direction = ft_player_initial_direction(data->board, *player);
 	player->x_position = player->x * data->px + data->px / 2;

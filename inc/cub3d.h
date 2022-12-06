@@ -158,7 +158,7 @@ t_ray		*initialize_ray(void);
 // player_function.c
 t_player	*where_is_the_player(t_board **board, int x, int y);
 int			is_player(t_board **board, int i, int j);
-void		ft_set_player_intial_geometry(t_data *data, t_player *player);
+void		set_player_initial_geometry(t_data *data, t_player *player);
 int			ft_player_initial_direction(t_board **board, t_player player);
 
 // images.c
