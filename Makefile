@@ -5,7 +5,7 @@ RED		= '\033[1;31m'
 GREEN	= '\033[1;32m'
 PURPLE	= '\033[1;35m'
 YELLOW	= '\033[1;33m'
-WHITE	= '\033[1;37m'
+WHITE	= '\033[0;37m'
 BLUE	= '\033[1;34m'
 
 NAME = cub3D
@@ -20,7 +20,7 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c read_file.c
+SRCS = main.c read_file.c matrix.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
@@ -72,5 +72,8 @@ fclean: clean
 	@$(MAKE) -C $(LIBFT_PATH) fclean --silent
 
 re: fclean $(NAME)
+
+run: $(NAME)
+	@./cub3d maps/37x14.cub
 
 .PHONY: all clean fclean re

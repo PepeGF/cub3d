@@ -1,7 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -118,6 +117,10 @@ void	ft_check_argc(int argc);
 t_list	*ft_read_map(char *file, t_data *data);
 void	check_file(char *file);
 
+// matrix.c
+t_board	**ft_final_matrix(t_list **list, t_data *data);
+t_board	ft_add_line_to_list(char c, int row, int col);
+void	ft_initialize_pos(t_board *elem);
 
 
 

@@ -21,7 +21,7 @@ t_list	*ft_read_map(char *file, t_data *data)
 			free_if_error(fd, &aux); */
 		ft_lstadd_back(&aux, ft_lstnew(line));
 		line = get_next_line(fd);
-		data->map_y_tot++;
+		data->map_y_tot += 1;
 	}
 	close(fd);
 	return (aux);

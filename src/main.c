@@ -8,11 +8,12 @@ int	main(int argc, char **argv)
 (void)argv;
 	list = 0;
 	ft_check_argc(argc);
-	data = (t_data *)malloc (sizeof(data));
+	data = (t_data *)malloc(sizeof(*data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
 	initialize_main_vars(data);
 	list = ft_read_map(argv[1], data);//algunas cosas de esta no valen
+	data->board = ft_final_matrix(&list, data);
 
-
+	write(1, "ADIOS\n", 6);
 	return (0);
 }
 
@@ -34,3 +35,4 @@ void	ft_check_argc(int argc)
 		exit (1);
 	}
 }
+
