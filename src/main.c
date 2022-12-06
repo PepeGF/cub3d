@@ -16,8 +16,11 @@ int	main(int argc, char **argv)
 	data->ray = initialize_ray();
 	data->player = where_is_the_player(data->board, data->map_x_tot, data->map_y_tot);//una vez me ha dado segfault, pero todas las variables están bien inicializadas, echar un ojo x si acaso
 	// printf("Mapa X: %d\tY: %d\n", data->map_x_tot, data->map_y_tot);
-	// initialize_images(data);
-	// ft_set_player_intial_geometry(data, data->player);
+	initialize_images(data);
+	ft_set_player_intial_geometry(data, data->player);
+
+
+	
 	write(1, "ADIOS\n", 6);
 	return (0);
 }
