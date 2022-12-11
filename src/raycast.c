@@ -102,8 +102,8 @@ void	calculate_ray_wall_collision_horizontal(t_data *data)
 
 bool	collision(t_board **board, int tile_x, int tile_y)
 {
-	if (tile_x < 0 || tile_y < 0)
-		return (true);
+	// if (tile_x < 0 || tile_y < 0)
+	// 	return (true);
 	if (board[tile_x][tile_y].type == 1)
 		return (true);
 	else
