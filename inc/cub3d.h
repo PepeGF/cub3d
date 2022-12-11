@@ -88,6 +88,8 @@ typedef struct s_player
 	int	sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
 	int	move_speed;		// velocidad desplazamiento en pixeles ¿3?
 	int	turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
+	int	x_view;			// para dibujar hacia dónde mira el jugador, solo para debug, creo
+	int	y_view;
 
 }	t_player;
 
@@ -152,9 +154,6 @@ t_board		**ft_final_matrix(t_list **list, t_data *data);
 t_board		ft_add_line_to_list(char c, int row, int col);
 void		ft_initialize_pos(t_board *elem);
 
-// raycast.c
-t_ray		*initialize_ray(void);
-
 // player_function.c
 t_player	*where_is_the_player(t_board **board, int x, int y);
 int			is_player(t_board **board, int i, int j);
@@ -172,6 +171,8 @@ void		replace_border_img(t_board **matrix, int row, int col, t_data *data);
 void		replace_player_img(t_board **matrix, int row, int col, t_data *data);
 void		draw_player(t_data *data);
 void		draw_floor2d(t_data	*data);
+void 		draw_view_point(t_data *data);
+
 
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
@@ -186,7 +187,13 @@ int			check_x_collision(t_data *data, int	player_pos_x_temp);
 int			check_y_collision(t_data *data, int	player_pos_y_temp);
 void		set_current_grid(t_data *data);
 
+// raycast.c
 
+t_ray	*initialize_ray(void);
+void	raycast(t_data *data);
+void	calculate_first_ray_collision_horizontal(t_data *data);
+void	calculate_ray_wall_collision_horizontal(t_data *data);
+bool	collision(t_board **board, int tile_x, int tile_y);
 
 
 

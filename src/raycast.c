@@ -30,3 +30,82 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 
 	return (ray); //hay que liberar esto
 }
+
+void	raycast(t_data *data)
+{
+	if (data->player->direction < 180 && data->player->direction != 0)
+		data->ray->ray_up = 1;
+	else if (data->player->direction > 180)
+		data->ray->ray_up = -1;
+	else
+		data->ray->ray_up = 0;
+	if (data->player->direction > 90 && data->player->direction < 270)
+		data->ray->ray_left = 1;
+	else if (data->player->direction == 90 || data->player->direction == 270)
+		data->ray->ray_left = 0;
+	else
+		data->ray->ray_left = -1;
+	calculate_first_ray_collision_horizontal(data);
+}
+
+void	calculate_first_ray_collision_horizontal(t_data *data)
+{
+	data->ray->ray_direction = data->player->direction * M_PI / 180;
+	if (data->ray->ray_up == 1)
+		data->ray->collision_y_h = data->player->y * data->px;
+	else if (data->ray->ray_up == -1)
+		data->ray->collision_y_h = (data->player->y + 1) * data->px;
+	else
+		data->ray->collision_y_h = data->player->y_position;
+	if (data->ray->ray_up == 1)
+		data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
+	else if (data->ray->ray_up == -1)
+		data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
+	else
+		data->ray->collision_x_h = 1000000;
+	calculate_ray_wall_collision_horizontal(data);
+mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x_h, data->ray->collision_y_h, 0x33FFFF);
+}
+
+void	calculate_ray_wall_collision_horizontal(t_data *data)
+{
+	data->ray->y_step = data->px;
+	data->ray->x_step = data->ray->y_step / tan(data->ray->ray_direction + data->ray->delta_angle);// este cálculo no contempla dirección, solo es el valor absoluto
+	if (data->ray->ray_up == 1)
+	{
+		data->ray->y_step *= -1;
+		data->ray->collision_y_h -= 1;
+	}
+	if ((data->ray->ray_left == 1 && data->ray->x_step > 0) || (data->ray->ray_left == -1 && data->ray->x_step < 0))
+		data->ray->x_step *= -1; //cambiar el signo de x_step si no es correcto
+
+/* 	while (!data->ray->h_crash)
+	{ 
+		data->ray->tile_x = data->ray->collision_x_h / data->px;
+		data->ray->tile_y = data->ray->collision_y_h / data->px;
+		printf("Casilla X colision: %d\n", data->ray->tile_x);
+		printf("Casilla Y colision: %d\n", data->ray->tile_y);
+		 
+		if (collision(data->board, data->ray->tile_x, data->ray->tile_y) == true)
+		{
+			printf("Se chocó contra mura horizontal\n");
+			data->ray->h_crash = true;
+		}
+		else
+		{
+			printf("Despejado\n");
+		}
+		data->ray->collision_x_h += data->ray->x_step;
+		data->ray->collision_y_h += data->ray->y_step;
+	} */
+}
+
+bool	collision(t_board **board, int tile_x, int tile_y)
+{
+	if (tile_x < 0 || tile_y < 0)
+		return (true);
+	if (board[tile_x][tile_y].type == 1)
+		return (true);
+	else
+		return (false);
+}
