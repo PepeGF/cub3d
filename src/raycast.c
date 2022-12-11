@@ -62,9 +62,11 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 	else if (data->ray->ray_up == -1)
 		data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
 	else
-		data->ray->collision_x_h = 1000000;
+		data->ray->collision_x_h = 0;
+	data->ray->h_crash = false;  //esto tengo que ponerlo en algún sitio y aun no tengo claro dónde
+
 	calculate_ray_wall_collision_horizontal(data);
-mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x_h, data->ray->collision_y_h, 0x33FFFF);
+mlx_pixel_put(data->mlx, data->mlx_win, 0/* data->ray->collision_x_h */, 0/* data->ray->collision_y_h */, 0x33FFFF);
 }
 
 void	calculate_ray_wall_collision_horizontal(t_data *data)
@@ -78,8 +80,7 @@ void	calculate_ray_wall_collision_horizontal(t_data *data)
 	}
 	if ((data->ray->ray_left == 1 && data->ray->x_step > 0) || (data->ray->ray_left == -1 && data->ray->x_step < 0))
 		data->ray->x_step *= -1; //cambiar el signo de x_step si no es correcto
-
-/* 	while (!data->ray->h_crash)
+	while (!data->ray->h_crash)
 	{ 
 		data->ray->tile_x = data->ray->collision_x_h / data->px;
 		data->ray->tile_y = data->ray->collision_y_h / data->px;
@@ -97,14 +98,14 @@ void	calculate_ray_wall_collision_horizontal(t_data *data)
 		}
 		data->ray->collision_x_h += data->ray->x_step;
 		data->ray->collision_y_h += data->ray->y_step;
-	} */
+	}
 }
 
 bool	collision(t_board **board, int tile_x, int tile_y)
 {
 	// if (tile_x < 0 || tile_y < 0)
 	// 	return (true);
-	if (board[tile_x][tile_y].type == 1)
+	if (board[tile_y][tile_x].type == '1')
 		return (true);
 	else
 		return (false);
