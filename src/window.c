@@ -11,10 +11,29 @@ void	put_field(t_board **matrix, int row, int col, t_data *data)
 		j = 0;
 		while (j < col)
 		{
-			mlx_put_image_to_window(data->mlx, data->mlx_win, data->field,
-				(matrix[i][j].col * data->px), (matrix[i][j].row * data->px));
+			if (matrix[i][j].type != ' ' && matrix[i][j].type != '\0' && matrix[i][j].type != '\t')
+					mlx_put_image_to_window(data->mlx, data->mlx_win, data->field,
+					(matrix[i][j].col * data->px), (matrix[i][j].row * data->px));
 			j++;
 		}
+	}
+}
+
+void	print_field(t_board **matrix, int row, int col)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < row)
+	{
+		j = 0;
+		while (j < col)
+		{
+			printf("%c", matrix[i][j].type);
+			j++;
+		}
+		printf("\n");
 	}
 }
 

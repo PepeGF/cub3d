@@ -124,6 +124,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_win;
 	void		*field;
+	t_list		*list;
 	// void		*dino;
 	// void		*food;
 	void		*obs;
@@ -172,6 +173,7 @@ void		replace_border_img(t_board **matrix, int row, int col, t_data *data);
 void		replace_player_img(t_board **matrix, int row, int col, t_data *data);
 void		draw_player(t_data *data);
 void		draw_floor2d(t_data	*data);
+void		print_field(t_board **matrix, int row, int col);
 
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
