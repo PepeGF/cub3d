@@ -11,7 +11,9 @@ void	turn(t_data *data, int keycode)
 	data->player->direction %= 360;//quita vueltas si es necesario
 	if (data->player->direction < 0)
 		data->player->direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
-	// raycast(data);
+	// printf("Direccion: %d\n", data->player->direction);
+	draw_view_point(data);
+	raycast(data);
 }
 
 void	front_back(t_data *data, int keycode)
@@ -37,7 +39,7 @@ void	front_back(t_data *data, int keycode)
 	set_current_grid(data);
 	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 	// draw_player(data);//dibuja al jugador en su nueva posicion
-	// raycast(data);
+	raycast(data);
 }
 
 void	side_move(t_data *data, int keycode)
@@ -61,7 +63,7 @@ void	side_move(t_data *data, int keycode)
 	set_current_grid(data);
 	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 	// draw_player(data);//dibuja al jugador en su nueva posicion
-	// raycast(data);
+	raycast(data);
 }
 
 int get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp, int player_pos_y_temp)

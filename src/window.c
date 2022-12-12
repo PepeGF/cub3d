@@ -113,6 +113,7 @@ void	draw_player(t_data *data)
 		}
 		i++;
 	}
+	draw_view_point(data);
 }
 
 void	draw_floor2d(t_data	*data)
@@ -132,4 +133,10 @@ void	draw_floor2d(t_data	*data)
 		}
 		i++;
 	}
+}
+
+void draw_view_point(t_data *data)
+{
+	mlx_pixel_put(data->mlx, data->mlx_win, (int)(data->player->x_position + (cos(data->player->direction * M_PI / 180) * 30)),
+			(int)(data->player->y_position - (sin(data->player->direction * M_PI / 180) * 30)), 0x000000);
 }
