@@ -47,6 +47,36 @@ void	raycast(t_data *data)
 		data->ray->ray_left = -1;
 	calculate_first_ray_collision_horizontal(data);
 	calculate_first_ray_collision_vertical(data);
+	choose_closer_collision(data);
+mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x00FF00);
+
+}
+
+int	distance_btw_points(int x_player, int y_player, int x_collision, int y_collision)
+{
+	int	distance;
+
+	distance = sqrt((x_player - x_collision) * (x_player - x_collision) +
+			(y_player - y_collision) * (y_player - y_collision));
+	return (distance);
+}
+
+void	choose_closer_collision(t_data *data)
+{
+	data->ray->dist_h_collision = distance_btw_points(data->player->x_position,
+		data->player->y_position, data->ray->collision_x_h, data->ray->collision_y_h);
+	data->ray->dist_v_collision = distance_btw_points(data->player->x_position,
+		data->player->y_position, data->ray->collision_x_v, data->ray->collision_y_v);
+	if (data->ray->dist_h_collision <= data->ray->dist_v_collision)
+	{
+		data->ray->collision_x = data->ray->collision_x_h;
+		data->ray->collision_y = data->ray->collision_y_h;
+	}
+	else
+	{
+		data->ray->collision_x = data->ray->collision_x_v;
+		data->ray->collision_y = data->ray->collision_y_v;
+	}
 }
 
 void	calculate_first_ray_collision_horizontal(t_data *data)
@@ -75,7 +105,6 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 
 	calculate_ray_wall_collision_horizontal(data);
 	// printf("Supuesta colision: (%d, %d)\n", data->ray->collision_x_h, data->ray->collision_y_h);
-mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x_h, data->ray->collision_y_h, 0x0000FF);
 }
 
 void	calculate_ray_wall_collision_horizontal(t_data *data)
@@ -137,7 +166,7 @@ void	calculate_first_ray_collision_vertical(t_data *data)
 
 	// printf("Supuesta colision: (%d, %d)\n", data->ray->collision_x_h, data->ray->collision_y_h);
 	calculate_ray_wall_collision_vertical(data);
-mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x_h, data->ray->collision_y_h, 0x00FF00);
+// mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x_h, data->ray->collision_y_h, 0x00FF00);
 }
 
 void	calculate_ray_wall_collision_vertical(t_data *data)
