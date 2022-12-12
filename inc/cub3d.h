@@ -193,6 +193,9 @@ t_ray	*initialize_ray(void);
 void	raycast(t_data *data);
 void	calculate_first_ray_collision_horizontal(t_data *data);
 void	calculate_ray_wall_collision_horizontal(t_data *data);
+void	calculate_first_ray_collision_vertical(t_data *data);
+void	calculate_ray_wall_collision_vertical(t_data *data);
+
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
 
 
