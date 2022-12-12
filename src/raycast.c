@@ -150,7 +150,7 @@ void	calculate_ray_wall_collision_vertical(t_data *data)
 		data->ray->collision_y_h -= 1;
 	}
 	if ((data->ray->ray_up == 1 && data->ray->y_step > 0) || (data->ray->ray_up == -1 && data->ray->y_step < 0))
-		data->ray->x_step *= -1; //cambiar el signo de x_step si no es correcto
+		data->ray->y_step *= -1; //cambiar el signo de x_step si no es correcto
 	while (!data->ray->h_crash)
 	{ 
 		data->ray->tile_x = data->ray->collision_x_h / data->px;
@@ -181,7 +181,7 @@ bool	collision(t_board **board, int tile_x, int tile_y, t_data *data)
 {
 	// if (tile_x < 0 || tile_y < 0)
 	// 	return (true);
-	printf("Casilla : (%d, %d)\n", tile_x, tile_y);
+	// printf("Casilla : (%d, %d)\n", tile_x, tile_y);
 	if (tile_x < 0 || tile_x > data->map_x_tot - 1 || tile_y < 0 || tile_y > data->map_y_tot - 1)
 		return (true);
 	if (board[tile_y][tile_x].type == '1')
