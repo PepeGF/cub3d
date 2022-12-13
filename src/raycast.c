@@ -48,7 +48,7 @@ void	raycast(t_data *data)
 	calculate_first_ray_collision_horizontal(data);
 	calculate_first_ray_collision_vertical(data);
 	choose_closer_collision(data);
-mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x00FF00);
+mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x000000);
 
 }
 
