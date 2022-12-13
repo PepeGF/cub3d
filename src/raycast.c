@@ -81,7 +81,7 @@ void	choose_closer_collision(t_data *data)
 
 void	calculate_first_ray_collision_horizontal(t_data *data)
 {
-	data->ray->ray_direction = data->player->direction * M_PI / 180;
+	data->ray->ray_direction = data->player->direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
 	if (data->ray->ray_up == 1)
 		data->ray->collision_y_h = data->player->y * data->px;
 	else if (data->ray->ray_up == -1)
@@ -92,7 +92,7 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 // printf("Jugador px: (%f, %f)\n", data->player->x_position, data->player->y_position);
 // printf("Jugador: (%d, %d)\n", data->player->x, data->player->y);
 	/* if (data->ray->ray_up == 1) */
-		data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
+	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
 	// else if (data->ray->ray_up == -1)
 	// 	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
 	// else
@@ -104,6 +104,34 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 	data->ray->h_crash = false;  //esto tengo que ponerlo en algún sitio y aun no tengo claro dónde
 
 	calculate_ray_wall_collision_horizontal(data);
+	// printf("Supuesta colision: (%d, %d)\n", data->ray->collision_x_h, data->ray->collision_y_h);
+}
+
+void	calculate_first_ray_collision_vertical(t_data *data)
+{
+	data->ray->ray_direction = data->player->direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
+	if (data->ray->ray_left == 1)
+		data->ray->collision_x_v = data->player->x * data->px;
+	else if (data->ray->ray_left == -1)
+		data->ray->collision_x_v = (data->player->x + 1) * data->px;
+	else
+		data->ray->collision_x_v = data->player->x_position;
+// printf("---------------------------------------\ntan(%d) = %f\n", data->player->direction, tan(data->ray->ray_direction));
+// printf("Jugador px: (%f, %f)\n", data->player->x_position, data->player->y_position);
+// printf("Jugador: (%d, %d)\n", data->player->x, data->player->y);
+	/* if (data->ray->ray_up == 1) */
+	data->ray->collision_y_v = data->player->y_position + (data->player->x_position - data->ray->collision_x_v) * tan(data->ray->ray_direction);
+	// else if (data->ray->ray_up == -1)
+	// 	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
+	// else
+		// data->ray->collision_x_h = data->player->x_position;
+
+
+/* ¡¡¡¡¡¡¡¡¡¡OJO LA TANGEENTE DE CERO HAY INT OVERFLOW!!!!!!!!!! */
+
+	data->ray->v_crash = false;  //esto tengo que ponerlo en algún sitio y aun no tengo claro dónde
+
+	calculate_ray_wall_collision_vertical(data);
 	// printf("Supuesta colision: (%d, %d)\n", data->ray->collision_x_h, data->ray->collision_y_h);
 }
 
@@ -140,35 +168,6 @@ void	calculate_ray_wall_collision_horizontal(t_data *data)
 	}
 }
 
-void	calculate_first_ray_collision_vertical(t_data *data)
-{
-	data->ray->ray_direction = data->player->direction * M_PI / 180;
-	if (data->ray->ray_left == 1)
-		data->ray->collision_x_h = data->player->x * data->px;
-	else if (data->ray->ray_left == -1)
-		data->ray->collision_x_h = (data->player->x + 1) * data->px;
-	else
-		data->ray->collision_x_h = data->player->x_position;
-// printf("---------------------------------------\ntan(%d) = %f\n", data->player->direction, tan(data->ray->ray_direction));
-// printf("Jugador px: (%f, %f)\n", data->player->x_position, data->player->y_position);
-// printf("Jugador: (%d, %d)\n", data->player->x, data->player->y);
-	/* if (data->ray->ray_up == 1) */
-		data->ray->collision_y_h = data->player->y_position + (data->player->x_position - data->ray->collision_x_h) * tan(data->ray->ray_direction);
-	// else if (data->ray->ray_up == -1)
-	// 	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
-	// else
-		// data->ray->collision_x_h = data->player->x_position;
-
-
-/* ¡¡¡¡¡¡¡¡¡¡OJO LA TANGEENTE DE CERO HAY INT OVERFLOW!!!!!!!!!! */
-
-	data->ray->h_crash = false;  //esto tengo que ponerlo en algún sitio y aun no tengo claro dónde
-
-	// printf("Supuesta colision: (%d, %d)\n", data->ray->collision_x_h, data->ray->collision_y_h);
-	calculate_ray_wall_collision_vertical(data);
-// mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x_h, data->ray->collision_y_h, 0x00FF00);
-}
-
 void	calculate_ray_wall_collision_vertical(t_data *data)
 {
 	data->ray->x_step = data->px;
@@ -176,35 +175,35 @@ void	calculate_ray_wall_collision_vertical(t_data *data)
 	if (data->ray->ray_left == 1)
 	{
 		data->ray->x_step *= -1;
-		data->ray->collision_y_h -= 1;
+		data->ray->collision_x_v -= 1;
 	}
 	if ((data->ray->ray_up == 1 && data->ray->y_step > 0) || (data->ray->ray_up == -1 && data->ray->y_step < 0))
-		data->ray->y_step *= -1; //cambiar el signo de x_step si no es correcto
-	while (!data->ray->h_crash)
+		data->ray->y_step *= -1; //cambiar el signo de y_step si no es correcto
+	// printf("Y step: %d\n", data->ray->y_step);
+	data->ray->tile_x = data->ray->collision_x_v / data->px;
+		data->ray->tile_y = data->ray->collision_y_v / data->px;
+	// printf("Tile V crash: (%d, %d)\n", data->ray->tile_x, data->ray->tile_y);
+	while (!data->ray->v_crash)
 	{ 
-		data->ray->tile_x = data->ray->collision_x_h / data->px;
-		data->ray->tile_y = data->ray->collision_y_h / data->px;
+		data->ray->tile_x = data->ray->collision_x_v / data->px;
+		data->ray->tile_y = data->ray->collision_y_v / data->px;
 		// printf("Casilla colision: (%d, %d)\n", data->ray->tile_x, data->ray->tile_y);
 		// printf("Pixel colision: (%d, %d)\n", data->ray->collision_x_h, data->ray->collision_y_h);
 		 
 		if (collision(data->board, data->ray->tile_x, data->ray->tile_y, data) == true)
 		{
-			// printf("Se chocó contra mura horizontal\n");
-			data->ray->h_crash = true;
+			// printf("Se chocó contra muro horizontal\n");
+			data->ray->v_crash = true;
 			// break;
 		}
 		else
 		{
-			data->ray->collision_x_h += data->ray->x_step;
-			data->ray->collision_y_h += data->ray->y_step;
+			data->ray->collision_x_v += data->ray->x_step;
+			data->ray->collision_y_v += data->ray->y_step;
 			// printf("Despejado\n");
 		}
 	}
 }
-
-
-
-
 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data)
 {
