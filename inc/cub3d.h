@@ -144,6 +144,12 @@ typedef struct s_data
 	t_ray		*ray;
 }	t_data;
 
+	typedef struct s_point		//esta es solo para dibujar las lineass
+{
+	int				x_mod;
+	int				y_mod;
+}	t_point;
+
 // main.c
 void		initialize_main_vars(t_data *data);
 void		ft_check_argc(int argc);
@@ -201,8 +207,18 @@ void	calculate_ray_wall_collision_vertical(t_data *data);
 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
 void	choose_closer_collision(t_data *data, int i);
+/* 
+// bresenham.c
+void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1);
+void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1);
+void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1);
+void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1);
 
 
+// trianguation.c
+static void	ft_swap_points(t_data *data, t_point *point0, t_point *point1);
+void	ft_decide_line(t_data *data, t_point point0, t_point point1);
+ */
 
 
 
