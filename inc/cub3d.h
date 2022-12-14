@@ -121,6 +121,7 @@ typedef struct s_ray
 	int		y_step;	//distancia en px entre las colisiones parciales en y
 	int		tile_x;
 	int		tile_y;
+	int		*dist;
 }	t_ray;
 
 typedef struct s_data
@@ -199,7 +200,7 @@ void	calculate_first_ray_collision_vertical(t_data *data);
 void	calculate_ray_wall_collision_vertical(t_data *data);
 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
-void	choose_closer_collision(t_data *data);
+void	choose_closer_collision(t_data *data, int i);
 
 
 

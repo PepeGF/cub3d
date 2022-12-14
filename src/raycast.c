@@ -36,7 +36,9 @@ void	raycast(t_data *data)
 	int	i;
 
 	i = 0;
-	printf("Dirección rayos:\n");
+	data->ray->dist = (int *)malloc(sizeof(int) * WIN_WIDTH);
+	// printf("Dirección rayos:\n");
+	printf("Distancia colisiones:\n");
 	while (i < WIN_WIDTH)
 	{	//								para empeza en la izquierda		incrementa un delta de angulo
 		data->ray->ray_direction = data->player->direction - FOV / 2 + i * FOV / WIN_WIDTH;
@@ -56,7 +58,8 @@ void	raycast(t_data *data)
 		data->ray->ray_direction = data->ray->ray_direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
 		calculate_first_ray_collision_horizontal(data);
 		calculate_first_ray_collision_vertical(data);
-		choose_closer_collision(data);
+		choose_closer_collision(data, i);
+		printf("%d\t->  %d\n", i, data->ray->dist[i]);
 		mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x000000);
 		i++;
 	}
@@ -71,7 +74,7 @@ int	distance_btw_points(int x_player, int y_player, int x_collision, int y_colli
 	return (distance);
 }
 
-void	choose_closer_collision(t_data *data)
+void	choose_closer_collision(t_data *data, int i)
 {
 	data->ray->dist_h_collision = distance_btw_points(data->player->x_position,
 		data->player->y_position, data->ray->collision_x_h, data->ray->collision_y_h);
@@ -81,11 +84,13 @@ void	choose_closer_collision(t_data *data)
 	{
 		data->ray->collision_x = data->ray->collision_x_h;
 		data->ray->collision_y = data->ray->collision_y_h;
+		data->ray->dist[i] = data->ray->dist_h_collision;
 	}
 	else
 	{
 		data->ray->collision_x = data->ray->collision_x_v;
 		data->ray->collision_y = data->ray->collision_y_v;
+		data->ray->dist[i] = data->ray->dist_v_collision;
 	}
 }
 
