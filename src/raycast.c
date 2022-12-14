@@ -38,7 +38,7 @@ void	raycast(t_data *data)
 	i = 0;
 	printf("Dirección rayos:\n");
 	while (i < WIN_WIDTH)
-	{
+	{	//								para empeza en la izquierda		incrementa un delta de angulo
 		data->ray->ray_direction = data->player->direction - FOV / 2 + i * FOV / WIN_WIDTH;
 		// printf("%d\t->  %f\n", i, data->ray->ray_direction);
 		if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
