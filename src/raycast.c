@@ -33,15 +33,16 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 
 void	raycast(t_data *data)
 {
-	if (data->player->direction < 180 && data->player->direction != 0)
+	data->ray->ray_direction = data->player->direction + 0;
+	if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
 		data->ray->ray_up = 1;
-	else if (data->player->direction > 180)
+	else if (data->ray->ray_direction > 180)
 		data->ray->ray_up = -1;
 	else
 		data->ray->ray_up = 0;
-	if (data->player->direction > 90 && data->player->direction < 270)
+	if (data->ray->ray_direction > 90 && data->ray->ray_direction < 270)
 		data->ray->ray_left = 1;
-	else if (data->player->direction == 90 || data->player->direction == 270)
+	else if (data->ray->ray_direction == 90 || data->ray->ray_direction == 270)
 		data->ray->ray_left = 0;
 	else
 		data->ray->ray_left = -1;
