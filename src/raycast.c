@@ -46,6 +46,7 @@ void	raycast(t_data *data)
 		data->ray->ray_left = 0;
 	else
 		data->ray->ray_left = -1;
+	data->ray->ray_direction = data->ray->ray_direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
 	calculate_first_ray_collision_horizontal(data);
 	calculate_first_ray_collision_vertical(data);
 	choose_closer_collision(data);
@@ -82,7 +83,6 @@ void	choose_closer_collision(t_data *data)
 
 void	calculate_first_ray_collision_horizontal(t_data *data)
 {
-	data->ray->ray_direction = data->player->direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
 	if (data->ray->ray_up == 1)
 		data->ray->collision_y_h = data->player->y * data->px;
 	else if (data->ray->ray_up == -1)
@@ -110,7 +110,7 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 
 void	calculate_first_ray_collision_vertical(t_data *data)
 {
-	data->ray->ray_direction = data->player->direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
+	// data->ray->ray_direction = data->ray->ray_direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
 	if (data->ray->ray_left == 1)
 		data->ray->collision_x_v = data->player->x * data->px;
 	else if (data->ray->ray_left == -1)
