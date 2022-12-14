@@ -33,25 +33,33 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 
 void	raycast(t_data *data)
 {
-	data->ray->ray_direction = data->player->direction + 0;
-	if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
-		data->ray->ray_up = 1;
-	else if (data->ray->ray_direction > 180)
-		data->ray->ray_up = -1;
-	else
-		data->ray->ray_up = 0;
-	if (data->ray->ray_direction > 90 && data->ray->ray_direction < 270)
-		data->ray->ray_left = 1;
-	else if (data->ray->ray_direction == 90 || data->ray->ray_direction == 270)
-		data->ray->ray_left = 0;
-	else
-		data->ray->ray_left = -1;
-	data->ray->ray_direction = data->ray->ray_direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
-	calculate_first_ray_collision_horizontal(data);
-	calculate_first_ray_collision_vertical(data);
-	choose_closer_collision(data);
-mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x000000);
+	int	i;
 
+	i = 0;
+	printf("Dirección rayos:\n");
+	while (i < WIN_WIDTH)
+	{
+		data->ray->ray_direction = data->player->direction - FOV / 2 + i * FOV / WIN_WIDTH;
+		// printf("%d\t->  %f\n", i, data->ray->ray_direction);
+		if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
+			data->ray->ray_up = 1;
+		else if (data->ray->ray_direction > 180)
+			data->ray->ray_up = -1;
+		else
+			data->ray->ray_up = 0;
+		if (data->ray->ray_direction > 90 && data->ray->ray_direction < 270)
+			data->ray->ray_left = 1;
+		else if (data->ray->ray_direction == 90 || data->ray->ray_direction == 270)
+			data->ray->ray_left = 0;
+		else
+			data->ray->ray_left = -1;
+		data->ray->ray_direction = data->ray->ray_direction * M_PI / 180; //sumar o restar delta angulo * n (o -n)
+		calculate_first_ray_collision_horizontal(data);
+		calculate_first_ray_collision_vertical(data);
+		choose_closer_collision(data);
+		mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x000000);
+		i++;
+	}
 }
 
 int	distance_btw_points(int x_player, int y_player, int x_collision, int y_collision)

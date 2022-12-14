@@ -15,11 +15,15 @@
 # include <math.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1920
+#  define WIN_WIDTH 500//1920
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1042
+#  define WIN_HEIGHT 271//1042
+# endif
+
+# ifndef FOV
+#  define FOV 60
 # endif
 
 enum e_keycodes
