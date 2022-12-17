@@ -1,80 +1,82 @@
 
-### --- COLORS --- ###
-
-RED		= '\033[1;31m'
-GREEN	= '\033[1;32m'
-PURPLE	= '\033[1;35m'
-YELLOW	= '\033[1;33m'
-WHITE	= '\033[0;37m'
-BLUE	= '\033[1;34m'
-
-NAME = cub3D
-
-LIB_GNL = -I$(LIBGNL_PATH) -L$(LIBGNL_PATH) -lgnl
-LIB_FT = -I$(LIBFT_PATH) -L$(LIBFT_PATH) -lft
-
-SRCS_PATH = src/
-INCS_PATH = inc/
-BIN_PATH = bin/
-LIBGNL_PATH = gnl/
-LIBFT_PATH = libft/
 
 
-SRCS = main.c read_file.c matrix.c raycast.c player_function.c images.c window.c\
-		key_pressed.c movement.c exit_game.c bresenham.c triangulation.c
+# ### --- COLORS --- ###
 
-OBJS = $(SRCS:%.c=bin/%.o)
+# RED		= '\033[1;31m'
+# GREEN	= '\033[1;32m'
+# PURPLE	= '\033[1;35m'
+# YELLOW	= '\033[1;33m'
+# WHITE	= '\033[0;37m'
+# BLUE	= '\033[1;34m'
 
-CC = gcc
-CFLAGS =-Wall -Werror -Wextra -g -O0
-RM = rm -f
+# NAME = cub3D
+
+# LIB_GNL = -I$(LIBGNL_PATH) -L$(LIBGNL_PATH) -lgnl
+# LIB_FT = -I$(LIBFT_PATH) -L$(LIBFT_PATH) -lft
+
+# SRCS_PATH = src/
+# INCS_PATH = inc/
+# BIN_PATH = bin/
+# LIBGNL_PATH = gnl/
+# LIBFT_PATH = libft/
 
 
-ifeq ($(shell uname), Linux)
-	#LIBMLX_PATH = ./mlx_linux/
-	OBJ_COMPIL = -I/usr/include -Imlx_linux -O0 -c $< -o $@
-	LIB_FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
-	LIB_COMPIL = -Lmlx_linux -lmlx $(LIB_FLAGS) $(LIB_GNL) $(LIB_FT)
-	SO = Linux
-else
-	OBJ_COMPIL = -Imlx -c $< -o $@
-	LIB_COMPIL = -lmlx -framework OpenGL -framework AppKit $(LIB_FLAGS) $(LIB_GNL) $(LIB_FT) -o $(NAME)
-endif
+# SRCS = main.c read_file.c matrix.c raycast.c player_function.c images.c window.c\
+# 		key_pressed.c movement.c exit_game.c bresenham.c triangulation.c
+
+# OBJS = $(SRCS:%.c=bin/%.o)
+
+# CC = gcc
+# CFLAGS =-Wall -Werror -Wextra -g -O0
+# RM = rm -f
 
 
-###		RULES		###
+# ifeq ($(shell uname), Linux)
+# 	#LIBMLX_PATH = ./mlx_linux/
+# 	OBJ_COMPIL = -I/usr/include -Imlx_linux -O0 -c $< -o $@
+# 	LIB_FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
+# 	LIB_COMPIL = -Lmlx_linux -lmlx $(LIB_FLAGS) $(LIB_GNL) $(LIB_FT)
+# 	SO = Linux
+# else
+# 	OBJ_COMPIL = -Imlx -c $< -o $@
+# 	LIB_COMPIL = -lmlx -framework OpenGL -framework AppKit $(LIB_FLAGS) $(LIB_GNL) $(LIB_FT) -o $(NAME)
+# endif
 
-all: $(NAME)
 
-bin/%.o: src/%.c
-	@mkdir -p bin
-	@$(CC) $(CFLAGS) $(OBJ_COMPIL)
+# ###		RULES		###
 
-$(NAME): $(OBJS)
-	@echo $(PURPLE)"[Creating libgnl]"$(BLUE)
-	@$(MAKE) -C $(LIBGNL_PATH) --silent
-	@echo $(PURPLE)"[Creating libft]"$(BLUE)
-	@$(MAKE) -C $(LIBFT_PATH) --silent
-	@echo $(PURPLE)"[Creating cub3D]"$(BLUE)
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) -fsanitize=address
-	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
+# all: $(NAME)
 
-clean:
-	@$(RM) $(OBJS)
-	@rm -rf bin/
-	@$(MAKE) -C $(LIBGNL_PATH) clean --silent
-	@$(MAKE) -C $(LIBFT_PATH) clean --silent
-	@echo $(RED)"[Object Files Deleted]"$(WHITE)
+# bin/%.o: src/%.c
+# 	@mkdir -p bin
+# 	@$(CC) $(CFLAGS) $(OBJ_COMPIL)
 
-fclean: clean
-	@$(RM) $(NAME)
-	@echo $(RED)"[Executable File Deleted]"$(WHITE)
-	@$(MAKE) -C $(LIBGNL_PATH) fclean --silent
-	@$(MAKE) -C $(LIBFT_PATH) fclean --silent
+# $(NAME): $(OBJS)
+# 	@echo $(PURPLE)"[Creating libgnl]"$(BLUE)
+# 	@$(MAKE) -C $(LIBGNL_PATH) --silent
+# 	@echo $(PURPLE)"[Creating libft]"$(BLUE)
+# 	@$(MAKE) -C $(LIBFT_PATH) --silent
+# 	@echo $(PURPLE)"[Creating cub3D]"$(BLUE)
+# 	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) -fsanitize=address
+# 	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
 
-re: fclean $(NAME)
+# clean:
+# 	@$(RM) $(OBJS)
+# 	@rm -rf bin/
+# 	@$(MAKE) -C $(LIBGNL_PATH) clean --silent
+# 	@$(MAKE) -C $(LIBFT_PATH) clean --silent
+# 	@echo $(RED)"[Object Files Deleted]"$(WHITE)
 
-run: $(NAME)
-	@./cub3d maps/37x14.cub
+# fclean: clean
+# 	@$(RM) $(NAME)
+# 	@echo $(RED)"[Executable File Deleted]"$(WHITE)
+# 	@$(MAKE) -C $(LIBGNL_PATH) fclean --silent
+# 	@$(MAKE) -C $(LIBFT_PATH) fclean --silent
 
-.PHONY: all clean fclean re
+# re: fclean $(NAME)
+
+# run: $(NAME)
+# 	@./cub3d maps/37x14.cub
+
+# .PHONY: all clean fclean re
