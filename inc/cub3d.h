@@ -112,8 +112,8 @@ typedef struct s_ray
 	int		collision_y_h; // y del punto de colision horizontal
 	int		collision_x_v; // x del punto de colision vertical
 	int		collision_y_v; // y del punto de colision vertical
-	int		dist_h_collision;
-	int		dist_v_collision;
+	double		dist_h_collision;
+	double		dist_v_collision;
 	int		column;	//pixel de la ventana 
 	int		h_crash; //booleano de si la colision es horizontal
 	int		v_crash; //booleano de si la colision es vertical
@@ -121,7 +121,7 @@ typedef struct s_ray
 	int		y_step;	//distancia en px entre las colisiones parciales en y
 	int		tile_x;
 	int		tile_y;
-	int		*dist;
+	double		*dist;
 }	t_ray;
 
 	typedef struct s_point		//esta es solo para dibujar las lineass
@@ -148,8 +148,8 @@ typedef struct s_data
 	// t_cont		*cont;
 	t_player	*player;
 	t_ray		*ray;
-	t_point		*collision;
-	t_point		*player_point;
+	t_point		*collision;		//sin bresenham se puede quitar
+	t_point		*player_point;	//sin bresenham se puede quitar
 }	t_data;
 
 // main.c

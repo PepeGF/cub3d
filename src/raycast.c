@@ -36,7 +36,7 @@ void	raycast(t_data *data)
 	int	i;
 
 	i = 0;
-	data->ray->dist = (int *)malloc(sizeof(int) * WIN_WIDTH);
+	data->ray->dist = (double *)malloc(sizeof(double) * WIN_WIDTH);
 	// printf("Dirección rayos:\n");
 	printf("Distancia colisiones:\n");
 	while (i < WIN_WIDTH)
@@ -59,11 +59,11 @@ void	raycast(t_data *data)
 		calculate_first_ray_collision_horizontal(data);
 		calculate_first_ray_collision_vertical(data);
 		choose_closer_collision(data, i);
-		printf("%d\t->  %d\n", i, data->ray->dist[i]);
-		prepare_point_to_bresenham(data, data->ray->collision_x, data->ray->collision_y);
-		ft_decide_line(data, *data->collision, *data->player_point);
-		free(data->player_point);
-		free(data->collision);
+		printf("%d\t->  %f\n", i, data->ray->dist[i]);
+		// prepare_point_to_bresenham(data, data->ray->collision_x, data->ray->collision_y);
+		// ft_decide_line(data, *data->collision, *data->player_point);
+		// free(data->player_point);
+		// free(data->collision);
 		mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x000000);
 		i++;
 	}
@@ -71,7 +71,7 @@ void	raycast(t_data *data)
 
 int	distance_btw_points(int x_player, int y_player, int x_collision, int y_collision)
 {
-	int	distance;
+	double	distance;
 
 	distance = sqrt((x_player - x_collision) * (x_player - x_collision) +
 			(y_player - y_collision) * (y_player - y_collision));
