@@ -11,7 +11,8 @@
 # include <errno.h>
 # include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
-# include <mlx.h>
+// # include <mlx.h>   //quitado para migrar a MLX42
+# include <MLX42.h>
 # include <math.h>
 
 # ifndef WIN_WIDTH
@@ -143,7 +144,7 @@ typedef struct s_data
 	int			map_x_tot;
 	int			map_y_tot;
 	int			px;
-	int			mov_cont;
+	// int			mov_cont;
 	t_board		**board;
 	// t_cont		*cont;
 	t_player	*player;

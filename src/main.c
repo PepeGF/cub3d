@@ -1,42 +1,37 @@
-#include <MLX42.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-#define WIDTH 256
-#define HEIGHT 256
+#include "../inc/cub3d.h"
 
-mlx_image_t	*g_img;
-
-void	hook(void *param)
+int32_t	main(int argc, char **argv)
 {
-	mlx_t	*mlx;
+	t_data	*data;
+	t_list	*list;
+// atexit(leakss);
+	list = 0;
+	ft_check_argc(argc);
+	data = (t_data *)malloc(sizeof(t_data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
+	initialize_main_vars(data);
 
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		g_img->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		g_img->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		g_img->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		g_img->instances[0].x += 5;
+
+	data = 0;
+	(void)argv;
+	return (EXIT_SUCCESS);
 }
 
-int32_t	main(void)
+void	ft_check_argc(int argc)
 {
-	mlx_t	*mlx;
+	if (argc != 2)
+	{
+		printf("Error en el número de argumentos\n");
+		exit (1);
+	}
+}
 
-	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	if (!mlx)
-		exit(EXIT_FAILURE);
-	g_img = mlx_new_image(mlx, 128, 128);
-	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int));
-	mlx_image_to_window(mlx, g_img, 0, 0);
-	mlx_loop_hook(mlx, &hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+void	initialize_main_vars(t_data *data)
+{
+	*data = (t_data){};
+	// data->board = 0;
+	// data->cont = 0;
+	// data->map_x_tot = 0;
+	// data->map_y_tot = 0;
+	// data->mov_cont = 0;//no hace falta
+	data->px = 16;
 }

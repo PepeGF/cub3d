@@ -28,7 +28,7 @@ OBJS = $(SRCS:%.c=bin/%.o)
 
 CC = gcc
 CFLAGS =-Wall -Werror -Wextra -g -O0
-RM = rm -f
+# RM = rm -f se puede quitar xq es una variable automática de make
 
 ###		RULES		###
 
@@ -58,10 +58,10 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(MAKE) -C MLX42/ fclean --silent
 	@echo $(RED)"[Executable File Deleted]"$(WHITE)
 	@$(MAKE) -C $(LIBGNL_PATH) fclean --silent
 	@$(MAKE) -C $(LIBFT_PATH) fclean --silent
-	@$(MAKE) -C MLX42/ fclean --silent
 
 re: fclean 
 	@$(MAKE)
