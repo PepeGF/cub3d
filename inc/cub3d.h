@@ -12,7 +12,7 @@
 # include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
 // # include <mlx.h>   //quitado para migrar a MLX42
-# include <MLX42.h>
+# include <MLX42.h>  //visual dice q hay error, pero está previsto en el Makefile
 # include <math.h>
 
 # ifndef WIN_WIDTH

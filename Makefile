@@ -22,7 +22,7 @@ LIBFT_PATH = libft/
 MLX_PATH = MLX42/include/MLX42/
 
 
-SRCS = main.c
+SRCS = main.c read_file.c matrix.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
@@ -35,8 +35,8 @@ CFLAGS =-Wall -Werror -Wextra -g -O0
 all: $(NAME)
 
 bin/%.o: src/%.c
-	mkdir -p bin
-	$(CC) $(CFLAGS) -I$(MLX_PATH) -c $< -o $@
+	@mkdir -p bin
+	@$(CC) $(CFLAGS) -I$(MLX_PATH) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo $(PURPLE)"[Creating libgnl]"$(BLUE)
@@ -46,7 +46,7 @@ $(NAME): $(OBJS)
 	@echo $(PURPLE)"[Creating libmlx42]"$(BLUE)
 	@$(MAKE) -C MLX42/ --silent
 	@echo $(PURPLE)"[Creating cub3D]"$(BLUE)
-	$(CC) -o $(NAME) $(OBJS) $(LIB_MLX) -lglfw -fsanitize=address
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_MLX) -lglfw $(LIB_FT) $(LIB_GNL) -fsanitize=address
 	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
 
 clean:
