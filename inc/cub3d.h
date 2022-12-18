@@ -149,12 +149,13 @@ typedef struct s_data
 	// t_cont		*cont;
 	t_player	*player;
 	t_ray		*ray;
+	mlx_image_t	*image;
 	t_point		*collision;		//sin bresenham se puede quitar
 	t_point		*player_point;	//sin bresenham se puede quitar
 }	t_data;
 
 // main.c
-void		initialize_main_vars(t_data *data, mlx_t *mlx);
+void		initialize_main_vars(t_data *data);
 void		ft_check_argc(int argc);
 
 // read_file.c
