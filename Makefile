@@ -22,7 +22,8 @@ LIBFT_PATH = libft/
 MLX_PATH = MLX42/include/MLX42/
 
 
-SRCS = main.c read_file.c matrix.c
+SRCS = main.c read_file.c matrix.c raycast.c player_function.c \
+		#images.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

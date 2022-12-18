@@ -86,8 +86,8 @@ typedef struct s_player
 	double	y_position;
 	double	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
 	double	y_fut_pos;
-	int	x_dir_vect;		//vector dirección
-	int	y_dir_vect;
+	double	x_dir_vect;		//vector dirección en radianes
+	double	y_dir_vect;		//rad
 	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
 	int	turn_on;		//-1 = giro Izq, 1 = giro Dcha
 	int	sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
@@ -154,7 +154,7 @@ typedef struct s_data
 }	t_data;
 
 // main.c
-void		initialize_main_vars(t_data *data);
+void		initialize_main_vars(t_data *data, mlx_t *mlx);
 void		ft_check_argc(int argc);
 
 // read_file.c
