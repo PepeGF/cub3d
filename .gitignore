@@ -10,6 +10,7 @@ so_long/so_long
 .vscode/*
 ./vscode/
 ./vscode/*
+MLX42/*
 
 # Prerequisites
 *.d
