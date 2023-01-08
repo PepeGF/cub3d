@@ -133,7 +133,7 @@ typedef struct s_ray
 
 typedef struct s_data
 {
-	void		*mlx;
+	mlx_t		*mlx;
 	void		*mlx_win;
 	void		*field;
 	// void		*dino;
