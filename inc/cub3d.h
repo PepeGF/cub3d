@@ -81,10 +81,10 @@ typedef struct s_player
 	int	x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
 	int	y_fut;
 	int	direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
-	double	x_position;		//posicion pixeles
-	double	y_position;
-	double	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
-	double	y_fut_pos;
+	float	x_position;		//posicion pixeles
+	float	y_position;
+	float	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
+	float	y_fut_pos;
 	int	x_dir_vect;		//vector dirección
 	int	y_dir_vect;
 	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
@@ -99,11 +99,11 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double	ray_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	ray_direction; // angulo en radianes
-	double	delta_angle; //angulo desde el rayo central en radianes
+	float	ray_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	float	ray_direction; // angulo en radianes
+	float	delta_angle; //angulo desde el rayo central en radianes
 	int		ray_up;		// para hacer la colisión correctamente cuando sube
 	int		ray_left;	// idem para cuando va hacia la izquierda
 	int		collision_x; // x del punto de colision

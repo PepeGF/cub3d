@@ -34,15 +34,18 @@ t_ray	*initialize_ray(void)//temporal para tener todo inicializado
 void	raycast(t_data *data)
 {
 	int	i;
-
-	i = 0;
+int color;
+	i = 1;
 	data->ray->dist = (int *)malloc(sizeof(int) * WIN_WIDTH);
 	// printf("Dirección rayos:\n");
 	printf("Distancia colisiones:\n");
-	while (i < WIN_WIDTH)
+	while (i <= WIN_WIDTH)
 	{	//								para empeza en la izquierda		incrementa un delta de angulo
 		data->ray->ray_direction = data->player->direction - FOV / 2 + i * FOV / WIN_WIDTH;
-		// printf("%d\t->  %f\n", i, data->ray->ray_direction);
+		printf("%3d  ->  %9.6f\t", i, data->ray->ray_direction);
+		fflush(0);
+		if (i % 9 == 0 || i == 500)
+			printf("\n");
 		if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
 			data->ray->ray_up = 1;
 		else if (data->ray->ray_direction > 180)
@@ -59,8 +62,12 @@ void	raycast(t_data *data)
 		calculate_first_ray_collision_horizontal(data);
 		calculate_first_ray_collision_vertical(data);
 		choose_closer_collision(data, i);
-		printf("%d\t->  %d\n", i, data->ray->dist[i]);
-		mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, 0x000000);
+		// printf("%d\t->  %d\t%9.6f\n", i, data->ray->dist[i], data->ray->ray_direction * 180 / M_PI);
+		if (i % 2 == 0)
+			color = 0x00ff00;
+		else
+			color = 0x000000;
+		mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, color);
 		i++;
 	}
 }
