@@ -13,6 +13,7 @@ void	turn(t_data *data, int keycode)
 		data->player->direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
 	// printf("Direccion: %d\n", data->player->direction);
 	draw_view_point(data);
+	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 	raycast(data);
 }
 
@@ -77,8 +78,6 @@ int get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp, int pl
 
 int	check_x_collision(t_data *data, int	player_pos_x_temp)
 {
-	(void)data;
-	(void)player_pos_x_temp;
 	data->player->x_fut = player_pos_x_temp / data->px;
 	data->player->y_fut = data->player->y_position / data->px;
 	if (data->board[data->player->y_fut][data->player->x_fut].type == '1')
@@ -91,8 +90,6 @@ int	check_x_collision(t_data *data, int	player_pos_x_temp)
 
 int	check_y_collision(t_data *data, int	player_pos_y_temp)
 {
-	(void)data;
-	(void)player_pos_y_temp;
 	data->player->y_fut = player_pos_y_temp / data->px;
 	data->player->x_fut = data->player->x_position / data->px;
 	if (data->board[data->player->y_fut][data->player->x_fut].type == '1')

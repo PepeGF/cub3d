@@ -31,7 +31,8 @@ void	initialize_main_vars(t_data *data)
 	data->map_x_tot = 0;
 	data->map_y_tot = 0;
 	data->mov_cont = 0;//no hace falta
-	data->px = 16;
+	data->px = 32;
+	// data->px = 16;
 }
 
 void	ft_check_argc(int argc)

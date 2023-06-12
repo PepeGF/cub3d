@@ -36,16 +36,10 @@ void	raycast(t_data *data)
 	int	i;
 int color;
 	i = 1;
-	data->ray->dist = (int *)malloc(sizeof(int) * WIN_WIDTH);
-	// printf("Dirección rayos:\n");
-	printf("Distancia colisiones:\n");
+	data->ray->dist = (float *)malloc(sizeof(float) * WIN_WIDTH);
 	while (i <= WIN_WIDTH)
 	{	//								para empeza en la izquierda		incrementa un delta de angulo
-		data->ray->ray_direction = data->player->direction - FOV / 2 + i * FOV / WIN_WIDTH;
-		printf("%3d  ->  %9.6f\t", i, data->ray->ray_direction);
-		fflush(0);
-		if (i % 9 == 0 || i == 500)
-			printf("\n");
+		data->ray->ray_direction = (float)((float)(data->player->direction) - (float)FOV / (float)2 + (float)i * (float)FOV / (float)WIN_WIDTH);
 		if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
 			data->ray->ray_up = 1;
 		else if (data->ray->ray_direction > 180)
@@ -63,18 +57,25 @@ int color;
 		calculate_first_ray_collision_vertical(data);
 		choose_closer_collision(data, i);
 		// printf("%d\t->  %d\t%9.6f\n", i, data->ray->dist[i], data->ray->ray_direction * 180 / M_PI);
-		if (i % 2 == 0)
-			color = 0x00ff00;
-		else
+		// if (i < 250 && i % 10 == 0)
+		// 	color = 0x00ff00;
+		// else if (i >= 250 && i % 10 == 0)
+		// 	color = 0xff0000;
+		// else if (i > 250)
+		if (i > 240 && i < 250)
 			color = 0x000000;
+		else if (i <= 240)
+			color = 0xff0000;
+		else
+			color = 0xffffff;
 		mlx_pixel_put(data->mlx, data->mlx_win, data->ray->collision_x, data->ray->collision_y, color);
 		i++;
 	}
 }
 
-int	distance_btw_points(int x_player, int y_player, int x_collision, int y_collision)
+float	distance_btw_points(int x_player, int y_player, int x_collision, int y_collision)
 {
-	int	distance;
+	float	distance;
 
 	distance = sqrt((x_player - x_collision) * (x_player - x_collision) +
 			(y_player - y_collision) * (y_player - y_collision));
@@ -92,13 +93,20 @@ void	choose_closer_collision(t_data *data, int i)
 		data->ray->collision_x = data->ray->collision_x_h;
 		data->ray->collision_y = data->ray->collision_y_h;
 		data->ray->dist[i] = data->ray->dist_h_collision;
+		printf("%3d -\x1b[35mh:%6.3f \x1b[37mv:%6.3f d:%6.3f\t", \
+		i, data->ray->dist_h_collision, data->ray->dist_v_collision, data->ray->dist[i]);
+		fflush(0);
 	}
 	else
 	{
 		data->ray->collision_x = data->ray->collision_x_v;
 		data->ray->collision_y = data->ray->collision_y_v;
 		data->ray->dist[i] = data->ray->dist_v_collision;
+		printf("%3d |h:%6.3f \x1b[35mv:%6.3f\x1b[37m d:%6.3f\t", i, data->ray->dist_h_collision, data->ray->dist_v_collision, data->ray->dist[i]);
+		fflush(0);
 	}
+		if (i % 6 == 0 || i == 500)
+			printf("\n");
 }
 
 void	calculate_first_ray_collision_horizontal(t_data *data)
@@ -109,15 +117,7 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 		data->ray->collision_y_h = (data->player->y + 1) * data->px;
 	else
 		data->ray->collision_y_h = data->player->y_position;
-// printf("---------------------------------------\ntan(%d) = %f\n", data->player->direction, tan(data->ray->ray_direction));
-// printf("Jugador px: (%f, %f)\n", data->player->x_position, data->player->y_position);
-// printf("Jugador: (%d, %d)\n", data->player->x, data->player->y);
-	/* if (data->ray->ray_up == 1) */
 	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
-	// else if (data->ray->ray_up == -1)
-	// 	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
-	// else
-		// data->ray->collision_x_h = data->player->x_position;
 
 
 /* ¡¡¡¡¡¡¡¡¡¡OJO LA TANGEENTE DE CERO HAY INT OVERFLOW!!!!!!!!!! */
@@ -137,15 +137,9 @@ void	calculate_first_ray_collision_vertical(t_data *data)
 		data->ray->collision_x_v = (data->player->x + 1) * data->px;
 	else
 		data->ray->collision_x_v = data->player->x_position;
-// printf("---------------------------------------\ntan(%d) = %f\n", data->player->direction, tan(data->ray->ray_direction));
-// printf("Jugador px: (%f, %f)\n", data->player->x_position, data->player->y_position);
-// printf("Jugador: (%d, %d)\n", data->player->x, data->player->y);
-	/* if (data->ray->ray_up == 1) */
+
 	data->ray->collision_y_v = data->player->y_position + (data->player->x_position - data->ray->collision_x_v) * tan(data->ray->ray_direction);
-	// else if (data->ray->ray_up == -1)
-	// 	data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->ray_direction);
-	// else
-		// data->ray->collision_x_h = data->player->x_position;
+
 
 
 /* ¡¡¡¡¡¡¡¡¡¡OJO LA TANGEENTE DE CERO HAY INT OVERFLOW!!!!!!!!!! */
@@ -159,7 +153,7 @@ void	calculate_first_ray_collision_vertical(t_data *data)
 void	calculate_ray_wall_collision_horizontal(t_data *data)
 {
 	data->ray->y_step = data->px;
-	data->ray->x_step = data->ray->y_step / tan(data->ray->ray_direction + data->ray->delta_angle);// este cálculo no contempla dirección, solo es el valor absoluto
+	data->ray->x_step = data->ray->y_step / tan(data->ray->ray_direction);// este cálculo no contempla dirección, solo es el valor absoluto
 	if (data->ray->ray_up == 1)
 	{
 		data->ray->y_step *= -1;
@@ -192,7 +186,7 @@ void	calculate_ray_wall_collision_horizontal(t_data *data)
 void	calculate_ray_wall_collision_vertical(t_data *data)
 {
 	data->ray->x_step = data->px;
-	data->ray->y_step = data->ray->x_step * tan(data->ray->ray_direction + data->ray->delta_angle);// este cálculo no contempla dirección, solo es el valor absoluto
+	data->ray->y_step = data->ray->x_step * tan(data->ray->ray_direction);// este cálculo no contempla dirección, solo es el valor absoluto
 	if (data->ray->ray_left == 1)
 	{
 		data->ray->x_step *= -1;

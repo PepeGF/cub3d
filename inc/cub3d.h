@@ -103,7 +103,6 @@ typedef struct s_ray
 	float	ray_dir_x;
 	float	ray_dir_y;
 	float	ray_direction; // angulo en radianes
-	float	delta_angle; //angulo desde el rayo central en radianes
 	int		ray_up;		// para hacer la colisión correctamente cuando sube
 	int		ray_left;	// idem para cuando va hacia la izquierda
 	int		collision_x; // x del punto de colision
@@ -112,8 +111,8 @@ typedef struct s_ray
 	int		collision_y_h; // y del punto de colision horizontal
 	int		collision_x_v; // x del punto de colision vertical
 	int		collision_y_v; // y del punto de colision vertical
-	int		dist_h_collision;
-	int		dist_v_collision;
+	float	dist_h_collision;
+	float	dist_v_collision;
 	int		column;	//pixel de la ventana 
 	int		h_crash; //booleano de si la colision es horizontal
 	int		v_crash; //booleano de si la colision es vertical
@@ -121,8 +120,9 @@ typedef struct s_ray
 	int		y_step;	//distancia en px entre las colisiones parciales en y
 	int		tile_x;
 	int		tile_y;
-	int		*dist;
+	float		*dist;
 }	t_ray;
+	//float	delta_angle; //angulo desde el rayo central en radianes
 
 typedef struct s_data
 {
