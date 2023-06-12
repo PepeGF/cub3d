@@ -40,6 +40,8 @@ int color;
 	while (i <= WIN_WIDTH)
 	{	//								para empeza en la izquierda		incrementa un delta de angulo
 		data->ray->ray_direction = (float)((float)(data->player->direction) - (float)FOV / (float)2 + (float)i * (float)FOV / (float)WIN_WIDTH);
+		if (data->ray->ray_direction < 0)
+			data->ray->ray_direction += 360;
 		if (data->ray->ray_direction < 180 && data->ray->ray_direction != 0)
 			data->ray->ray_up = 1;
 		else if (data->ray->ray_direction > 180)
@@ -93,18 +95,25 @@ void	choose_closer_collision(t_data *data, int i)
 		data->ray->collision_x = data->ray->collision_x_h;
 		data->ray->collision_y = data->ray->collision_y_h;
 		data->ray->dist[i] = data->ray->dist_h_collision;
-		printf("%3d -\x1b[35mh:%6.3f \x1b[37mv:%6.3f d:%6.3f\t", \
-		i, data->ray->dist_h_collision, data->ray->dist_v_collision, data->ray->dist[i]);
-		fflush(0);
 	}
 	else
 	{
 		data->ray->collision_x = data->ray->collision_x_v;
 		data->ray->collision_y = data->ray->collision_y_v;
 		data->ray->dist[i] = data->ray->dist_v_collision;
-		printf("%3d |h:%6.3f \x1b[35mv:%6.3f\x1b[37m d:%6.3f\t", i, data->ray->dist_h_collision, data->ray->dist_v_collision, data->ray->dist[i]);
-		fflush(0);
 	}
+	if (i > 1 && i < WIN_WIDTH)
+		{
+		// printf("%3d %12.9f\t", i, data->ray->dist[i - 1] - data->ray->dist[i + 1]);
+			if (data->ray->dist[i - 1] - data->ray->dist[1 + 1] < 0.001f)
+			{
+				// data->ray->collision_x =
+				data->ray->dist[i] = data->ray->dist[i + 1];
+			}
+		}
+		// printf("%3d h:%6.3f v:%6.3f d:%6.3f\t", i, data->ray->dist_h_collision, data->ray->dist_v_collision, data->ray->dist[i]);
+		printf("%3d x:%3d v:%3d\t", i, data->ray->collision_x, data->ray->collision_y);
+		fflush(0);
 		if (i % 6 == 0 || i == 500)
 			printf("\n");
 }
