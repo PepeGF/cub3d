@@ -15,7 +15,7 @@
 # include <math.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 500//1920
+#  define WIN_WIDTH 3//1920
 # endif
 
 # ifndef WIN_HEIGHT
@@ -74,7 +74,7 @@ typedef struct s_board {
 	int	y;
 }	t_cont;
  */
-typedef struct s_player 
+typedef struct s_player
 {
 	int	x;				//posicion cuadricula
 	int	y;
@@ -116,8 +116,8 @@ typedef struct s_ray
 	int		column;	//pixel de la ventana 
 	int		h_crash; //booleano de si la colision es horizontal
 	int		v_crash; //booleano de si la colision es vertical
-	int		x_step;	//distancia en px entre las colisiones parciales en x
-	int		y_step;	//distancia en px entre las colisiones parciales en y
+	float		x_step;	//distancia en px entre las colisiones parciales en x
+	float		y_step;	//distancia en px entre las colisiones parciales en y
 	int		tile_x;
 	int		tile_y;
 	float		*dist;
@@ -201,6 +201,7 @@ void	calculate_ray_wall_collision_vertical(t_data *data);
 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
 void	choose_closer_collision(t_data *data, int i);
+bool	corner_collision(t_board **board, int collision_x, int collision_y, t_data *data, char dir);
 
 
 

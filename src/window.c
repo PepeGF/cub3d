@@ -51,7 +51,12 @@ void	replace_border_img(t_board **matrix, int row, int col, t_data *data)
 					mlx_put_image_to_window(data->mlx, data->mlx_win, data->obs,
 						(matrix[i][j].col * data->px),
 						(matrix[i][j].row * data->px));
+
 			}
+			if (j == 0 || j == data->map_x_tot - 1)
+				mlx_string_put(data->mlx, data->mlx_win, (j) * 32 + 10, (i) * data->px + 10, 0x000000, ft_itoa(i));
+			if (i == 0 || i == data->map_y_tot - 1)
+				mlx_string_put(data->mlx, data->mlx_win, (j) * 32 + 10, (i) * data->px + 10, 0x000000, ft_itoa(j));
 			j++;
 		}
 	}
