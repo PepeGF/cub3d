@@ -15,7 +15,7 @@
 # include <math.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 3//1920
+#  define WIN_WIDTH 500//1920
 # endif
 
 # ifndef WIN_HEIGHT
@@ -99,6 +99,12 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	
+}	t_ray;
+
+
+/* typedef struct s_ray
+{
 	float	ray_x;
 	float	ray_dir_x;
 	float	ray_dir_y;
@@ -123,23 +129,19 @@ typedef struct s_ray
 	float		*dist;
 }	t_ray;
 	//float	delta_angle; //angulo desde el rayo central en radianes
+ */
 
 typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
 	void		*field;
-	// void		*dino;
-	// void		*food;
 	void		*obs;
 	void		*border;
-	// void		*end;
 	int			map_x_tot;
 	int			map_y_tot;
 	int			px;
-	int			mov_cont;
 	t_board		**board;
-	// t_cont		*cont;
 	t_player	*player;
 	t_ray		*ray;
 }	t_data;

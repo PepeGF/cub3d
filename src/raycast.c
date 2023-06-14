@@ -170,10 +170,10 @@ void	calculate_ray_wall_collision_horizontal(t_data *data)
 			data->ray->h_crash = true;
 			break;
 		}
-		else if (corner_collision(data->board, data->ray->collision_x_h, data->ray->collision_y_h, data, 'h') == true)
-		{
-			data->ray->h_crash = true;
-		}
+		// else if (corner_collision(data->board, data->ray->collision_x_h, data->ray->collision_y_h, data, 'h') == true)
+		// {
+		// 	data->ray->h_crash = true;
+		// }
 		else
 		{
 			data->ray->collision_x_h += data->ray->x_step;

@@ -27,10 +27,8 @@ int	main(int argc, char **argv)
 void	initialize_main_vars(t_data *data)
 {
 	data->board = 0;
-	// data->cont = 0;
 	data->map_x_tot = 0;
 	data->map_y_tot = 0;
-	data->mov_cont = 0;//no hace falta
 	data->px = 32;
 	// data->px = 16;
 }

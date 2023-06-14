@@ -20,8 +20,17 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c read_file.c matrix.c raycast.c player_function.c images.c window.c\
-		key_pressed.c movement.c exit_game.c
+SRCS = main.c \
+		read_file.c \
+		matrix.c \
+		player_function.c \
+		images.c \
+		window.c \
+		key_pressed.c \
+		movement.c \
+		exit_game.c \
+		# raycast.c 
+		new_raycast.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
