@@ -9,3 +9,4 @@ t_ray	*initialize_ray(void)
 	return (ray); //hay que liberar esto
 }
 
+// https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
