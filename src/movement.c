@@ -23,7 +23,7 @@ void	front_back(t_data *data, int keycode)
 	double	player_pos_y_temp;
 
 	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
-	data->player->move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
+	data->player->move_speed = 1;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_w || keycode == key_up)
 		data->player->move_on = 1;
 	else
@@ -49,7 +49,7 @@ void	side_move(t_data *data, int keycode)
 	double	player_pos_y_temp;
 
 	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
-	data->player->move_speed = 3;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
+	data->player->move_speed = 1;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_d)
 		data->player->sideway_on = 1;
 	else

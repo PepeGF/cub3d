@@ -29,8 +29,8 @@ SRCS = main.c \
 		key_pressed.c \
 		movement.c \
 		exit_game.c \
-		# raycast.c 
 		new_raycast.c
+# 		raycast.c 
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

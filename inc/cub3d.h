@@ -15,7 +15,7 @@
 # include <math.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 500//1920
+#  define WIN_WIDTH 60//1920
 # endif
 
 # ifndef WIN_HEIGHT
@@ -23,7 +23,7 @@
 # endif
 
 # ifndef FOV
-#  define FOV 60
+#  define FOV 30
 # endif
 
 enum e_keycodes
@@ -81,10 +81,10 @@ typedef struct s_player
 	int	x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
 	int	y_fut;
 	int	direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
-	float	x_position;		//posicion pixeles
-	float	y_position;
-	float	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
-	float	y_fut_pos;
+	int	x_position;		//posicion pixeles
+	int	y_position;
+	int	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
+	int	y_fut_pos;
 	int	x_dir_vect;		//vector dirección
 	int	y_dir_vect;
 	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
@@ -99,11 +99,20 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	
+	int		ray_up;
+	int		ray_left;
+	float	collision_x_v;
+	float	collision_y_v;
+	float	collision_x_h;
+	float	collision_y_h;
+	float	collison_x;
+	float	collision_y;
+	float	direction_rad;	//rray direction in radians
+	float		direction_deg;	//ray direction in degrees
 }	t_ray;
 
-
-/* typedef struct s_ray
+/* 
+typedef struct s_ray
 {
 	float	ray_x;
 	float	ray_dir_x;
