@@ -26,6 +26,14 @@
 #  define FOV 30
 # endif
 
+# ifndef MOVE_SPEED
+#  define MOVE_SPEED 5
+# endif
+
+# ifndef TURN_SPEED
+#  define TURN_SPEED 10
+# endif
+
 enum e_keycodes
 {
 	key_a = 0,
@@ -108,7 +116,13 @@ typedef struct s_ray
 	float	collison_x;
 	float	collision_y;
 	float	direction_rad;	//rray direction in radians
-	float		direction_deg;	//ray direction in degrees
+	float	direction_deg;	//ray direction in degrees
+	int		x_step;
+	int		y_step;
+	bool	h_crash;
+	bool	v_crash;
+	int		tile_x;
+	int		tile_y;
 }	t_ray;
 
 /* 
