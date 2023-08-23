@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:05:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2023/06/12 20:48:50 by josgarci         ###   ########.fr       */
+/*   Updated: 2023/07/13 20:47:38 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,29 @@ char *ft_select_player_orientation(t_data *data)
 		return (NULL);
 }
 
-void	initialize_images(t_data *data, int cont[2])
-{
-	char *initial_player_orientation;
+// void	initialize_images(t_data *data, int cont[2])
+// {
+// 	char *initial_player_orientation;
 
-	initial_player_orientation = ft_select_player_orientation(data);
-	data->px = 16;
-	data->mlx = mlx_init();
-	data->field = mlx_xpm_file_to_image(data->mlx,
-			"./img/gris.xpm", &data->px, &data->px);
-	data->dino = mlx_xpm_file_to_image(data->mlx,
-			initial_player_orientation, &data->px, &data->px);
-	free(initial_player_orientation);
-	data->food = mlx_xpm_file_to_image(data->mlx,
-			"./img/azul.xpm", &data->px, &data->px);
-	data->border = mlx_xpm_file_to_image(data->mlx,
-			"./img/rojo.xpm", &data->px, &data->px);
-	data->obs = mlx_xpm_file_to_image(data->mlx,
-			"./img/rosa.xpm", &data->px, &data->px);
-/* 	data->end = mlx_xpm_file_to_image(data->mlx,
-	 		"./img/amarillo.xpm", &data->px, &data->px); */
-	data->mlx_win = mlx_new_window(data->mlx, data->px * cont[0],//bien
-			data->px * cont[1], "so_long");//bien
-}
+// 	initial_player_orientation = ft_select_player_orientation(data);
+// 	data->px = 16;
+// 	data->mlx = mlx_init();
+// 	data->field = mlx_xpm_file_to_image(data->mlx,
+// 			"./img/gris.xpm", &data->px, &data->px);
+// 	data->dino = mlx_xpm_file_to_image(data->mlx,
+// 			initial_player_orientation, &data->px, &data->px);
+// 	free(initial_player_orientation);
+// 	data->food = mlx_xpm_file_to_image(data->mlx,
+// 			"./img/azul.xpm", &data->px, &data->px);
+// 	data->border = mlx_xpm_file_to_image(data->mlx,
+// 			"./img/rojo.xpm", &data->px, &data->px);
+// 	data->obs = mlx_xpm_file_to_image(data->mlx,
+// 			"./img/rosa.xpm", &data->px, &data->px);
+// /* 	data->end = mlx_xpm_file_to_image(data->mlx,
+// 	 		"./img/amarillo.xpm", &data->px, &data->px); */
+// 	data->mlx_win = mlx_new_window(data->mlx, data->px * cont[0],//bien
+// 			data->px * cont[1], "so_long");//bien
+// }
 
 void	initialize_main_vars(t_data *data, int cont[2])
 {
@@ -87,24 +87,26 @@ int	main(int argc, char **argv)
 		exit (0);
 	}
 	list = ft_read_map(argv[1], cont);//algunas cosas de esta no valen
-	data.board = ft_final_matrix(&list, cont);
-	data.cont = sum_cont(data.board, cont);//esta no va a hacer falta, creo
+	//data.board = 
+	printf("%d", ft_final_matrix(&list, cont));
+	
+	//data.cont = sum_cont(data.board, cont);//esta no va a hacer falta, creo
 	// check_map(data.board, cont);
 	// check_counters(data.cont);
 	// data.px = 16; //metido en función de initializa_main_vars
-	data.ray = initialize_ray();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
-	data.player = where_is_the_player(data.board, cont[0], cont[1]);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
-	initialize_images(&data, cont);
+	//data.ray = initialize_ray();//para raycast, hecha en las primeras pruebas, sin utilidad clara aún
+	//data.player = where_is_the_player(data.board, cont[0], cont[1]);//inicializa los datos geometricos del jugador. MUY IMPORTANTE
+	//initialize_images(&data, cont);
 	// printf("X ini: %d, Y ini: %d\n",data.player.x, data.player.y);
 	// ft_set_player_intial_geometry(data, &(data.player));
-	put_field(data.board, cont[1], cont[0], data);
+	//put_field(data.board, cont[1], cont[0], data);
 	// print_matrix(data.board, cont[0], cont[1]);
-	replace_field(data.board, cont[1], cont[0], data);
+	//replace_field(data.board, cont[1], cont[0], data);
 	// mlx_key_hook(data.mlx_win, &key_hook, &data);
-	mlx_hook(data.mlx_win, 2, 0/* (1L << 17) */, &key_hook, &data.mlx);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
-	mlx_hook(data.mlx_win, 17, 0/* (1L << 17) */, &exit_game, &data.mlx);
-	mlx_loop(data.mlx);
-	free_main_vars(&data, &list, cont[1]);
+	//mlx_hook(data.mlx_win, 2, 0/* (1L << 17) */, &key_hook, &data.mlx);//captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
+	//mlx_hook(data.mlx_win, 17, 0/* (1L << 17) */, &exit_game, &data.mlx);
+	//mlx_loop(data.mlx);
+	//free_main_vars(&data, &list, cont[1]);
 	return (0);
 }
 

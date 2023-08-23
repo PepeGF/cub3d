@@ -49,7 +49,6 @@ char	*ft_itoa(int n)
 	unsigned int	num;
 	size_t			co;
 	char			*s;
-	size_t			i;
 
 	co = ft_count(n);
 	if (n == -2147483648)
@@ -64,7 +63,6 @@ char	*ft_itoa(int n)
 		num = n * (-1);
 	else
 		num = n;
-	i = co - 1;
 	s[co] = '\0';
 	ft_string(s, num, co - 1, n);
 	return (s);

@@ -63,7 +63,6 @@ static size_t	ft_end_position(char const *s1, char const *set, size_t pos)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
 	size_t	pos[2];
 	char	*aux;
 
@@ -74,7 +73,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 		aux = ft_strdup(s1);
 		return (aux);
 	}
-	i = 0;
 	pos[0] = ft_start_position(s1, set);
 	pos[1] = ft_end_position(s1, set, pos[0]);
 	aux = malloc(sizeof(char) * (ft_strlen(s1) - pos[0] - pos[1] + 1));

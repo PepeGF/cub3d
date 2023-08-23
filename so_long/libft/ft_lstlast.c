@@ -14,13 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	int		i;
 	t_list	*ant;
 	t_list	*sig;
 
 	if (lst == 0)
 		return (0);
-	i = 0;
 	ant = lst;
 	if (ft_lstsize(lst) > 1)
 	{

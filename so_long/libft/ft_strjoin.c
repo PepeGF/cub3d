@@ -23,5 +23,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	ft_memcpy(aux2, s1, ft_strlen(s1) + 1);
 	ft_strlcat(aux2, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	printf("concatenado -> %s\n", aux2);
 	return (aux2);
 }

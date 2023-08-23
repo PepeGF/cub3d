@@ -22,7 +22,7 @@
 # include <errno.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
-# include <mlx.h>
+//# include <mlx.h>
 # include <math.h>
 
 # ifndef WIN_WIDTH
@@ -40,8 +40,14 @@ typedef struct s_board {
 	int		is_border;
 	int		jug;
 	int		coll;
+	int		checked;
 	// int		end;
 }	t_board;
+
+typedef struct s_background {
+	char	**rgb_color;
+	int		ncolor;
+}	t_background;
 
 typedef struct s_cont {
 	int	jug;
@@ -189,8 +195,9 @@ void		side_move(t_data *data, int keycode);
 
 // matrix.c
 void		ft_initialize_pos(t_board *elem);
-t_board		ft_add_line_to_lit_list(char c, int fil, int col);
-t_board		**ft_final_matrix(t_list **list, int cont[2]);
+t_board		ft_add_element_to_list(char c, int fil, int col);
+//t_board		**ft_final_matrix(t_list **list, int cont[2]);
+int			ft_final_matrix(t_list **list, int cont[2]);
 
 // player_functions.c
 int			is_player(t_board **board, int i, int j);
