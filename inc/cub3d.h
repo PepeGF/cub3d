@@ -15,7 +15,7 @@
 # include <math.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 60//1920
+#  define WIN_WIDTH 360//1920
 # endif
 
 # ifndef WIN_HEIGHT
@@ -23,7 +23,7 @@
 # endif
 
 # ifndef FOV
-#  define FOV 30
+#  define FOV 60
 # endif
 
 # ifndef MOVE_SPEED
@@ -109,12 +109,12 @@ typedef struct s_ray
 {
 	int		ray_up;
 	int		ray_left;
-	float	collision_x_v;
-	float	collision_y_v;
-	float	collision_x_h;
-	float	collision_y_h;
-	float	collison_x;
-	float	collision_y;
+	int	collision_x_v;
+	int	collision_y_v;
+	int	collision_x_h;
+	int	collision_y_h;
+	int	collision_x;
+	int	collision_y;
 	float	direction_rad;	//rray direction in radians
 	float	direction_deg;	//ray direction in degrees
 	int		x_step;
@@ -123,6 +123,9 @@ typedef struct s_ray
 	bool	v_crash;
 	int		tile_x;
 	int		tile_y;
+	float	dist_h_collision;
+	float	dist_v_collision;
+	int		color;
 }	t_ray;
 
 /* 
@@ -201,6 +204,8 @@ void		draw_player(t_data *data);
 void		draw_floor2d(t_data	*data);
 void 		draw_view_point(t_data *data);
 
+void		draw_raycast_floor(t_data *data);
+
 
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
@@ -225,10 +230,11 @@ void	calculate_first_ray_collision_vertical(t_data *data);
 void	calculate_ray_wall_collision_vertical(t_data *data);
 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
-void	choose_closer_collision(t_data *data, int i);
+void	choose_closer_collision(t_data *data);
 bool	corner_collision(t_board **board, int collision_x, int collision_y, t_data *data, char dir);
 
-
+float	calculate_horizontal_distance(t_data *data);
+float	calculate_vertical_distance(t_data *data);
 
 
 

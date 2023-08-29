@@ -29,7 +29,8 @@ SRCS = main.c \
 		key_pressed.c \
 		movement.c \
 		exit_game.c \
-		new_raycast.c
+		new_raycast.c \
+		walls.c
 # 		raycast.c 
 
 OBJS = $(SRCS:%.c=bin/%.o)
@@ -65,7 +66,7 @@ $(NAME): $(OBJS)
 	@echo $(PURPLE)"[Creating libft]"$(BLUE)
 	@$(MAKE) -C $(LIBFT_PATH) --silent
 	@echo $(PURPLE)"[Creating cub3D]"$(BLUE)
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) -fsanitize=address
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) #-fsanitize=address
 	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
 
 clean:

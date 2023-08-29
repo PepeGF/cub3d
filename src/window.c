@@ -126,3 +126,25 @@ void draw_view_point(t_data *data)
 	mlx_pixel_put(data->mlx, data->mlx_win, (int)(data->player->x_position + (cos(data->player->direction * M_PI / 180) * 30)),
 			(int)(data->player->y_position - (sin(data->player->direction * M_PI / 180) * 30)), 0x00FF00);
 }
+
+void	draw_raycast_floor(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIN_HEIGHT)
+	{
+		j = 0;
+		while (j < WIN_WIDTH)
+		{
+			if (i > WIN_HEIGHT / 2)
+				mlx_pixel_put(data->mlx, data->mlx_win, i, j, 0x3C3C3C);
+			else
+				mlx_pixel_put(data->mlx, data->mlx_win, i, j, 0xC3C3C3);
+
+			j++;
+		}
+		i++;
+	}
+}

@@ -13,7 +13,7 @@ void	raycast(t_data *data)
 {
 	int	i;
 	i = 0;
-	printf("player:(%3d, %3d)\n", data->player->x_position, data->player->y_position);
+	// printf("player:(%3d, %3d)\n", data->player->x_position, data->player->y_position);
 	while (i <= WIN_WIDTH)
 	{
 		data->ray->direction_deg = data->player->direction - (float)FOV / 2 + i * ((float)FOV / (float)WIN_WIDTH);
@@ -48,16 +48,24 @@ void	raycast(t_data *data)
 		//iterar colisiones verticales
 		calculate_ray_wall_collision_vertical(data);
 		//calcular distancia colision horizontal
+		data->ray->dist_h_collision = calculate_horizontal_distance(data);
 		//calcular distancia colision vertical
-
+		data->ray->dist_v_collision = calculate_vertical_distance(data);
 		//elegir punto de menor distancia
+		choose_closer_collision(data);
 
-
-		printf("%2d  (%3d,%3d)[%d,%d]\n",i, (int)round(data->ray->collision_x_h), (int)round(data->ray->collision_y_h), data->player->x, data->player->y);
-		mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray->collision_x_h, (int)data->ray->collision_y_h, 0x000000);
-		mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray->collision_x_v, (int)data->ray->collision_y_v, 0xff00ff);
-		if (i == WIN_WIDTH)
-			printf("\n");
+		// printf("%2d  (%3d,%3d)[%d,%d]\n",i, (int)round(data->ray->collision_x_h), (int)round(data->ray->collision_y_h), data->player->x, data->player->y);
+		// mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray->collision_x_h, (int)data->ray->collision_y_h, 0x00ff00);
+		// mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray->collision_x_v, (int)data->ray->collision_y_v, 0xff0000);
+		// mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray->collision_x, (int)data->ray->collision_y, data->ray->color);
+		// if (data->ray->color == 0x00ff00)
+			// printf("\033[0;32m%d h: %d %d v: %d %d\033[0;37m\t",i, data->ray->collision_x_h, data->ray->collision_y_h, data->ray->collision_x_v, data->ray->collision_y_v);
+		// else
+			// printf("\033[0;31m%d h: %d %d v: %d %d\033[0;37m\t",i, data->ray->collision_x_h, data->ray->collision_y_h, data->ray->collision_x_v, data->ray->collision_y_v);
+		// fflush(0);
+		// if (i == WIN_WIDTH)
+			// printf("\n");
+		draw_raycast_floor(data);
 		i++;
 	}
 
@@ -79,11 +87,6 @@ void	calculate_first_ray_collision_horizontal(t_data *data)
 		data->ray->collision_x_h = data->player->x_position + (data->player->y_position - data->ray->collision_y_h) / tan(data->ray->direction_rad);
 		// return ;
 	}
-	//si no sube ni baja
-	// if (data->ray->ray_up == 0)
-	// {
-	// 	return ;
-	// }
 	data->ray->h_crash = false;
 }
 
@@ -158,10 +161,7 @@ void	calculate_ray_wall_collision_vertical(t_data *data)
 		data->ray->tile_x = (int)(data->ray->collision_x_v / data->px);
 		data->ray->tile_y = (int)(data->ray->collision_y_v / data->px);
 		if (collision(data->board, data->ray->tile_x, data->ray->tile_y, data) == true)
-		{	
 			data->ray->v_crash = true;
-			printf("Casilla : (%d, %d)\n", data->ray->tile_x, data->ray->tile_y);
-		}
 		else
 		{
 			data->ray->collision_x_v += data->ray->x_step;
@@ -177,12 +177,48 @@ bool	collision(t_board **board, int tile_x, int tile_y, t_data *data)
 	// 	return (true);
 	// printf("Casilla : (%d, %d)\n", tile_x, tile_y);
 	if (tile_x < 0 || tile_x > data->map_x_tot - 1 || tile_y < 0 || tile_y > data->map_y_tot - 1)
-		return (true);
+		return (true);	//puede no ser válido en mapas no rectangulares
+	(void)data;
 	if (board[tile_y][tile_x].type == '1')
 		return (true);
 	else
 		return (false);
 }
 
+float	calculate_horizontal_distance(t_data *data)
+{
+	float	distance;
+	float	beta;
+
+	beta = (data->ray->direction_deg - data->player->direction) * M_PI / 180;
+	distance = cos(beta)*sqrt(pow(data->player->x_position - data->ray->collision_x_h, 2) + pow(data->player->y_position - data->ray->collision_y_h, 2));
+	return (distance);
+}
+
+float	calculate_vertical_distance(t_data *data)
+{
+	float	distance;
+	float	beta;
+
+	beta = (data->ray->direction_deg - data->player->direction) * M_PI / 180;
+	distance = cos(beta)*sqrt(pow(data->player->x_position - data->ray->collision_x_v, 2) + pow(data->player->y_position - data->ray->collision_y_v, 2));
+	return (distance);
+}
+
+void	choose_closer_collision(t_data *data)
+{
+	if (data->ray->dist_h_collision <= data->ray->dist_v_collision)
+	{
+		data->ray->collision_x = data->ray->collision_x_h;
+		data->ray->collision_y = data->ray->collision_y_h;
+		data->ray->color = 0x00FF00;
+	}
+	else
+	{
+		data->ray->collision_x = data->ray->collision_x_v;
+		data->ray->collision_y = data->ray->collision_y_v;
+		data->ray->color = 0xFF0000;
+	}
+}
 
 // https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
