@@ -15,11 +15,11 @@
 # include <math.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 360//1920
+#  define WIN_WIDTH 1536//360//1920
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 271//1042
+#  define WIN_HEIGHT 896//271//1042
 # endif
 
 # ifndef FOV

@@ -85,6 +85,6 @@ fclean: clean
 re: fclean $(NAME)
 
 run: $(NAME)
-	@./cub3d maps/37x14.cub
+	@./cub3d maps/24x14.cub
 
 .PHONY: all clean fclean re
