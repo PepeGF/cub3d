@@ -54,9 +54,9 @@ void	replace_border_img(t_board **matrix, int row, int col, t_data *data)
 
 			}
 			if (j == 0 || j == data->map_x_tot - 1)
-				mlx_string_put(data->mlx, data->mlx_win, (j) * 32 + 10, (i) * data->px + 10, 0x000000, ft_itoa(i));
+				mlx_string_put(data->mlx, data->mlx_win, (j) * data->px + 10, (i) * data->px + 30, 0x000000, ft_itoa(i));
 			if (i == 0 || i == data->map_y_tot - 1)
-				mlx_string_put(data->mlx, data->mlx_win, (j) * 32 + 10, (i) * data->px + 10, 0x000000, ft_itoa(j));
+				mlx_string_put(data->mlx, data->mlx_win, (j) * data->px + 10, (i) * data->px + 10, 0x000000, ft_itoa(j));
 			j++;
 		}
 	}
@@ -123,11 +123,22 @@ void	draw_floor2d(t_data	*data)
 
 void draw_view_point(t_data *data)
 {
-	mlx_pixel_put(data->mlx, data->mlx_win, (int)(data->player->x_position + (cos(data->player->direction * M_PI / 180) * 30)),
-			(int)(data->player->y_position - (sin(data->player->direction * M_PI / 180) * 30)), 0x00FF00);
+	int i = -1;
+	int j;
+	while (i <= 1)
+	{
+		j = -1;
+		while (j <= 1)
+		{
+			mlx_pixel_put(data->mlx, data->mlx_win, (int)(data->player->x_position + roundf(cos(data->player->direction * M_PI / 180) * 100))+i,
+					(int)(data->player->y_position - roundf(sin(data->player->direction * M_PI / 180) * 100))+j, 0x0000FF);
+			j++;
+		}
+		i++;
+	}
 }
 
-void	draw_raycast_floor(t_data *data)
+void	draw_raycast_floor(t_data *data)//esto es mierda pura
 {
 	int	i;
 	int	j;

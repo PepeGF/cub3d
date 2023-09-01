@@ -1,10 +1,15 @@
 #include "../inc/cub3d.h"
 
+void	leaks()
+{
+	system("leaks cub3d -list -fullContent");
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 	t_list	*list;
-// atexit(leakss);
+// atexit(leaks);
 	list = 0;
 	ft_check_argc(argc);
 	data = (t_data *)malloc(sizeof(t_data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta

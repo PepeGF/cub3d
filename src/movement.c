@@ -11,16 +11,17 @@ void	turn(t_data *data, int keycode)
 	data->player->direction %= 360;//quita vueltas si es necesario
 	if (data->player->direction < 0)
 		data->player->direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
-	// printf("Direccion: %d\n", data->player->direction);
+	printf("Direccion: %d\n", data->player->direction);
 	draw_view_point(data);
 	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
+	mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
 	// raycast(data);
 }
 
 void	front_back(t_data *data, int keycode)
 {
-	double	player_pos_x_temp;
-	double	player_pos_y_temp;
+	int	player_pos_x_temp;
+	int	player_pos_y_temp;
 
 	draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = MOVE_SPEED;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
@@ -29,9 +30,10 @@ void	front_back(t_data *data, int keycode)
 	else
 		data->player->move_on = -1;
 	//aquí faltaría el control de colisiones
-	player_pos_x_temp = data->player->x_position + cos(data->player->direction * M_PI / 180) * data->player->move_speed * data->player->move_on;
-	player_pos_y_temp = data->player->y_position + (-1 * sin(data->player->direction * M_PI / 180) * data->player->move_speed * data->player->move_on);
+	player_pos_x_temp = (int)(data->player->x_position + roundf(cos(data->player->direction * M_PI / 180) * data->player->move_speed * data->player->move_on));
+	player_pos_y_temp = (int)(data->player->y_position + roundf((-1 * sin(data->player->direction * M_PI / 180) * data->player->move_speed * data->player->move_on)));
 	get_future_pos_from_player_pixel(data, player_pos_x_temp, player_pos_y_temp);
+printf("Direccion: %d,\tX:%d FutX:%d\tY:%d FutY:%d\n", data->player->direction, data->player->x_position, player_pos_x_temp, data->player->y_position, player_pos_y_temp);
 	//habría que plantear si hay colisión no se mueve nada o se puede mover en paralelo al muro con el que colisiona
 	if (check_x_collision(data, player_pos_x_temp) == 0)  //no hace falta else, si hay colisión x_position mantiene su valor, idem para los demás if de colisiones
 		data->player->x_position = player_pos_x_temp;	//nueva posicion en x
@@ -45,8 +47,8 @@ void	front_back(t_data *data, int keycode)
 
 void	side_move(t_data *data, int keycode)
 {
-	double	player_pos_x_temp;
-	double	player_pos_y_temp;
+	int	player_pos_x_temp;
+	int	player_pos_y_temp;
 
 	draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = MOVE_SPEED;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
@@ -54,8 +56,8 @@ void	side_move(t_data *data, int keycode)
 		data->player->sideway_on = 1;
 	else
 		data->player->sideway_on = -1;
-	player_pos_x_temp = data->player->x_position + cos(((data->player->direction + 270) % 360) * M_PI / 180) * data->player->move_speed * data->player->sideway_on;
-	player_pos_y_temp = data->player->y_position + (-1 * sin(((data->player->direction + 270) % 360) * M_PI / 180) * data->player->move_speed * data->player->sideway_on);
+	player_pos_x_temp = (int)(data->player->x_position + roundf(cos(((data->player->direction + 270) % 360) * M_PI / 180) * data->player->move_speed * data->player->sideway_on));
+	player_pos_y_temp = (int)(data->player->y_position + roundf((-1 * sin(((data->player->direction + 270) % 360) * M_PI / 180) * data->player->move_speed * data->player->sideway_on)));
 	get_future_pos_from_player_pixel(data, player_pos_x_temp, player_pos_y_temp);
 	if (check_x_collision(data, player_pos_x_temp) == 0)
 		data->player->x_position = player_pos_x_temp;

@@ -27,11 +27,11 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 5
+#  define MOVE_SPEED 10
 # endif
 
 # ifndef TURN_SPEED
-#  define TURN_SPEED 10
+#  define TURN_SPEED 5
 # endif
 
 enum e_keycodes
@@ -109,12 +109,12 @@ typedef struct s_ray
 {
 	int		ray_up;
 	int		ray_left;
-	int	collision_x_v;
-	int	collision_y_v;
-	int	collision_x_h;
-	int	collision_y_h;
-	int	collision_x;
-	int	collision_y;
+	int		collision_x_v;
+	int		collision_y_v;
+	int		collision_x_h;
+	int		collision_y_h;
+	int		collision_x;
+	int		collision_y;
 	float	direction_rad;	//rray direction in radians
 	float	direction_deg;	//ray direction in degrees
 	int		x_step;
