@@ -8,13 +8,13 @@ void	ft_set_data(t_data *data)
 		perror("Unable to create mlx pointer\n");
 		exit(2);
 	}
-	data->mlx_win = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
+	data->mlx_win = mlx_new_window(data->mlx_ptr, WIN_2D_WIDTH, WIN_2D_HEIGHT, "FDF");
 	if (data->mlx_win == NULL)
 	{
 		perror("Unable to create window pointer\n");
 		exit(2);
 	}
-	data->img = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->img = mlx_new_image(data->mlx_ptr, WIN_2D_WIDTH, WIN_2D_HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->line_lenght), &(data->endian));
 }

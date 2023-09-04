@@ -14,12 +14,20 @@
 # include <mlx.h>
 # include <math.h>
 
+# ifndef WIN_2D_WIDTH
+#  define WIN_2D_WIDTH 1536//360//1920
+# endif
+
+# ifndef WIN_2D_HEIGHT
+#  define WIN_2D_HEIGHT 896//271//1042
+# endif
+
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1536//360//1920
+#  define WIN_WIDTH 512//320
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 896//271//1042
+#  define WIN_HEIGHT 200
 # endif
 
 # ifndef FOV
@@ -27,11 +35,11 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 10
+#  define MOVE_SPEED 20
 # endif
 
 # ifndef TURN_SPEED
-#  define TURN_SPEED 5
+#  define TURN_SPEED 10
 # endif
 
 enum e_keycodes
@@ -105,6 +113,7 @@ typedef struct s_player
 
 }	t_player;
 
+
 typedef struct s_ray
 {
 	int		ray_up;
@@ -169,7 +178,7 @@ typedef struct s_data
 	int			px;
 	t_board		**board;
 	t_player	*player;
-	t_ray		*ray;
+	t_ray		**ray;
 }	t_data;
 
 // main.c
@@ -222,11 +231,15 @@ void		set_current_grid(t_data *data);
 
 // raycast.c
 
-t_ray	*initialize_ray(void);
+t_ray	**initialize_ray(void);
 void	raycast(t_data *data);
-void	calculate_first_ray_collision_horizontal(t_data *data);
-void	calculate_ray_wall_collision_horizontal(t_data *data);
-void	calculate_first_ray_collision_vertical(t_data *data);
+void	set_ray_basic(t_data *data, t_player *player, t_ray **ray, int i);
+
+void	calculate_first_ray_collision_horizontal(t_data *data, t_board **board,
+		t_ray *ray, t_player *player);
+void	calculate_first_ray_collision_vertical(t_data *data, t_board **board,
+		t_ray *ray, t_player *player);
+/* void	calculate_ray_wall_collision_horizontal(t_data *data);
 void	calculate_ray_wall_collision_vertical(t_data *data);
 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
@@ -235,7 +248,7 @@ bool	corner_collision(t_board **board, int collision_x, int collision_y, t_data 
 
 float	calculate_horizontal_distance(t_data *data);
 float	calculate_vertical_distance(t_data *data);
-
+ */
 
 
 

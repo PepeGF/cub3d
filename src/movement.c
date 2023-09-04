@@ -11,7 +11,7 @@ void	turn(t_data *data, int keycode)
 	data->player->direction %= 360;//quita vueltas si es necesario
 	if (data->player->direction < 0)
 		data->player->direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
-	printf("Direccion: %d\n", data->player->direction);
+	// printf("Direccion: %d\n", data->player->direction);
 	draw_view_point(data);
 	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 	mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
@@ -33,7 +33,7 @@ void	front_back(t_data *data, int keycode)
 	player_pos_x_temp = (int)(data->player->x_position + roundf(cos(data->player->direction * M_PI / 180) * data->player->move_speed * data->player->move_on));
 	player_pos_y_temp = (int)(data->player->y_position + roundf((-1 * sin(data->player->direction * M_PI / 180) * data->player->move_speed * data->player->move_on)));
 	get_future_pos_from_player_pixel(data, player_pos_x_temp, player_pos_y_temp);
-printf("Direccion: %d,\tX:%d FutX:%d\tY:%d FutY:%d\n", data->player->direction, data->player->x_position, player_pos_x_temp, data->player->y_position, player_pos_y_temp);
+// printf("Direccion: %d,\tX:%d FutX:%d\tY:%d FutY:%d\n", data->player->direction, data->player->x_position, player_pos_x_temp, data->player->y_position, player_pos_y_temp);
 	//habría que plantear si hay colisión no se mueve nada o se puede mover en paralelo al muro con el que colisiona
 	if (check_x_collision(data, player_pos_x_temp) == 0)  //no hace falta else, si hay colisión x_position mantiene su valor, idem para los demás if de colisiones
 		data->player->x_position = player_pos_x_temp;	//nueva posicion en x
@@ -42,7 +42,7 @@ printf("Direccion: %d,\tX:%d FutX:%d\tY:%d FutY:%d\n", data->player->direction, 
 	set_current_grid(data);
 	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 	draw_player(data);//dibuja al jugador en su nueva posicion
-	// raycast(data);
+	raycast(data);
 }
 
 void	side_move(t_data *data, int keycode)
