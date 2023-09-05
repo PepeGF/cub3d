@@ -134,6 +134,8 @@ typedef struct s_ray
 	int		tile_y;
 	float	dist_h_collision;
 	float	dist_v_collision;
+	float	dist;
+	char	chosen;
 	int		color;
 }	t_ray;
 
@@ -231,24 +233,28 @@ void		set_current_grid(t_data *data);
 
 // raycast.c
 
-t_ray	**initialize_ray(void);
-void	raycast(t_data *data);
-void	set_ray_basic(t_data *data, t_player *player, t_ray **ray, int i);
-
-void	calculate_first_ray_collision_horizontal(t_data *data, t_board **board,
-		t_ray *ray, t_player *player);
-void	calculate_first_ray_collision_vertical(t_data *data, t_board **board,
-		t_ray *ray, t_player *player);
-/* void	calculate_ray_wall_collision_horizontal(t_data *data);
-void	calculate_ray_wall_collision_vertical(t_data *data);
-
+t_ray		**initialize_ray(void);
+void		raycast(t_data *data);
+void		set_ray_basic(t_data *data, t_player *player, t_ray **ray, int i);
+void		calculate_first_ray_collision_horizontal(t_data *data, 
+				t_board **board, t_ray *ray, t_player *player);
+void		calculate_first_ray_collision_vertical(t_data *data,
+				t_board **board, t_ray *ray, t_player *player);
+void		collision(t_data *data, t_board **board, t_player *player,
+				t_ray *ray);
+void		calculate_ray_wall_collision_horizontal(t_data *data,
+				t_board **board, t_player *player, t_ray *ray);
+void		calculate_ray_wall_collision_vertical(t_data *data,
+				t_board **board, t_player *player, t_ray *ray);
+void		choose_closer_collision(t_data *data, t_player *player, t_ray *ray);
+/* 
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
 void	choose_closer_collision(t_data *data);
 bool	corner_collision(t_board **board, int collision_x, int collision_y, t_data *data, char dir);
 
 float	calculate_horizontal_distance(t_data *data);
 float	calculate_vertical_distance(t_data *data);
- */
+*/
 
 
 
