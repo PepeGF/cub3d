@@ -2,7 +2,6 @@
 
 void	raycast(t_data *data)
 {
-	(void)data;
 	int	i;
 
 	i = 0;
@@ -12,27 +11,34 @@ void	raycast(t_data *data)
 		set_ray_basic(data, data->player, data->ray, i);
 		calculate_first_ray_collision_horizontal(data, data->board, data->ray[i], data->player);
 		calculate_first_ray_collision_vertical(data, data->board, data->ray[i], data->player);
-//check_collision
-		// printf("%d: ", i);
 		collision(data, data->board, data->player, data->ray[i]);
 		calculate_ray_wall_collision_horizontal(data, data->board, data->player, data->ray[i]);
 		calculate_ray_wall_collision_vertical(data, data->board, data->player, data->ray[i]);
 		choose_closer_collision(data, data->player, data->ray[i]);
-	// 	calculate_ray_distance(data);
+		calculate_texture(data->ray[i]);
 	// 	calculate_ray_height(data);
+		calculate_wall_height(data, data->ray[i]);
+		calculate_column(data, data->ray[i]);
+	// 	calculate_ray_distance(data);
 	// 	calculate_ray_texture(data);
 	// 	draw_ray(data);
 	mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x, (int)data->ray[i]->collision_y, 0x000000);
 	// mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x_v, (int)data->ray[i]->collision_y_v, 0xFF00FF);
 		i++;
 	}
-	/* i = 0;
+
+	printf("\n");
+	i = 0;
 	for (i = 0; i < WIN_WIDTH; i++)
 	{
-		if (i % 10 == 0 && i != 0)
+		if (i % 3 == 0 && i != 0)
 			printf("\n");
-		printf("%f|up:%d|left%d\t", data->ray[i]->direction_deg, data->ray[i]->ray_up, data->ray[i]->ray_left);
-	} */
+		// printf("%d|%.2f|up:%d|left%d|face:%c\t",i, data->ray[i]->direction_deg, data->ray[i]->ray_up, data->ray[i]->ray_left, data->ray[i]->face);
+		// printf("%d|%.2f|Ad[-1]:%.2f|Ad[+1]:%.2f\t",i, data->ray[i]->dist, fabs(data->ray[i]->dist - data->ray[i - 1]->dist), fabs(data->ray[i]->dist - data->ray[i + 1]->dist));
+		printf("%d|%c|%d|%d|%d\t",i, data->ray[i]->chosen, data->ray[i]->collision_x, data->ray[i]->collision_y, data->ray[i]->column);
+	}
+	printf("\n");
+
 	return ;
 }
 
@@ -156,8 +162,6 @@ void	collision(t_data *data, t_board **board, t_player *player, t_ray *ray)
 	ray->tile_x = ray->collision_x_h >> 6;
 	ray->tile_y = ray->collision_y_h >> 6;
 	adjust_tiles(ray, data);
-	// printf("tile_x: %d    tile_y: %d\n", ray->tile_x, ray->tile_y);
-	// fflush(stdout);
 	if (board[ray->tile_y][ray->tile_x].type == '1')
 		ray->h_crash = true;
 	else
@@ -251,12 +255,55 @@ void	choose_closer_collision(t_data *data, t_player *player, t_ray *ray)
 		ray->collision_x = ray->collision_x_h;
 		ray->collision_y = ray->collision_y_h;
 		ray->dist = ray->dist_h_collision;
+		ray->chosen = 'h';
 	}
 	else
 	{
 		ray->collision_x = ray->collision_x_v;
 		ray->collision_y = ray->collision_y_v;
 		ray->dist = ray->dist_v_collision;
+		ray->chosen = 'v';
 	}
 }
+
+void	calculate_texture(t_ray *ray)
+{
+	if (ray->chosen == 'v' && ray->ray_left == 1)
+		ray->face = 'e';
+	else if (ray->chosen == 'v')
+		ray->face = 'w';
+	else if (ray->ray_up == 1)
+		ray->face = 's';
+	else
+		ray->face = 'n';
+}
+
+void	calculate_wall_height(t_data *data, t_ray *ray)
+{
+	ray->wall_height = (data->px / ray->dist) * 277; //277 es la distancia al plano de proyección
+	//creo que falta multiplicar por el coseno de ray->direction_rad
+	ray->wall_height *= cos(ray->direction_rad - data->player->direction * M_PI / 180);
+}
+ 
+void	calculate_column(t_data *data, t_ray *ray)
+{
+	if (ray->chosen == 'h' && ray->ray_left == 1)
+	{
+		ray->column = data->px - ray->collision_x % data->px;
+	}
+	else if (ray->ray_left == -1)
+	{
+		ray->column = ray->collision_x % data->px;
+	}
+	else if (ray->chosen == 'v' && ray->ray_up == 1)
+	{
+		ray->column = ray->collision_y % data->px;
+	}
+	else
+	{
+		ray->column = data->px - ray->collision_y % data->px;
+	}
+}
+
+
 

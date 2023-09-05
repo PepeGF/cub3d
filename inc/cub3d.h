@@ -136,7 +136,10 @@ typedef struct s_ray
 	float	dist_v_collision;
 	float	dist;
 	char	chosen;
+	char	face; //hacia dónde mira la pared (no desde dónde se mira)
+	int		wall_height;
 	int		color;
+	int		column;
 }	t_ray;
 
 /* 
@@ -247,7 +250,10 @@ void		calculate_ray_wall_collision_horizontal(t_data *data,
 void		calculate_ray_wall_collision_vertical(t_data *data,
 				t_board **board, t_player *player, t_ray *ray);
 void		choose_closer_collision(t_data *data, t_player *player, t_ray *ray);
-/* 
+void		calculate_texture(t_ray *ray);
+void		calculate_wall_height(t_data *data, t_ray *ray);
+void		calculate_column(t_data *data, t_ray *ray);
+/*
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
 void	choose_closer_collision(t_data *data);
 bool	corner_collision(t_board **board, int collision_x, int collision_y, t_data *data, char dir);
