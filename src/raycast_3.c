@@ -27,7 +27,8 @@ void	raycast(t_data *data)
 	// mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x_v, (int)data->ray[i]->collision_y_v, 0xFF00FF);
 		i++;
 	}
-	visualize_no_texture(data, data->ray);
+	if (data->debug == false)
+		visualize_no_texture(data, data->ray);
 
 	if (data->debug == true)
 	{

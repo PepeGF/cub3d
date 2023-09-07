@@ -35,5 +35,6 @@ void    visualize_no_texture(t_data *data, t_ray **ray)
 		i++;
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, image, 0, 0);
+	mlx_destroy_image(data->mlx, image);
 	return ;
 }
