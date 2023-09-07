@@ -23,7 +23,13 @@ void	raycast(t_data *data)
 	// 	calculate_ray_texture(data);
 	// 	draw_ray(data);
 	if (data->debug == true)
-		mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x, (int)data->ray[i]->collision_y, 0x000000);
+	{
+		if (data->ray[i]->chosen == 'v')
+			mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x, (int)data->ray[i]->collision_y, 0x000000);
+		else
+			mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x, (int)data->ray[i]->collision_y, 0x000000);
+
+	}
 	// mlx_pixel_put(data->mlx, data->mlx_win, (int)data->ray[i]->collision_x_v, (int)data->ray[i]->collision_y_v, 0xFF00FF);
 		i++;
 	}
