@@ -23,11 +23,11 @@
 # endif
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 512//320
+#  define WIN_WIDTH 1024//512//320
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 200
+#  define WIN_HEIGHT 768//200
 # endif
 
 # ifndef FOV
@@ -140,6 +140,8 @@ typedef struct s_ray
 	int		wall_height;
 	int		color;
 	int		column;
+	int		draw_start;
+	int		draw_end;
 }	t_ray;
 
 /* 
@@ -184,6 +186,9 @@ typedef struct s_data
 	t_board		**board;
 	t_player	*player;
 	t_ray		**ray;
+	bool		debug;
+	int			floor_color;
+	int			sky_color;
 }	t_data;
 
 // main.c
@@ -250,9 +255,10 @@ void		calculate_ray_wall_collision_horizontal(t_data *data,
 void		calculate_ray_wall_collision_vertical(t_data *data,
 				t_board **board, t_player *player, t_ray *ray);
 void		choose_closer_collision(t_data *data, t_player *player, t_ray *ray);
-void		calculate_texture(t_ray *ray);
+void		calculate_face(t_ray *ray);
 void		calculate_wall_height(t_data *data, t_ray *ray);
 void		calculate_column(t_data *data, t_ray *ray);
+void		calculate_color(t_ray *ray);//solo sin textura, quitar
 /*
 bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
 void	choose_closer_collision(t_data *data);
@@ -262,7 +268,8 @@ float	calculate_horizontal_distance(t_data *data);
 float	calculate_vertical_distance(t_data *data);
 */
 
-
+// visualize
+void    visualize_no_texture(t_data *data, t_ray **ray);
 
 
 

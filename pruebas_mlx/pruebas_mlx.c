@@ -1,10 +1,10 @@
 # include <stdio.h>
 # include <mlx.h>
 #include "../libft/libft.h"
-# define width 640
-# define heigth 360
+// # define width 640
+// # define heigth 360
 
-int *ft_get_color_from_strings(char *array[2][3])
+/* int *ft_get_color_from_strings(char *array[2][3])
 {
 	int *colors;
 	int	i;
@@ -49,10 +49,12 @@ int main()
 	
 	return 0;
 }
+*/
 
 
 
-/* 
+# define width 640
+# define heigth 360
 int main()
 {
 	void *mlx = mlx_init();
@@ -77,15 +79,20 @@ int main()
 	{
 		buffer[(y * line_bytes) + x] = color;
 	}
+	//aquí una columna de pixeles negros en x = witdh * 0.66
+	for (int y = 40; y < heigth - 40; ++y)
+    {
+        buffer[(y * line_bytes) + 300] = 0xFF0000;
+    }
 	printf("pixel_bits: %d\nline_bytes: %d\nendia: %d\n", pixel_bits, line_bytes, endian);
 
 	mlx_put_image_to_window(mlx, win, image, 0, 0);
-	// The following code goes here.
+	
 
 	mlx_loop(mlx);
 	return 0;
 }
- */
+
 
 /* int main()
 {

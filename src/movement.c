@@ -12,9 +12,11 @@ void	turn(t_data *data, int keycode)
 	if (data->player->direction < 0)
 		data->player->direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
 	// printf("Direccion: %d\n", data->player->direction);
-	draw_view_point(data);
-	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
-	mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
+	if (data->debug == true){
+		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
+		draw_view_point(data);}
+	raycast(data);
+	// mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
 	// raycast(data);
 }
 
@@ -23,7 +25,7 @@ void	front_back(t_data *data, int keycode)
 	int	player_pos_x_temp;
 	int	player_pos_y_temp;
 
-	draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
+	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = MOVE_SPEED;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_w || keycode == key_up)
 		data->player->move_on = 1;
@@ -40,8 +42,9 @@ void	front_back(t_data *data, int keycode)
 	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player->y_position = player_pos_y_temp;//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	set_current_grid(data);
-	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
-	draw_player(data);//dibuja al jugador en su nueva posicion
+	if (data->debug == true){
+		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
+		draw_player(data);}//dibuja al jugador en su nueva posicion
 	raycast(data);
 }
 
@@ -50,7 +53,7 @@ void	side_move(t_data *data, int keycode)
 	int	player_pos_x_temp;
 	int	player_pos_y_temp;
 
-	draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
+	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = MOVE_SPEED;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_d)
 		data->player->sideway_on = 1;
@@ -64,9 +67,10 @@ void	side_move(t_data *data, int keycode)
 	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player->y_position = player_pos_y_temp;
 	set_current_grid(data);
-	draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
-	draw_player(data);//dibuja al jugador en su nueva posicion
-	// raycast(data);
+	if (data->debug == true){
+		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
+		draw_player(data);}//dibuja al jugador en su nueva posicion
+	raycast(data);
 }
 
 int get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp, int player_pos_y_temp)
