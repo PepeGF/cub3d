@@ -82,39 +82,42 @@ typedef struct s_board {
 	// int		end;
 }	t_board;
 
-/* typedef struct s_cont {
-	int	jug;
-	int	coll;
-	int	end;
-	int	x;
-	int	y;
-}	t_cont;
- */
 typedef struct s_player
 {
-	int	x;				//posicion cuadricula
-	int	y;
-	int	x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
-	int	y_fut;
-	int	direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
-	int	x_position;		//posicion pixeles
-	int	y_position;
-	int	x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
-	int	y_fut_pos;
-	int	x_dir_vect;		//vector dirección
-	int	y_dir_vect;
-	int	move_on;		//0 = parado, 1 = adelante, -1 = atrás
-	int	turn_on;		//-1 = giro Izq, 1 = giro Dcha
-	int	sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
-	int	move_speed;		// velocidad desplazamiento en pixeles ¿3?
-	int	turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
-	int	x_view;			// para dibujar hacia dónde mira el jugador, solo para debug, creo
-	int	y_view;
+	int		x;				//posicion cuadricula
+	int		y;
+	int		x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
+	int		y_fut;
+	int		direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
+	double	dir_rad;		
+	int		x_position;		//posicion pixeles
+	int		y_position;
+	int		x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
+	int		y_fut_pos;
+	int		move_on;		//0 = parado, 1 = adelante, -1 = atrás
+	int		turn_on;		//-1 = giro Izq, 1 = giro Dcha
+	int		sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
+	int		move_speed;		// velocidad desplazamiento en pixeles ¿3?
+	int		turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
+	int		x_view;			// para dibujar hacia dónde mira el jugador, solo para debug, creo
+	int		y_view;
+
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 
 }	t_player;
 
-
 typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+}	t_ray;
+
+/* 
+typedef struct s_ray //casi bueno
 {
 	int		ray_up;
 	int		ray_left;
@@ -143,7 +146,7 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 }	t_ray;
-
+ */
 /* 
 typedef struct s_ray
 {
@@ -208,7 +211,7 @@ void		ft_initialize_pos(t_board *elem);
 t_player	*where_is_the_player(t_board **board, int x, int y);
 int			is_player(t_board **board, int i, int j);
 void		set_player_initial_geometry(t_data *data, t_player *player);
-int			ft_player_initial_direction(t_board **board, t_player player);
+int			ft_player_initial_direction(t_board **board, t_player *player);
 
 // images.c
 void		initialize_images(t_data *data);
@@ -239,7 +242,12 @@ int			check_x_collision(t_data *data, int	player_pos_x_temp);
 int			check_y_collision(t_data *data, int	player_pos_y_temp);
 void		set_current_grid(t_data *data);
 
-// raycast.c
+//raycast_4
+
+void		raycast(t_data *data, t_ray **ray, t_player *player);
+t_ray		**initialize_ray(void);
+
+/* // raycast.c
 
 t_ray		**initialize_ray(void);
 void		raycast(t_data *data);
@@ -259,15 +267,7 @@ void		calculate_face(t_ray *ray);
 void		calculate_wall_height(t_data *data, t_ray *ray);
 void		calculate_column(t_data *data, t_ray *ray);
 void		calculate_color(t_ray *ray);//solo sin textura, quitar
-/*
-bool	collision(t_board **board, int tile_x, int tile_y, t_data *data);
-void	choose_closer_collision(t_data *data);
-bool	corner_collision(t_board **board, int collision_x, int collision_y, t_data *data, char dir);
-
-float	calculate_horizontal_distance(t_data *data);
-float	calculate_vertical_distance(t_data *data);
-*/
-
+ */
 // visualize
 void    visualize_no_texture(t_data *data, t_ray **ray);
 
