@@ -2,24 +2,26 @@
 
 void	raycast(t_data *data, t_ray **ray, t_player *player)
 {
-	int	x;
+	int	i;
 
-	x = 0;
-	while (x < WIN_WIDTH)
+	i = 0;
+	while (i < WIN_WIDTH)
 	{
-		ray[x]->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-		ray[x]->ray_dir_x = player->dir_x + player->plane_x * ray[x]->camera_x;
-		ray[x]->ray_dir_y = player->dir_y + player->plane_y * ray[x]->camera_x;
-		x++;
+		ray[i]->camera_x = 2 * i / (double)WIN_WIDTH - 1;
+		ray[i]->ray_dir_x = player->dir_x + player->plane_x * ray[i]->camera_x;
+		ray[i]->ray_dir_y = player->dir_y + player->plane_y * ray[i]->camera_x;
+		ray[i]->map_x = (int)player->x;
+		ray[i]->map_y = (int)player->y;
+		i++;
 	}
 	if (data->debug == false)
-	x = 0;
+	i = 0;
 	{
-		while (x < WIN_WIDTH)
+		while (i < WIN_WIDTH)
 		{
 
-			printf("Rayo: %3d | ", x);
-			x++;
+			printf("Rayo: %3d | ", i);
+			i++;
 		}
 	}
 }

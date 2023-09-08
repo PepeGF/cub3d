@@ -25,7 +25,6 @@ void	front_back(t_data *data, int keycode)
 	int	player_pos_x_temp;
 	int	player_pos_y_temp;
 
-	// draw_floor2d(data);//primero dibuja los 25 pixeles de suelo en la posición actual del jugador (borra el jugador)
 	data->player->move_speed = MOVE_SPEED;//ajustar velocidad desplazamiento -> posible mejora, hacerla dependiente de las dimensiones del mapa??
 	if (keycode == key_w || keycode == key_up)
 		data->player->move_on = 1;
@@ -109,8 +108,12 @@ int	check_y_collision(t_data *data, int	player_pos_y_temp)
 
 void	set_current_grid(t_data *data)
 {
-	data->player->x = data->player->x_position / data->px;
-	data->player->y = data->player->y_position / data->px;
+	data->player->x = data->player->x_position / (float)data->px;
+	data->player->y = data->player->y_position / (float)data->px;
+	if (data->debug == true)
+	{
+		printf("Casilla actual: %f %f\n", data->player->x, data->player->y);
+	}
 }
 
 // printf("Nueva X: %f\tnueva y: %f\n", round(data->player->x_position), round(data->player->y_position));

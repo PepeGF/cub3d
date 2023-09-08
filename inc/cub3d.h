@@ -27,7 +27,7 @@
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 768//200
+#  define WIN_HEIGHT 820//200
 # endif
 
 # ifndef FOV
@@ -84,8 +84,8 @@ typedef struct s_board {
 
 typedef struct s_player
 {
-	int		x;				//posicion cuadricula
-	int		y;
+	double	x;				//posicion cuadricula
+	double	y;
 	int		x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
 	int		y_fut;
 	int		direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
@@ -114,6 +114,8 @@ typedef struct s_ray
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
 }	t_ray;
 
 /* 

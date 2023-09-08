@@ -26,6 +26,7 @@ atexit(leaks);
 	set_player_initial_geometry(data, data->player);
 	if (data->debug == true)
 	{
+		// printf("player: x: %f y:%f\t|||||\tray: x: %d y:%d\n", data->player->x, data->player->y);
 		put_field(data->board, data->map_y_tot, data->map_x_tot, data);
 		replace_field(data->board, data->map_y_tot, data->map_x_tot, data);
 	}
