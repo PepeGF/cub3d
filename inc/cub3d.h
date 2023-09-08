@@ -31,7 +31,7 @@
 # endif
 
 # ifndef FOV
-#  define FOV 60
+#  define FOV 66
 # endif
 
 # ifndef MOVE_SPEED

@@ -48,27 +48,31 @@ int	ft_player_initial_direction(t_board **board, t_player *player)
 {
 	if (board[player->y][player->x].type == 'N')
 	{
-		player->
+		player->dir_rad = M_PI_2;
 		player->plane_x = -0.66;
+		//player->plane_x = player->dir_rad - FOV / 2 * M_PI / 180; //terminar este cálculo
 		player->plane_y = 0;
 		return (NORTH);
 	}
 	if (board[player->y][player->x].type == 'S')
 	{
+		player->dir_rad = 3 * M_PI_2;
 		player->plane_x = 0.66;
 		player->plane_y = 0;
 		return (SOUTH);
 	}
 	if (board[player->y][player->x].type == 'W')
 	{
+		player->dir_rad = M_PI;
 		player->plane_x = 0;
 		player->plane_y = -0.66;
 		return (WEST);
 	}
 	if (board[player->y][player->x].type == 'E')
 	{
+		player->dir_rad = 0;
 		player->plane_x = 0;
-		player->plane_y = 0,66;
+		player->plane_y = 0.66;
 		return (EAST);
 	}
 	else

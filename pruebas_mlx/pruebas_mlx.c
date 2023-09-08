@@ -1,5 +1,6 @@
 # include <stdio.h>
 # include <mlx.h>
+#include <math.h>
 #include "../libft/libft.h"
 // # define width 640
 // # define heigth 360
@@ -57,6 +58,7 @@ int main()
 # define heigth 360
 int main()
 {
+	printf("%f\n", (double)1 / (double)0);
 	void *mlx = mlx_init();
 	void *win = mlx_new_window(mlx, width, heigth, "Tutorial Window - Create Image");
 
