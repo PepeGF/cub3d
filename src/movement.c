@@ -2,6 +2,7 @@
 
 void	turn(t_data *data, int keycode)
 {
+
 	data->player->turn_speed = TURN_SPEED;//ajusta la velocidad de giro
 	if (keycode == key_right)
 		data->player->turn_on = -1;
@@ -12,10 +13,17 @@ void	turn(t_data *data, int keycode)
 	if (data->player->direction < 0)
 		data->player->direction += 360;//lo convierte en angulo positivo, posiblemente innecesario, pero me gusta
 	// printf("Direccion: %d\n", data->player->direction);
+	data->player->dir_rad = data->player->direction * M_PI / 180;
+
+	data->player->dir_x = cos(data->player->dir_rad);
+	data->player->dir_y = -sin(data->player->dir_rad);
+	data->player->plane_x = 0.66 * cos(data->player->dir_rad + M_PI_2);
+	data->player->plane_y = -0.66 * sin(data->player->dir_rad + M_PI_2);	
+
 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 		draw_view_point(data);}
-	if (data->debug == false)
+	if (data->debug == true)
 		raycast(data, data->ray, data->player);
 	// mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
 }
@@ -44,7 +52,7 @@ void	front_back(t_data *data, int keycode)
 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 		draw_player(data);}//dibuja al jugador en su nueva posicion
-	if (data->debug == false)
+	if (data->debug == true)
 		raycast(data, data->ray, data->player);
 }
 
@@ -70,7 +78,7 @@ void	side_move(t_data *data, int keycode)
 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 		draw_player(data);}//dibuja al jugador en su nueva posicion
-	if (data->debug == false)
+	if (data->debug == true)
 		raycast(data, data->ray, data->player);
 }
 
@@ -115,12 +123,3 @@ void	set_current_grid(t_data *data)
 		printf("Casilla actual: %f %f\n", data->player->x, data->player->y);
 	}
 }
-
-// printf("Nueva X: %f\tnueva y: %f\n", round(data->player->x_position), round(data->player->y_position));
-// printf("Nueva X: %f\tnueva y: %f\n", round(data->player->x_position), round(data->player->y_position));
-// printf("Cuadricula X: %d\tY: %d\n", data->player->x, data->player->y); //funciona bien
-
-// printf("Me voy contra el muro en X\n");
-// printf("Me voy contra el muro en Y\n");
-
-// printf("Direccion: %d\n", data->player->direction);

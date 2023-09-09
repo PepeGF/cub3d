@@ -9,10 +9,15 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 	{
 		ray[i]->hit = false;
 		ray[i]->camera_x = 2 * i / (double)WIN_WIDTH - 1;
-		ray[i]->ray_dir_x = player->dir_x + player->plane_x * ray[i]->camera_x;
-		ray[i]->ray_dir_y = player->dir_y + player->plane_y * ray[i]->camera_x;
+		ray[i]->ray_dir_x = player->dir_x + player->plane_x * ray[i]->camera_x * -1;
+		ray[i]->ray_dir_y = player->dir_y + player->plane_y * ray[i]->camera_x * -1;
 		ray[i]->map_x = (int)player->x;
 		ray[i]->map_y = (int)player->y;
+		if (data->debug == true)
+		{
+			printf("Antes: %d, %d || ", ray[i]->map_x, ray[i]->map_y);
+			fflush(0);
+		}
 		if (ray[i]->ray_dir_x == 0)
 			ray[i]->delta_dist_x = 1e30;
 		else
@@ -25,8 +30,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		if (ray[i]->ray_dir_x < 0)
 		{
 			ray[i]->step_x = -1;
-			ray[i]->side_dist_x = (player->x - ray[i]->map_x)
-				* ray[i]->delta_dist_x;
+			ray[i]->side_dist_x = (player->x - ray[i]->map_x) * ray[i]->delta_dist_x;
 		}
 		else
 		{
@@ -69,6 +73,11 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			if (data->board[ray[i]->map_x][ray[i]->map_y].type == '1')
 				ray[i]->hit = true;
 		}
+		if (data->debug == true)
+		{
+			printf("Después: %d, %d\n", ray[i]->map_x, ray[i]->map_y);
+			fflush(0);
+		}
 		if (ray[i]->face == 'w' || ray[i]->face == 'e')
 			ray[i]->perp_wall_dist = ray[i]->side_dist_x - ray[i]->delta_dist_x;
 		else
@@ -82,15 +91,21 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->draw_end = WIN_HEIGHT - 1;
 		i++;
 	}
+
+	//comprobaciones para debug
 	if (data->debug == false)
 	i = 0;
 	{
 		while (i < WIN_WIDTH)
 		{
-			printf("Rayo: %3d | ", i);
+			printf("Rayo: %3d | %f, %f\n", i, ray[i]->ray_dir_x, ray[i]->ray_dir_y);
 			i++;
 		}
 	}
+	if (data->debug == false)
+		printf("Playerr: %f, %f, %f | %f, %f, %f\n", player->dir_x, player->dir_y, 
+			sqrt(pow(player->dir_x, 2)+pow(player->dir_y, 2)), player->plane_x, player->plane_y,
+			sqrt(pow(player->plane_x, 2)+pow(player->plane_y, 2)));
 }
 
 t_ray	**initialize_ray(void)

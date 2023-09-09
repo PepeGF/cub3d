@@ -39,13 +39,11 @@ void	set_player_initial_geometry(t_data *data, t_player *player)
 	player->direction = ft_player_initial_direction(data->board, player);
 	player->dir_rad = player->direction * (M_PI / 180);
 	player->x_position = player->x * data->px;
-	// player->x_position = player->x * data->px + data->px / 2;
 	player->y_position = player->y * data->px;
-	// player->y_position = player->y * data->px + data->px / 2;
-	player->dir_x = cos(player->direction * 2 * M_PI / 360);
-	player->dir_y = -1 * sin(player->direction * 2 * M_PI / 360);
+	player->dir_x = cos(player->dir_rad);
+	player->dir_y = -1 * sin(player->dir_rad);
 	player->plane_x = 0.66 * cos(player->dir_rad + M_PI_2);
-	player->plane_y = 0.66 * sin(player->dir_rad + M_PI_2);
+	player->plane_y = -0.66 * sin(player->dir_rad + M_PI_2);
 }
 
 int	ft_player_initial_direction(t_board **board, t_player *player)

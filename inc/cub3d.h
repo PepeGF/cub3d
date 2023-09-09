@@ -23,11 +23,11 @@
 # endif
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1024//512//320
+#  define WIN_WIDTH 50//512//1024//320
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 820//200
+#  define WIN_HEIGHT 40//200//820//200
 # endif
 
 # ifndef FOV
@@ -89,7 +89,7 @@ typedef struct s_player
 	int		x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
 	int		y_fut;
 	int		direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
-	double	dir_rad;		
+	double	dir_rad;		//está bien
 	int		x_position;		//posicion pixeles
 	int		y_position;
 	int		x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
