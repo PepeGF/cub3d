@@ -31,10 +31,7 @@ SRCS = main.c \
 		exit_game.c \
 		walls.c \
 		raycast_4.c \
-#		visualitation.c
-#		raycast_3.c \
-#		new_raycast.c \
-# 		raycast.c 
+		visualitation.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

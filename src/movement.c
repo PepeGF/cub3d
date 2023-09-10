@@ -23,8 +23,7 @@ void	turn(t_data *data, int keycode)
 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 		draw_view_point(data);}
-	if (data->debug == true)
-		raycast(data, data->ray, data->player);
+	raycast(data, data->ray, data->player);
 	// mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
 }
 
@@ -52,8 +51,7 @@ void	front_back(t_data *data, int keycode)
 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 		draw_player(data);}//dibuja al jugador en su nueva posicion
-	if (data->debug == true)
-		raycast(data, data->ray, data->player);
+	raycast(data, data->ray, data->player);
 }
 
 void	side_move(t_data *data, int keycode)
@@ -78,8 +76,7 @@ void	side_move(t_data *data, int keycode)
 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
 		draw_player(data);}//dibuja al jugador en su nueva posicion
-	if (data->debug == true)
-		raycast(data, data->ray, data->player);
+	raycast(data, data->ray, data->player);
 }
 
 int get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp, int player_pos_y_temp)

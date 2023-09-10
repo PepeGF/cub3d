@@ -14,7 +14,7 @@ atexit(leaks);
 	ft_check_argc(argc);
 	data = (t_data *)malloc(sizeof(t_data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
 
-	data->debug = true;
+	data->debug = false;
 
 	initialize_main_vars(data);
 	list = ft_read_map(argv[1], data);//algunas cosas de esta no valen

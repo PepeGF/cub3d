@@ -18,14 +18,23 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			printf("Antes: %d, %d || ", ray[i]->map_x, ray[i]->map_y);
 			fflush(0);
 		}
+		//calculate step and initial sideDist
 		if (ray[i]->ray_dir_x == 0)
 			ray[i]->delta_dist_x = 1e30;
 		else
-			ray[i]->delta_dist_x = fabs(1 / ray[i]->side_dist_x);
+			ray[i]->delta_dist_x = fabs(1 / ray[i]->ray_dir_x);
 		if (ray[i]->ray_dir_y == 0)
 			ray[i]->delta_dist_y = 1e30;
 		else
-			ray[i]->delta_dist_y = fabs(1 / ray[i]->side_dist_y);
+			ray[i]->delta_dist_y = fabs(1 / ray[i]->ray_dir_y);
+		
+		if (data->debug == true)
+		{
+			printf("Rayo: %3d | %f, %f | %f, %f\n", i, ray[i]->delta_dist_x, ray[i]->delta_dist_y,
+				ray[i]->ray_dir_x, ray[i]->ray_dir_y);
+			fflush(0);
+		}
+
 		//calculate step and initial sideDist
 		if (ray[i]->ray_dir_x < 0)
 		{
@@ -47,6 +56,16 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->step_y = 1;
 			ray[i]->side_dist_y = (ray[i]->map_y + 1.0 - player->y) * ray[i]->delta_dist_y;
 		}
+		if (data->debug == true)
+		{
+			printf("Rayo: %3d | %f, %f | %f, %f | %f, %f\n", i, ray[i]->delta_dist_x, ray[i]->delta_dist_y,
+				ray[i]->ray_dir_x, ray[i]->ray_dir_y, ray[i]->side_dist_x, ray[i]->side_dist_y);
+			fflush(0);
+			if (i == WIN_WIDTH - 1)
+				printf("\n");
+		}
+//hasta aquí parece estar bien
+
 		while (ray[i]->hit == false)
 		{
 			if (ray[i]->side_dist_x < ray[i]->side_dist_y)
@@ -55,10 +74,15 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 				ray[i]->map_x += ray[i]->step_x;
 				//esto es altamente probable que esté mal ----> REVISAR!!!!
 				if (ray[i]->ray_dir_x > 0)
+				{
 					ray[i]->face = 'w';
+					ray[i]->color = 0xFF0000;
+				}
 				else
+				{
 					ray[i]->face = 'e';
-				
+					ray[i]->color =0xfb85e8;
+				}
 			}
 			else
 			{
@@ -66,12 +90,22 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 				ray[i]->map_y += ray[i]->step_y;
 				//esto es altamente probable que esté mal ----> REVISAR!!!!
 				if (ray[i]->ray_dir_y > 0)
+				{
 					ray[i]->face = 's';
+					ray[i]->color = 0x85fb8c;
+				}
 				else
+				{
 					ray[i]->face = 'n';
+					ray[i]->color = 0xffa35e;
+				}
 			}
-			if (data->board[ray[i]->map_x][ray[i]->map_y].type == '1')
+			if (data->board[ray[i]->map_y][ray[i]->map_x].type == '1')
 				ray[i]->hit = true;
+			if ((i % 10 == 0 || i == WIN_WIDTH - 1) && data->debug == true)
+			{
+				printf("Rayo: %3d:  %d , %d\n", i, ray[i]->map_x, ray[i]->map_y);
+			}
 		}
 		if (data->debug == true)
 		{
@@ -82,8 +116,8 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->perp_wall_dist = ray[i]->side_dist_x - ray[i]->delta_dist_x;
 		else
 			ray[i]->perp_wall_dist = ray[i]->side_dist_y - ray[i]->delta_dist_y;
-		ray[i]->line_height = (int)(i / ray[i]->perp_wall_dist);
-		ray[i]->draw_start = -(ray[i]->line_height) / 2 + WIN_HEIGHT / 2;
+		ray[i]->line_height = (int)(WIN_WIDTH / ray[i]->perp_wall_dist);
+		ray[i]->draw_start = WIN_HEIGHT / 2 - (ray[i]->line_height) / 2;
 		if (ray[i]->draw_start < 0)
 			ray[i]->draw_start = 0;
 		ray[i]->draw_end = ray[i]->line_height / 2 + WIN_HEIGHT / 2;
@@ -91,21 +125,25 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->draw_end = WIN_HEIGHT - 1;
 		i++;
 	}
-
+	if (data->debug == true)
+			printf("\n");
 	//comprobaciones para debug
-	if (data->debug == false)
+	if (data->debug == true)
 	i = 0;
 	{
 		while (i < WIN_WIDTH)
 		{
-			printf("Rayo: %3d | %f, %f\n", i, ray[i]->ray_dir_x, ray[i]->ray_dir_y);
+			printf("Rayo: %3d | %f | %c\n", i, ray[i]->perp_wall_dist, ray[i]->face);
+			// printf("Rayo: %3d | %f, %f\n", i, ray[i]->ray_dir_x, ray[i]->ray_dir_y);
 			i++;
 		}
 	}
-	if (data->debug == false)
+	if (data->debug == true)
 		printf("Playerr: %f, %f, %f | %f, %f, %f\n", player->dir_x, player->dir_y, 
 			sqrt(pow(player->dir_x, 2)+pow(player->dir_y, 2)), player->plane_x, player->plane_y,
 			sqrt(pow(player->plane_x, 2)+pow(player->plane_y, 2)));
+	if (data->debug == false)
+		visualize_no_texture(data, ray);
 }
 
 t_ray	**initialize_ray(void)

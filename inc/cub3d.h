@@ -23,11 +23,11 @@
 # endif
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 50//512//1024//320
+#  define WIN_WIDTH 1024//320
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 40//200//820//200
+#  define WIN_HEIGHT 820//200
 # endif
 
 # ifndef FOV
@@ -128,6 +128,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	int		color;
 }	t_ray;
 
 /* 
