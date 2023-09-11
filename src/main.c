@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 	t_list	*list;
-atexit(leaks);
+// atexit(leaks);
 	list = 0;
 	ft_check_argc(argc);
 	data = (t_data *)malloc(sizeof(t_data));//lo casteo xq visual no para de decirme q hay un error si no, pero no hace falta
@@ -30,6 +30,7 @@ atexit(leaks);
 		put_field(data->board, data->map_y_tot, data->map_x_tot, data);
 		replace_field(data->board, data->map_y_tot, data->map_x_tot, data);
 	}
+	init_texture(data);
 	raycast(data, data->ray, data->player);
 	mlx_hook(data->mlx_win, 2, 0, &key_hook, data);// (1L << 17) captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
 	mlx_hook(data->mlx_win, 17, 0, &exit_game, data); //(1L << 17) 

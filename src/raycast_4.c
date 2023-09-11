@@ -92,12 +92,12 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 				if (ray[i]->ray_dir_y > 0)
 				{
 					ray[i]->face = 's';
-					ray[i]->color = 0x85fb8c;
+					ray[i]->color = 0xffa35e;
 				}
 				else
 				{
 					ray[i]->face = 'n';
-					ray[i]->color = 0xffa35e;
+					ray[i]->color = 0x85fb8c;
 				}
 			}
 			if (data->board[ray[i]->map_y][ray[i]->map_x].type == '1')
@@ -123,8 +123,36 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		ray[i]->draw_end = ray[i]->line_height / 2 + WIN_HEIGHT / 2;
 		if (ray[i]->draw_end >= WIN_HEIGHT)
 			ray[i]->draw_end = WIN_HEIGHT - 1;
+
+		//texturas
+		if (ray[i]->face == 'w' || ray[i]-> face == 'e')
+			ray[i]->wall_x = player->y + ray[i]->perp_wall_dist * ray[i]->ray_dir_y;
+		else
+			ray[i]->wall_x = player->x + ray[i]->perp_wall_dist * ray[i]->ray_dir_x;
+		ray[i]->wall_x -= floor(ray[i]->wall_x);
+		ray[i]->tex_x = (int)(ray[i]->wall_x * (double)TEXTURE_WIDTH);
+		if (ray[i]->face == 'w' || ray[i]->face == 'n') //chequear esto si las imágenes salen al revés
+			ray[i]->tex_x = TEXTURE_WIDTH - ray[i]->tex_x - 1;
+		ray[i]->tex_step = 1.0 * TEXTURE_HEIGHT / ray[i]->line_height;
+		ray[i]->tex_pos = (ray[i]->draw_start - WIN_HEIGHT / 2 + ray[i]->line_height / 2) * ray[i]->tex_step;
+
+		while(ray[i]->y < ray[i]->draw_end)
+		{
+			ray[i]->tex_y = (int)ray[i]->tex_pos & (TEXTURE_HEIGHT - 1);
+			ray[i]->tex_pos += ray[i]->tex_step;
+
+			//terminar de hacer las texturas
+			
+			//buffer[tex_y][i] = texture[4][tex_y][tex_x];
+			(ray[i]->y)++;
+		}
+
+
+
+
 		i++;
 	}
+/* 
 	if (data->debug == true)
 			printf("\n");
 	//comprobaciones para debug
@@ -142,6 +170,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		printf("Playerr: %f, %f, %f | %f, %f, %f\n", player->dir_x, player->dir_y, 
 			sqrt(pow(player->dir_x, 2)+pow(player->dir_y, 2)), player->plane_x, player->plane_y,
 			sqrt(pow(player->plane_x, 2)+pow(player->plane_y, 2)));
+	 */
 	if (data->debug == false)
 		visualize_no_texture(data, ray);
 }

@@ -42,6 +42,14 @@
 #  define TURN_SPEED 10
 # endif
 
+# ifndef TEXTURE_WIDTH
+#  define TEXTURE_WIDTH 64
+# endif
+
+# ifndef TEXTURE_HEIGHT
+#  define TEXTURE_HEIGHT 64
+# endif
+
 enum e_keycodes
 {
 	key_a = 0,
@@ -63,13 +71,6 @@ enum e_cardinal_points
 	SOUTH = 270,
 	EAST = 0,
 	WEST = 180
-};
-
-enum e_constant_values
-{
-	vision_angle = 90,
-	window_height = 720,
-	window_width = 1280
 };
 
 typedef struct s_board {
@@ -129,6 +130,12 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 	int		color;
+	double	wall_x;
+	int		tex_x;
+	int		tex_step;
+	double	tex_pos;
+	int		y;
+	int		tex_y;
 }	t_ray;
 
 /* 
@@ -191,6 +198,29 @@ typedef struct s_ray
 	//float	delta_angle; //angulo desde el rayo central en radianes
  */
 
+typedef struct s_img
+{
+	void	*img_data;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
+
+typedef struct s_texture
+{
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	t_img		no_img;
+	t_img		so_img;
+	t_img		we_img;
+	t_img		ea_img;
+}	t_texture;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -204,6 +234,7 @@ typedef struct s_data
 	t_board		**board;
 	t_player	*player;
 	t_ray		**ray;
+	t_texture	texture;
 	bool		debug;
 	int			floor_color;
 	int			sky_color;
@@ -284,7 +315,8 @@ void		calculate_column(t_data *data, t_ray *ray);
 void		calculate_color(t_ray *ray);//solo sin textura, quitar
  */
 // visualize
-void    visualize_no_texture(t_data *data, t_ray **ray);
+void	visualize_no_texture(t_data *data, t_ray **ray);
+void	init_texture(t_data *data);
 
 
 

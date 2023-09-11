@@ -66,7 +66,7 @@ $(NAME): $(OBJS)
 	@echo $(PURPLE)"[Creating libft]"$(BLUE)
 	@$(MAKE) -C $(LIBFT_PATH) --silent
 	@echo $(PURPLE)"[Creating cub3D]"$(BLUE)
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) #-fsanitize=address
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) -fsanitize=address
 	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
 
 clean:
