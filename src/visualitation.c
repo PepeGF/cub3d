@@ -29,7 +29,7 @@ void	visualize_with_texture(t_data *data, t_ray ** ray)
 	(void)ray;
 }
 
-
+/* 
 void	visualize_no_texture(t_data *data, t_ray **ray)
 {
 	visualize_with_texture(data, ray);
@@ -69,3 +69,5 @@ void	visualize_no_texture(t_data *data, t_ray **ray)
 	mlx_destroy_image(data->mlx, image);
 	return ;
 }
+ */
+

@@ -136,67 +136,8 @@ typedef struct s_ray
 	double	tex_pos;
 	int		y;
 	int		tex_y;
+	int		aux;
 }	t_ray;
-
-/* 
-typedef struct s_ray //casi bueno
-{
-	int		ray_up;
-	int		ray_left;
-	int		collision_x_v;
-	int		collision_y_v;
-	int		collision_x_h;
-	int		collision_y_h;
-	int		collision_x;
-	int		collision_y;
-	float	direction_rad;	//rray direction in radians
-	float	direction_deg;	//ray direction in degrees
-	int		x_step;
-	int		y_step;
-	bool	h_crash;
-	bool	v_crash;
-	int		tile_x;
-	int		tile_y;
-	float	dist_h_collision;
-	float	dist_v_collision;
-	float	dist;
-	char	chosen;
-	char	face; //hacia dónde mira la pared (no desde dónde se mira)
-	int		wall_height;
-	int		color;
-	int		column;
-	int		draw_start;
-	int		draw_end;
-}	t_ray;
- */
-/* 
-typedef struct s_ray
-{
-	float	ray_x;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	ray_direction; // angulo en radianes
-	int		ray_up;		// para hacer la colisión correctamente cuando sube
-	int		ray_left;	// idem para cuando va hacia la izquierda
-	int		collision_x; // x del punto de colision
-	int		collision_y; // y del punto de colision
-	int		collision_x_h; // x del punto de colision horizontal
-	int		collision_y_h; // y del punto de colision horizontal
-	int		collision_x_v; // x del punto de colision vertical
-	int		collision_y_v; // y del punto de colision vertical
-	float	dist_h_collision;
-	float	dist_v_collision;
-	int		column;	//pixel de la ventana 
-	int		h_crash; //booleano de si la colision es horizontal
-	int		v_crash; //booleano de si la colision es vertical
-	float		x_step;	//distancia en px entre las colisiones parciales en x
-	float		y_step;	//distancia en px entre las colisiones parciales en y
-	int		tile_x;
-	int		tile_y;
-	float		*dist;
-}	t_ray;
-	//float	delta_angle; //angulo desde el rayo central en radianes
- */
 
 typedef struct s_img
 {
@@ -207,6 +148,7 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
+	int		*buffer;
 }	t_img;
 
 typedef struct s_texture
@@ -238,6 +180,7 @@ typedef struct s_data
 	bool		debug;
 	int			floor_color;
 	int			sky_color;
+	t_img		*cub3d_image;
 }	t_data;
 
 // main.c

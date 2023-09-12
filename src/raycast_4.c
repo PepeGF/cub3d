@@ -133,7 +133,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		ray[i]->tex_x = (int)(ray[i]->wall_x * (double)TEXTURE_WIDTH);
 		if (ray[i]->face == 'w' || ray[i]->face == 'n') //chequear esto si las imágenes salen al revés
 			ray[i]->tex_x = TEXTURE_WIDTH - ray[i]->tex_x - 1;
-		ray[i]->tex_step = 1.0 * TEXTURE_HEIGHT / ray[i]->line_height;
+		ray[i]->tex_step = (double)TEXTURE_HEIGHT / ray[i]->line_height;
 		ray[i]->tex_pos = (ray[i]->draw_start - WIN_HEIGHT / 2 + ray[i]->line_height / 2) * ray[i]->tex_step;
 
 		while(ray[i]->y < ray[i]->draw_end)
@@ -142,10 +142,21 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->tex_pos += ray[i]->tex_step;
 
 			//terminar de hacer las texturas
-			
+			if (ray[i]->face == 'n' && ray[i]->hit == true)
+				ray[i]->color = ft_atoi(data->texture.no_img.addr + (ray[i]->tex_y * data->texture.no_img.line_length - ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8)));
+			else if (ray[i]->face == 's' && ray[i]->hit == true)
+				ray[i]->color = ft_atoi(data->texture.so_img.addr + (ray[i]->tex_y * data->texture.so_img.line_length - ray[i]->tex_x * (data->texture.so_img.bits_per_pixel / 8)));
+			else if (ray[i]->face == 'e' && ray[i]->hit == true)
+				ray[i]->color = ft_atoi(data->texture.ea_img.addr + (ray[i]->tex_y * data->texture.ea_img.line_length - ray[i]->tex_x * (data->texture.ea_img.bits_per_pixel / 8)));
+			else if (ray[i]->face == 'w' && ray[i]->hit == true)
+				ray[i]->color = ft_atoi(data->texture.we_img.addr + (ray[i]->tex_y * data->texture.we_img.line_length - ray[i]->tex_x * (data->texture.we_img.bits_per_pixel / 8)));
+			// ray[i]->aux = data->cub3d_image->addr + (ray[i]->y * data->cub3d_image->line_length + i * (data->cub3d_image->bits_per_pixel / 8));
+			// data->cub3d_image->buffer[ray[i]->aux] = ray[i]->color; 
 			//buffer[tex_y][i] = texture[4][tex_y][tex_x];
 			(ray[i]->y)++;
 		}
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub3d_image->img_data, WIN_WIDTH, WIN_HEIGHT);
+
 
 
 
@@ -171,8 +182,10 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			sqrt(pow(player->dir_x, 2)+pow(player->dir_y, 2)), player->plane_x, player->plane_y,
 			sqrt(pow(player->plane_x, 2)+pow(player->plane_y, 2)));
 	 */
-	if (data->debug == false)
-		visualize_no_texture(data, ray);
+	// if (data->debug == false)
+	// 	visualize_no_texture(data, ray);
+
+	
 }
 
 t_ray	**initialize_ray(void)
