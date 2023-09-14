@@ -38,3 +38,29 @@ void    visualize_no_texture(t_data *data, t_ray **ray)
 	mlx_destroy_image(data->mlx, image);
 	return ;
 }
+/* 
+void	init_texture(t_data *data)
+{
+	void    *image;
+	int     pixel_bits;
+	int     endian;
+	int     *buffer;
+	int     line_bytes;
+	int     i;
+	int     j;
+	data->texture.no_path = "./img/NO.xpm";
+	data->texture.so_path = "./img/SO.xpm";
+	data->texture.we_path = "./img/WE.xpm";
+	data->texture.ea_path = "./img/EA.xpm";
+
+	data->texture.no_img.img_data = mlx_xpm_file_to_image(data->mlx, data->texture.no_path, &data->texture.no_img.width, &data->texture.no_img.height);
+	data->texture.so_img.img_data = mlx_xpm_file_to_image(data->mlx, data->texture.so_path, &data->texture.so_img.width, &data->texture.so_img.height);
+	data->texture.we_img.img_data = mlx_xpm_file_to_image(data->mlx, data->texture.we_path, &data->texture.we_img.width, &data->texture.we_img.height);
+	data->texture.ea_img.img_data = mlx_xpm_file_to_image(data->mlx, data->texture.ea_path, &data->texture.ea_img.width, &data->texture.ea_img.height);
+
+	data->texture.no_img.addr = mlx_get_data_addr(data->texture.no_img.img_data, &data->texture.no_img.bits_per_pixel, &data->texture.no_img.line_length, &data->texture.no_img.endian);
+	data->texture.so_img.addr = mlx_get_data_addr(data->texture.so_img.img_data, &data->texture.so_img.bits_per_pixel, &data->texture.so_img.line_length, &data->texture.so_img.endian);
+	data->texture.we_img.addr = mlx_get_data_addr(data->texture.we_img.img_data, &data->texture.we_img.bits_per_pixel, &data->texture.we_img.line_length, &data->texture.we_img.endian);
+	data->texture.ea_img.addr = mlx_get_data_addr(data->texture.ea_img.img_data, &data->texture.ea_img.bits_per_pixel, &data->texture.ea_img.line_length, &data->texture.ea_img.endian);
+}
+ */

@@ -125,6 +125,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->draw_end = WIN_HEIGHT - 1;
 		i++;
 	}
+	/* 
 	if (data->debug == true)
 			printf("\n");
 	//comprobaciones para debug
@@ -142,6 +143,8 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		printf("Playerr: %f, %f, %f | %f, %f, %f\n", player->dir_x, player->dir_y, 
 			sqrt(pow(player->dir_x, 2)+pow(player->dir_y, 2)), player->plane_x, player->plane_y,
 			sqrt(pow(player->plane_x, 2)+pow(player->plane_y, 2)));
+	 */
+	
 	if (data->debug == false)
 		visualize_no_texture(data, ray);
 }
