@@ -1,5 +1,12 @@
 # include "../inc/cub3d.h"
 
+void put_pixel_img(t_img game, int x, int y, int color)
+{
+	char	*dst;
+	dst = game.addr + (y * game.line_length + x * (game.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
 void	raycast(t_data *data, t_ray **ray, t_player *player)
 {
 	int	i;
@@ -136,7 +143,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		ray[i]->tex_step = (double)TEXTURE_HEIGHT / ray[i]->line_height;
 		if (i == 500)
 		{
-			printf("Step: %d\t|\t%d\n", ray[i]->tex_step, ray[i]->line_height);
+			printf("Step: %f | step_wall: %f | line: %d\n", ray[i]->tex_step, 1/ray[i]->tex_step, ray[i]->line_height);
 		}
 		ray[i]->tex_pos = (ray[i]->draw_start - WIN_HEIGHT / 2 + ray[i]->line_height / 2) * ray[i]->tex_step;
 
@@ -145,29 +152,59 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		{
 			if (j < ray[i]->draw_start)
 				{
+					// printf("%3d, %3d\t", i ,j); fflush(0);
 					if (i == 500)
 					{
-						data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = 0xFF0000;
+						put_pixel_img(*(data->cub3d_image), i, j, 0xFF0000);
 					}
 					else
-					data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = data->sky_color;
+					put_pixel_img(*(data->cub3d_image), i, j, data->sky_color);
+					// data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = data->sky_color;
 				}
 			else if (j >= ray[i]->draw_start && j <= ray[i]->draw_end)
 			{
+				ray[i]->tex_y = (int)roundf((TEXTURE_HEIGHT - 1) * (j - ray[i]->draw_start) / ray[i]->line_height);
 				if (ray[i]->face == 'n' && ray[i]->hit == true)
-					ray[i]->color = ft_atoi(data->texture.no_img.addr + (ray[i]->tex_y * data->texture.no_img.line_length - ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8)));
+				{
+				// printf("Wololoooooooooo\t"); fflush(0);
+					data->texture.no_img.index = ray[i]->tex_y * data->texture.no_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
+					ray[i]->color = (data->texture.no_img.addr[data->texture.no_img.index + 2] << 16) | (data->texture.no_img.addr[data->texture.no_img.index + 1] << 8) | (data->texture.no_img.addr[data->texture.no_img.index]);
+					// ray[i]->color = 0x880088;
+					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+
+					// printf("%d\n", ray[i]->color);
+				}
 				else if (ray[i]->face == 's' && ray[i]->hit == true)
-					ray[i]->color = ft_atoi(data->texture.so_img.addr + (ray[i]->tex_y * data->texture.so_img.line_length - ray[i]->tex_x * (data->texture.so_img.bits_per_pixel / 8)));
+				{
+					data->texture.so_img.index = ray[i]->tex_y * data->texture.so_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
+					ray[i]->color = 0x440044;
+					// ray[i]->color = ft_atoi(data->texture.so_img.addr + (ray[i]->tex_y * data->texture.so_img.line_length + ray[i]->tex_x * (data->texture.so_img.bits_per_pixel / 8)));
+					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+				}
 				else if (ray[i]->face == 'e' && ray[i]->hit == true)
-					ray[i]->color = ft_atoi(data->texture.ea_img.addr + (ray[i]->tex_y * data->texture.ea_img.line_length - ray[i]->tex_x * (data->texture.ea_img.bits_per_pixel / 8)));
+				{
+					data->texture.ea_img.index = ray[i]->tex_y * data->texture.ea_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
+					ray[i]->color = 0x112233;
+					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+					// ray[i]->color = ft_atoi(data->texture.ea_img.addr + (ray[i]->tex_y * data->texture.ea_img.line_length + ray[i]->tex_x * (data->texture.ea_img.bits_per_pixel / 8)));
+				}
 				else if (ray[i]->face == 'w' && ray[i]->hit == true)
-					ray[i]->color = ft_atoi(data->texture.we_img.addr + (ray[i]->tex_y * data->texture.we_img.line_length - ray[i]->tex_x * (data->texture.we_img.bits_per_pixel / 8)));
-				data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = ray[i]->color;
-				ray[i]->tex_y = (int)ray[i]->tex_pos & (TEXTURE_HEIGHT - 1);
-				ray[i]->tex_pos += ray[i]->tex_step;
+				{
+					data->texture.we_img.index = ray[i]->tex_y * data->texture.we_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
+					ray[i]->color = 0x004444;
+					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+					// ray[i]->color = ft_atoi(data->texture.we_img.addr + (ray[i]->tex_y * data->texture.we_img.line_length + ray[i]->tex_x * (data->texture.we_img.bits_per_pixel / 8)));
+				}
+				// data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = ray[i]->color;
+				// if (i == 500)
+				// {
+				// 	printf("j: %3d | tex_y: %3d | cara: %c | color: %3d\t", j, ray[i]->tex_y, ray[i]->face, ray[i]->color);
+				// 	fflush(0);
+				// }
 			}
 			else
-				data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = data->floor_color;
+				put_pixel_img(*(data->cub3d_image), i, j, data->floor_color);
+				// data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = data->floor_color;
 		}
 		i++;
 	}
