@@ -26,5 +26,7 @@ void	initialize_images(t_data *data)
 		data->cub3d_image->img_data = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 		data->cub3d_image->buffer = (int *)mlx_get_data_addr(data->cub3d_image->img_data, &data->cub3d_image->bits_per_pixel, &data->cub3d_image->line_length, &data->cub3d_image->endian);
 		data->cub3d_image->line_length /= 4;
+		data->sky_color = 0xABCDEF;
+		data->floor_color = 0x123456;
 	}
 }

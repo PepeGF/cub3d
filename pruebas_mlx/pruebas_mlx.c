@@ -1,9 +1,90 @@
 # include <stdio.h>
 # include <mlx.h>
 #include <math.h>
+#include <unistd.h>
 #include "../libft/libft.h"
-// # define width 640
-// # define heigth 360
+# define width 640
+# define heigth 360
+
+typedef struct s_image
+{
+	void *mlx;
+	void *win;
+	void *img;
+	char *addr;
+	int bits_per_pixel;
+	int line_length;
+	int endian;
+} t_image;
+
+void put_pixel_img(t_image game, int x, int y, int color)
+{
+	char *dst;
+// printf("x: %d | y: %d\n", x, y);
+	dst = game.addr + (y * game.line_length + x * (game.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+int main()
+{
+	t_image texture;
+	t_image game;
+	int color;
+	(void)game;
+	// vamos a crear una textura a partir de un archivo xpm
+	texture.mlx = mlx_init();
+	texture.win = mlx_new_window(texture.mlx, width, heigth, "Tutorial Window - Create Image");
+	texture.img = mlx_xpm_file_to_image(texture.mlx, "WE.XPM", &texture.line_length, &texture.bits_per_pixel);
+	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
+	printf("bits_per_pixel: %d\tline_length: %d\tendian: %d\n", texture.bits_per_pixel, texture.line_length, texture.endian);
+
+// Fila y columna del píxel que deseas obtener
+	int x = 0;
+	int y = 0;
+
+	// Calcular el índice del píxel en función de la fila y columna
+	int index = (y * texture.line_length) + (x * (texture.bits_per_pixel / 8));
+
+	// Acceder a los componentes de color (RGBA) en el píxel
+	unsigned char blue = texture.addr[index];
+	unsigned char green = texture.addr[index + 1];
+	unsigned char red = texture.addr[index + 2];
+
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, width, heigth, "Game");
+	game.img = mlx_new_image(game.mlx, width, heigth);
+	game.addr = mlx_get_data_addr(game.img, &game.bits_per_pixel, &game.line_length, &game.endian);
+	
+	color = (red << 16) | (green << 8) | blue;
+
+	x = 0;
+	y = 0;
+	while(y < heigth)
+	{
+		x = 0;
+		while(x < width)
+		{
+			put_pixel_img(game, x, y, color);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(game.mlx, game.win, game.img, 0, 0);
+	printf("Color del píxel (%d, %d): RGB(%u, %u, %u)\n", x, y, red, green, blue);
+	printf("Color del píxel (%d, %d): RGB(%02X%02X%02X)\n", x, y, red, green, blue);
+
+	mlx_loop(game.mlx);
+	return 0;
+
+}
+
+
+
+
+
+
+
+
 
 /* int *ft_get_color_from_strings(char *array[2][3])
 {
@@ -52,12 +133,10 @@ int main()
 }
 */
 
-
-
-# define width 640
-# define heigth 360
-int main()
+/* int main()
 {
+
+	// crea una ventana de 640x360 y le pone la mitad superior de un color y la mitad inferior de otro
 	printf("%f\n", (double)1 / (double)0);
 	void *mlx = mlx_init();
 	void *win = mlx_new_window(mlx, width, heigth, "Tutorial Window - Create Image");
@@ -94,10 +173,10 @@ int main()
 	mlx_loop(mlx);
 	return 0;
 }
-
+ */
 
 /* int main()
-{
+{ // la mismo que el anterior pero con un código más complicado
 	void *mlx = mlx_init();
 	void *win = mlx_new_window(mlx, width, heigth, "Tutorial Window - Create Image");
 
@@ -149,3 +228,4 @@ for(int x = 0; x < 640; ++x)
 	mlx_loop(mlx);
 }
  */
+

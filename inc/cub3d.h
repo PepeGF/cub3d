@@ -257,6 +257,7 @@ void		calculate_wall_height(t_data *data, t_ray *ray);
 void		calculate_column(t_data *data, t_ray *ray);
 void		calculate_color(t_ray *ray);//solo sin textura, quitar
  */
+
 // visualize
 void	visualize_no_texture(t_data *data, t_ray **ray);
 void	init_texture(t_data *data);
