@@ -1,16 +1,18 @@
 # include "../inc/cub3d.h"
 
-void put_pixel_img(t_img game, int x, int y, int color)
+void put_pixel_img(t_img *game, int x, int y, int color)
 {
 	char	*dst;
-	dst = game.addr + (y * game.line_length + x * (game.bits_per_pixel / 8));
+	// dst = game->img_data + (y * game->line_length + x * (game->bits_per_pixel / 8));
+	dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel / 8));
+	printf("color:%d\n", color);
 	*(unsigned int *)dst = color;
 }
 
 void	raycast(t_data *data, t_ray **ray, t_player *player)
 {
 	int	i;
-
+// printf("Direccion memoria: %p || %s\n", data->cub3d_image->addr, data->cub3d_image->addr);
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
@@ -152,13 +154,14 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		{
 			if (j < ray[i]->draw_start)
 				{
-					// printf("%3d, %3d\t", i ,j); fflush(0);
+					printf("%3d, %3d\t", i ,j); fflush(0);
+					printf("\nsky_color: %d\n", data->sky_color); fflush(0);
 					if (i == 500)
 					{
-						put_pixel_img(*(data->cub3d_image), i, j, 0xFF0000);
+						put_pixel_img(data->cub3d_image, i, j, 0xFF0000);
 					}
 					else
-					put_pixel_img(*(data->cub3d_image), i, j, data->sky_color);
+					put_pixel_img(data->cub3d_image, i, j, 0xFF0000/* data->sky_color */);
 					// data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = data->sky_color;
 				}
 			else if (j >= ray[i]->draw_start && j <= ray[i]->draw_end)
@@ -170,7 +173,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 					data->texture.no_img.index = ray[i]->tex_y * data->texture.no_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
 					ray[i]->color = (data->texture.no_img.addr[data->texture.no_img.index + 2] << 16) | (data->texture.no_img.addr[data->texture.no_img.index + 1] << 8) | (data->texture.no_img.addr[data->texture.no_img.index]);
 					// ray[i]->color = 0x880088;
-					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 
 					// printf("%d\n", ray[i]->color);
 				}
@@ -179,20 +182,20 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 					data->texture.so_img.index = ray[i]->tex_y * data->texture.so_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
 					ray[i]->color = 0x440044;
 					// ray[i]->color = ft_atoi(data->texture.so_img.addr + (ray[i]->tex_y * data->texture.so_img.line_length + ray[i]->tex_x * (data->texture.so_img.bits_per_pixel / 8)));
-					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				}
 				else if (ray[i]->face == 'e' && ray[i]->hit == true)
 				{
 					data->texture.ea_img.index = ray[i]->tex_y * data->texture.ea_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
 					ray[i]->color = 0x112233;
-					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 					// ray[i]->color = ft_atoi(data->texture.ea_img.addr + (ray[i]->tex_y * data->texture.ea_img.line_length + ray[i]->tex_x * (data->texture.ea_img.bits_per_pixel / 8)));
 				}
 				else if (ray[i]->face == 'w' && ray[i]->hit == true)
 				{
 					data->texture.we_img.index = ray[i]->tex_y * data->texture.we_img.line_length + ray[i]->tex_x * (data->texture.no_img.bits_per_pixel / 8);
 					ray[i]->color = 0x004444;
-					put_pixel_img(*(data->cub3d_image), i, j, ray[i]->color);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 					// ray[i]->color = ft_atoi(data->texture.we_img.addr + (ray[i]->tex_y * data->texture.we_img.line_length + ray[i]->tex_x * (data->texture.we_img.bits_per_pixel / 8)));
 				}
 				// data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = ray[i]->color;
@@ -203,7 +206,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 				// }
 			}
 			else
-				put_pixel_img(*(data->cub3d_image), i, j, data->floor_color);
+				put_pixel_img(data->cub3d_image, i, j, data->floor_color);
 				// data->cub3d_image->buffer[(j * data->cub3d_image->line_length) + i] = data->floor_color;
 		}
 		i++;

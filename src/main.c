@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	data->ray = initialize_ray();
 	data->player = where_is_the_player(data->board, data->map_x_tot, data->map_y_tot);//una vez me ha dado segfault, pero todas las variables están bien inicializadas, echar un ojo x si acaso
 	initialize_images(data);
+	// init_texture(data);
 	set_player_initial_geometry(data, data->player);
 	if (data->debug == true)
 	{
@@ -30,7 +31,8 @@ int	main(int argc, char **argv)
 		put_field(data->board, data->map_y_tot, data->map_x_tot, data);
 		replace_field(data->board, data->map_y_tot, data->map_x_tot, data);
 	}
-	init_texture(data);
+printf("Color sky un rato después: %d\n", data->sky_color);
+
 	raycast(data, data->ray, data->player);
 	mlx_hook(data->mlx_win, 2, 0, &key_hook, data);// (1L << 17) captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás
 	mlx_hook(data->mlx_win, 17, 0, &exit_game, data); //(1L << 17) 
