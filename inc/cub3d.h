@@ -220,32 +220,12 @@ int			check_x_collision(t_data *data, int	player_pos_x_temp);
 int			check_y_collision(t_data *data, int	player_pos_y_temp);
 void		set_current_grid(t_data *data);
 
-//raycast_4
+//raycast
 
 void		raycast(t_data *data, t_ray **ray, t_player *player);
 t_ray		**initialize_ray(void);
 
-/* // raycast.c
 
-t_ray		**initialize_ray(void);
-void		raycast(t_data *data);
-void		set_ray_basic(t_data *data, t_player *player, t_ray **ray, int i);
-void		calculate_first_ray_collision_horizontal(t_data *data, 
-				t_board **board, t_ray *ray, t_player *player);
-void		calculate_first_ray_collision_vertical(t_data *data,
-				t_board **board, t_ray *ray, t_player *player);
-void		collision(t_data *data, t_board **board, t_player *player,
-				t_ray *ray);
-void		calculate_ray_wall_collision_horizontal(t_data *data,
-				t_board **board, t_player *player, t_ray *ray);
-void		calculate_ray_wall_collision_vertical(t_data *data,
-				t_board **board, t_player *player, t_ray *ray);
-void		choose_closer_collision(t_data *data, t_player *player, t_ray *ray);
-void		calculate_face(t_ray *ray);
-void		calculate_wall_height(t_data *data, t_ray *ray);
-void		calculate_column(t_data *data, t_ray *ray);
-void		calculate_color(t_ray *ray);//solo sin textura, quitar
- */
 
 // visualize
 void	visualize_no_texture(t_data *data, t_ray **ray);
