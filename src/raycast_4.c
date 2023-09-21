@@ -81,33 +81,19 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			{
 				ray[i]->side_dist_x += ray[i]->delta_dist_x;
 				ray[i]->map_x += ray[i]->step_x;
-				//esto es altamente probable que esté mal ----> REVISAR!!!!
 				if (ray[i]->ray_dir_x > 0)
-				{
-					ray[i]->face = 'w';
-					ray[i]->color = 0xFF0000;
-				}
-				else
-				{
 					ray[i]->face = 'e';
-					ray[i]->color =0xfb85e8;
-				}
+				else
+					ray[i]->face = 'w';
 			}
 			else
 			{
 				ray[i]->side_dist_y += ray[i]->delta_dist_y;
 				ray[i]->map_y += ray[i]->step_y;
-				//esto es altamente probable que esté mal ----> REVISAR!!!!
 				if (ray[i]->ray_dir_y > 0)
-				{
-					ray[i]->face = 's';
-					ray[i]->color = 0xffa35e;
-				}
-				else
-				{
 					ray[i]->face = 'n';
-					ray[i]->color = 0x85fb8c;
-				}
+				else
+					ray[i]->face = 's';
 			}
 			if (data->board[ray[i]->map_y][ray[i]->map_x].type == '1')
 				ray[i]->hit = true;
@@ -154,19 +140,11 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		{
 			if (j < ray[i]->draw_start)
 				{
-					if (i == 500)
-					{
-						put_pixel_img(data->cub3d_image, i, j, 0xFF0000);
-					}
-					else
 					put_pixel_img(data->cub3d_image, i, j, data->sky_color);
 				}
 			else if (j >= ray[i]->draw_start && j <= ray[i]->draw_end)
 			{
 				ray[i]->tex_y = (int)roundf((TEXTURE_HEIGHT - 1) * (j - ray[i]->draw_start) / ray[i]->line_height);
-				// if (ray[i]->tex_x == 10 && ray[i]->tex_y == 15)
-				// 	printf("Index(%d,%d): %d\n", ray[i]->tex_x, ray[i]->tex_y, data->no->index);
-				// ray[i]->color = ((unsigned char)(data->no->addr[data->no->index + 2]) << 16) | ((unsigned char)(data->no->addr[data->no->index + 1]) << 8) | (unsigned char)(data->no->addr[data->no->index]);
 				put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				if (ray[i]->face == 'n' && ray[i]->hit == true)
 				{
