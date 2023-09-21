@@ -61,9 +61,9 @@ void	init_texture(t_data *data)
 	data->ea->addr = mlx_get_data_addr(data->ea->img_data, &(data->ea->bits_per_pixel), &(data->ea->line_length), &(data->ea->endian));
 	data->we->addr = mlx_get_data_addr(data->we->img_data, &(data->we->bits_per_pixel), &(data->we->line_length), &(data->we->endian));
 
-	printf("NO: %p | ll: %d | addr: %s\n", data->no->img_data, data->no->line_length, data->no->addr);
-	printf("SO: %p | ll: %d | addr: %s\n", data->so->img_data, data->so->line_length, data->so->addr);
-	printf("EA: %p | ll: %d | addr: %s\n", data->ea->img_data, data->ea->line_length, data->ea->addr);
-	printf("WE: %p | ll: %d | addr: %s\n", data->we->img_data, data->we->line_length, data->we->addr);
+	// printf("NO: %p | ll: %d | addr: %s\n", data->no->img_data, data->no->line_length, data->no->addr);
+	// printf("SO: %p | ll: %d | addr: %s\n", data->so->img_data, data->so->line_length, data->so->addr);
+	// printf("EA: %p | ll: %d | addr: %s\n", data->ea->img_data, data->ea->line_length, data->ea->addr);
+	// printf("WE: %p | ll: %d | addr: %s\n", data->we->img_data, data->we->line_length, data->we->addr);
 	
 }

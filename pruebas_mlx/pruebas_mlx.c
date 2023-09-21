@@ -39,11 +39,12 @@ int main()
 	printf("bits_per_pixel: %d\tline_length: %d\tendian: %d\n", texture.bits_per_pixel, texture.line_length, texture.endian);
 
 // Fila y columna del píxel que deseas obtener
-	int x = 0;
-	int y = 0;
+	int x = 10;
+	int y = 15;
 
 	// Calcular el índice del píxel en función de la fila y columna
 	int index = (y * texture.line_length) + (x * (texture.bits_per_pixel / 8));
+	printf("Index: %d\n", index);
 
 	// Acceder a los componentes de color (RGBA) en el píxel
 	unsigned char blue = texture.addr[index];
@@ -56,6 +57,7 @@ int main()
 	game.addr = mlx_get_data_addr(game.img, &game.bits_per_pixel, &game.line_length, &game.endian);
 	
 	color = (red << 16) | (green << 8) | blue;
+	color = ((unsigned char)(texture.addr[index + 2]) << 16) | ((unsigned char)(texture.addr[index + 1]) << 8) | (unsigned char)(texture.addr[index]);
 
 	x = 0;
 	y = 0;
@@ -72,6 +74,7 @@ int main()
 	mlx_put_image_to_window(game.mlx, game.win, game.img, 0, 0);
 	printf("Color del píxel (%d, %d): RGB(%u, %u, %u)\n", x, y, red, green, blue);
 	printf("Color del píxel (%d, %d): RGB(%02X%02X%02X)\n", x, y, red, green, blue);
+	printf("Color del píxel (%d, %d): RGB(%X)\n", x, y, color);
 
 	mlx_loop(game.mlx);
 	return 0;

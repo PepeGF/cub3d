@@ -164,52 +164,40 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			else if (j >= ray[i]->draw_start && j <= ray[i]->draw_end)
 			{
 				ray[i]->tex_y = (int)roundf((TEXTURE_HEIGHT - 1) * (j - ray[i]->draw_start) / ray[i]->line_height);
+				// if (ray[i]->tex_x == 10 && ray[i]->tex_y == 15)
+				// 	printf("Index(%d,%d): %d\n", ray[i]->tex_x, ray[i]->tex_y, data->no->index);
+				// ray[i]->color = ((unsigned char)(data->no->addr[data->no->index + 2]) << 16) | ((unsigned char)(data->no->addr[data->no->index + 1]) << 8) | (unsigned char)(data->no->addr[data->no->index]);
+				put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				if (ray[i]->face == 'n' && ray[i]->hit == true)
 				{
 					data->no->index = ray[i]->tex_y * data->no->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
-					if (i == 500)
-					{
-						if (j % 2 != 0)
-							printf("tex_x: %3d | tex_y: %3d | index: %3d\t", ray[i]->tex_x, ray[i]->tex_y, data->no->index);
-						else
-							printf("tex_x: %3d | tex_y: %3d | index: %3d\n", ray[i]->tex_x, ray[i]->tex_y, data->no->index);
-						
-					}
-
-					ray[i]->color = (data->no->addr[data->no->index + 2] << 16) | (data->no->addr[data->no->index + 1] << 8) | (data->no->addr[data->no->index]);
-					ray[i]->color = 0x9922cc;
+					ray[i]->color = ((unsigned char)(data->no->addr[data->no->index + 2]) << 16) | ((unsigned char)(data->no->addr[data->no->index + 1]) << 8) | (unsigned char)(data->no->addr[data->no->index]);
 					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				}
 				else if (ray[i]->face == 's' && ray[i]->hit == true)
 				{
-					data->so->index = ray[i]->tex_y * data->so->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
-					ray[i]->color = 0x440044;
+					data->so->index = ray[i]->tex_y * data->so->line_length + ray[i]->tex_x * (data->so->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->so->addr[data->so->index + 2]) << 16) | ((unsigned char)(data->so->addr[data->so->index + 1]) << 8) | (unsigned char)(data->so->addr[data->so->index]);
 					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				}
 				else if (ray[i]->face == 'e' && ray[i]->hit == true)
 				{
-					data->ea->index = ray[i]->tex_y * data->ea->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
-					ray[i]->color = 0x112233;
+					data->ea->index = ray[i]->tex_y * data->ea->line_length + ray[i]->tex_x * (data->ea->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->ea->addr[data->ea->index + 2]) << 16) | ((unsigned char)(data->ea->addr[data->ea->index + 1]) << 8) | (unsigned char)(data->ea->addr[data->ea->index]);
 					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				}
 				else if (ray[i]->face == 'w' && ray[i]->hit == true)
 				{
-					data->we->index = ray[i]->tex_y * data->we->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
-					ray[i]->color = 0x004444;
+					data->we->index = ray[i]->tex_y * data->we->line_length + ray[i]->tex_x * (data->we->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->we->addr[data->we->index + 2]) << 16) | ((unsigned char)(data->we->addr[data->we->index + 1]) << 8) | (unsigned char)(data->we->addr[data->we->index]);
 					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				}
-				// if (i == 500)
-				// {
-				// 	printf("j: %3d | tex_y: %3d | cara: %c | color: %3d  ", j, ray[i]->tex_y, ray[i]->face, ray[i]->color);
-				// 	fflush(0);
-				// }
 			}
 			else
 				put_pixel_img(data->cub3d_image, i, j, data->floor_color);
 		}
 		i++;
 	}
-		printf("\n");
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub3d_image->img_data, 0, 0);
 		// mlx_destroy_image(data->mlx, data->cub3d_image->img_data);
 }
