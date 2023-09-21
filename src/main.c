@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		put_field(data->board, data->map_y_tot, data->map_x_tot, data);
 		replace_field(data->board, data->map_y_tot, data->map_x_tot, data);
 	}
-printf("Color sky un rato después: %d\n", data->sky_color);
+// printf("Color sky un rato después: %d\n", data->sky_color);
 
 	raycast(data, data->ray, data->player);
 	mlx_hook(data->mlx_win, 2, 0, &key_hook, data);// (1L << 17) captar pulsaciones mantenidas, investigar cómo evitar micropausa entre primera pulsacion y las demás

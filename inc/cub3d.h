@@ -149,19 +149,8 @@ typedef struct s_img
 	int		width;
 	int		height;
 	int		index;
+	char	*path;
 }	t_img;
-
-typedef struct s_texture
-{
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	t_img		no_img;
-	t_img		so_img;
-	t_img		we_img;
-	t_img		ea_img;
-}	t_texture;
 
 typedef struct s_data
 {
@@ -176,11 +165,14 @@ typedef struct s_data
 	t_board		**board;
 	t_player	*player;
 	t_ray		**ray;
-	t_texture	texture;
 	bool		debug;
 	int			floor_color;
 	int			sky_color;
 	t_img		*cub3d_image;
+	t_img		*no;
+	t_img		*so;
+	t_img		*ea;
+	t_img		*we;
 }	t_data;
 
 // main.c
@@ -204,6 +196,7 @@ int			ft_player_initial_direction(t_board **board, t_player *player);
 
 // images.c
 void		initialize_images(t_data *data);
+void		init_texture(t_data *data);
 
 // window.c
 void		put_field(t_board **matrix, int row, int col, t_data *data);
@@ -260,7 +253,6 @@ void		calculate_color(t_ray *ray);//solo sin textura, quitar
 
 // visualize
 void	visualize_no_texture(t_data *data, t_ray **ray);
-void	init_texture(t_data *data);
 
 
 
