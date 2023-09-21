@@ -132,11 +132,7 @@ typedef struct s_ray
 	int		color;
 	double	wall_x;
 	int		tex_x;
-	double	tex_step;
-	double	tex_pos;
-	int		y;
 	int		tex_y;
-	int		aux;
 }	t_ray;
 
 typedef struct s_img

@@ -126,14 +126,8 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 			ray[i]->wall_x = player->x + ray[i]->perp_wall_dist * ray[i]->ray_dir_x;
 		ray[i]->wall_x -= floor(ray[i]->wall_x);
 		ray[i]->tex_x = (int)(ray[i]->wall_x * (double)TEXTURE_WIDTH);
-		if (ray[i]->face == 'w' || ray[i]->face == 'n') //chequear esto si las imágenes salen al revés
+		if (ray[i]->face == 'w' || ray[i]->face == 'n')
 			ray[i]->tex_x = TEXTURE_WIDTH - ray[i]->tex_x - 1;
-		ray[i]->tex_step = (double)TEXTURE_HEIGHT / ray[i]->line_height;
-		if (i == 500 && data->debug == true)
-		{
-			printf("Step: %f | step_wall: %f | line: %d\n", ray[i]->tex_step, 1/ray[i]->tex_step, ray[i]->line_height);
-		}
-		ray[i]->tex_pos = (ray[i]->draw_start - WIN_HEIGHT / 2 + ray[i]->line_height / 2) * ray[i]->tex_step;
 
 		int j = -1;
 		while (++j < WIN_HEIGHT)
