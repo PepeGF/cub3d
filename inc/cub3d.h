@@ -35,7 +35,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 20
+#  define MOVE_SPEED 1
 # endif
 
 # ifndef TURN_SPEED

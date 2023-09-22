@@ -112,8 +112,6 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		else
 			ray[i]->perp_wall_dist = ray[i]->side_dist_y - ray[i]->delta_dist_y;
 		ray[i]->line_height = (int)(WIN_HEIGHT / ray[i]->perp_wall_dist);
-		if (ray[i]->line_height > WIN_HEIGHT)
-			printf("Rayo: %3d | Altura: %3d\n", i, ray[i]->line_height);
 		ray[i]->draw_start = WIN_HEIGHT / 2 - (ray[i]->line_height) / 2;
 		if (ray[i]->draw_start < 0)
 			ray[i]->draw_start = 0;
@@ -134,6 +132,10 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		int j = -1;
 		while (++j < WIN_HEIGHT)
 		{
+			if (ray[i]->line_height > WIN_HEIGHT && j == 0)
+			{
+				printf("Rayo: %3d | Altura: %3d | Distancia: %f\n", i, ray[i]->line_height, ray[i]->perp_wall_dist);
+			}
 			if (j < ray[i]->draw_start)
 				{
 					put_pixel_img(data->cub3d_image, i, j, data->sky_color);
