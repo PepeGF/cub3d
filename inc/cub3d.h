@@ -133,6 +133,8 @@ typedef struct s_ray
 	double	wall_x;
 	int		tex_x;
 	int		tex_y;
+	int		tex_big_y_start;
+	int		tex_big_y_end;
 }	t_ray;
 
 typedef struct s_img

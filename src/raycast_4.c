@@ -9,6 +9,13 @@ void put_pixel_img(t_img *game, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	color_from_tex_to_game(t_data *data, t_ray **ray, int i, int j)
+{
+	data->we->index = ray[i]->tex_y * data->we->line_length + ray[i]->tex_x * (data->we->bits_per_pixel / 8);
+	ray[i]->color = ((unsigned char)(data->we->addr[data->we->index + 2]) << 16) | ((unsigned char)(data->we->addr[data->we->index + 1]) << 8) | (unsigned char)(data->we->addr[data->we->index]);
+	put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+}
+
 void	raycast(t_data *data, t_ray **ray, t_player *player)
 {
 	int	i;
@@ -134,16 +141,23 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		{
 			if (ray[i]->line_height > WIN_HEIGHT && j == 0)
 			{
-				printf("Rayo: %3d | Altura: %3d | Distancia: %f\n", i, ray[i]->line_height, ray[i]->perp_wall_dist);
+				ray[i]->tex_big_y_start = TEXTURE_HEIGHT / 2 * (1 - ray[i]->perp_wall_dist);
+				ray[i]->tex_big_y_end = TEXTURE_HEIGHT - ray[i]->tex_big_y_start;
+				ray[i]->tex_y = (int)roundf((ray[i]->tex_big_y_end - ray[i]->tex_big_y_start) * (j / (ray[i]->tex_big_y_end - ray[i]->tex_big_y_start)));
+				data->no->index = ray[i]->tex_y * data->no->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
+				ray[i]->color = ((unsigned char)(data->no->addr[data->no->index + 2]) << 16) | ((unsigned char)(data->no->addr[data->no->index + 1]) << 8) | (unsigned char)(data->no->addr[data->no->index]);
+				put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+
+				printf("Rayo: %3d | Altura: %3d | Distancia: %f | texY_ini: %3d | texY_fin: %3d\n", i, ray[i]->line_height, ray[i]->perp_wall_dist, ray[i]->tex_big_y_start, ray[i]->tex_big_y_end);
 			}
-			if (j < ray[i]->draw_start)
+			if (j < ray[i]->draw_start && ray[i]->line_height <= WIN_HEIGHT)
 				{
 					put_pixel_img(data->cub3d_image, i, j, data->sky_color);
 				}
-			else if (j >= ray[i]->draw_start && j <= ray[i]->draw_end)
+			else if (j >= ray[i]->draw_start && j <= ray[i]->draw_end && ray[i]->line_height <= WIN_HEIGHT)
 			{
 				ray[i]->tex_y = (int)roundf((TEXTURE_HEIGHT - 1) * (j - ray[i]->draw_start) / ray[i]->line_height);
-				put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+				// put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				if (ray[i]->face == 'n' && ray[i]->hit == true)
 				{
 					data->no->index = ray[i]->tex_y * data->no->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
@@ -169,7 +183,7 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
 				}
 			}
-			else
+			else if (ray[i]->line_height <= WIN_HEIGHT)
 				put_pixel_img(data->cub3d_image, i, j, data->floor_color);
 		}
 		i++;
