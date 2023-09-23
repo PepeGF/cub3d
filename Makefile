@@ -27,11 +27,11 @@ SRCS = main.c \
 		images.c \
 		key_pressed.c \
 		movement.c \
+		collision.c \
 		exit_game.c \
 		walls.c \
 		raycast_4.c \
 		visualitation.c
-# window.c \
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

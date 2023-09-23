@@ -12,13 +12,11 @@ t_list	*ft_read_map(char *file, t_data *data)
 	line = get_next_line(fd);
 	if (line == 0)
 		exit(0);
-	data->map_x_tot = ft_strlen(line) - 1;//esto no valdrá, el mapa no tiene xq ser rectangular
+	data->map_x_tot = ft_strlen(line) - 1;
 	aux = 0;
 	while (line)
 	{
 		len = ft_strlen(line) - 1;
-/* 		if (data->map_x_tot != len)//no vale, las lineas no tienen q ser iguales
-			free_if_error(fd, &aux); */
 		ft_lstadd_back(&aux, ft_lstnew(line));
 		line = get_next_line(fd);
 		data->map_y_tot += 1;

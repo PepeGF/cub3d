@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 19:40:50 by josgarci          #+#    #+#             */
+/*   Updated: 2023/09/23 20:19:32 by josgarci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 t_board	**ft_final_matrix(t_list **list, t_data *data)
@@ -17,11 +29,8 @@ t_board	**ft_final_matrix(t_list **list, t_data *data)
 		while (j < data->map_x_tot)
 		{
 			board[i][j] = ft_add_line_to_list(aux->content[j], i, j);
-			// printf("%c", board[i][j].type);
-			// fflush(0);
 			j++;
 		}
-		// printf("\n");
 		i++;
 		aux = aux->next;
 	}
@@ -38,7 +47,6 @@ t_board	ft_add_line_to_list(char c, int row, int col)
 	elem.type = c;
 	if (c == '1')
 		elem.is_border = 1;
-	// elem.coll = 1;
 	return (elem);
 }
 
@@ -47,8 +55,6 @@ void	ft_initialize_pos(t_board *elem)
 	elem->col = -1;
 	elem->row = -1;
 	elem->is_border = 0;
-	elem->type = 'N';//esto no se puede hacer aquí, se puede, pero no sirve de nada
 	elem->coll = 0;
-//	elem->end = 0;
 	elem->jug = 0;
 }
