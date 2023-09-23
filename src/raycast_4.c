@@ -119,6 +119,8 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		else
 			ray[i]->perp_wall_dist = ray[i]->side_dist_y - ray[i]->delta_dist_y;
 		ray[i]->line_height = (int)(WIN_HEIGHT / ray[i]->perp_wall_dist);
+		if (ray[i]->line_height < 0)
+			ray[i]->line_height = 62500;
 		ray[i]->draw_start = WIN_HEIGHT / 2 - (ray[i]->line_height) / 2;
 		if (ray[i]->draw_start < 0)
 			ray[i]->draw_start = 0;
@@ -139,16 +141,35 @@ void	raycast(t_data *data, t_ray **ray, t_player *player)
 		int j = -1;
 		while (++j < WIN_HEIGHT)
 		{
-			if (ray[i]->line_height > WIN_HEIGHT && j == 0)
+			if (ray[i]->line_height > WIN_HEIGHT)
 			{
-				ray[i]->tex_big_y_start = TEXTURE_HEIGHT / 2 * (1 - ray[i]->perp_wall_dist);
-				ray[i]->tex_big_y_end = TEXTURE_HEIGHT - ray[i]->tex_big_y_start;
-				ray[i]->tex_y = (int)roundf((ray[i]->tex_big_y_end - ray[i]->tex_big_y_start) * (j / (ray[i]->tex_big_y_end - ray[i]->tex_big_y_start)));
-				data->no->index = ray[i]->tex_y * data->no->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
-				ray[i]->color = ((unsigned char)(data->no->addr[data->no->index + 2]) << 16) | ((unsigned char)(data->no->addr[data->no->index + 1]) << 8) | (unsigned char)(data->no->addr[data->no->index]);
-				put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
-
-				printf("Rayo: %3d | Altura: %3d | Distancia: %f | texY_ini: %3d | texY_fin: %3d\n", i, ray[i]->line_height, ray[i]->perp_wall_dist, ray[i]->tex_big_y_start, ray[i]->tex_big_y_end);
+				ray[i]->tex_big_y_start = ((double)(TEXTURE_HEIGHT - 1) / (double)2 * (1 - ray[i]->perp_wall_dist));
+				ray[i]->tex_big_y_end = ((double)(TEXTURE_HEIGHT - 1) - ray[i]->tex_big_y_start);
+				ray[i]->tex_y = (int)roundf(ray[i]->tex_big_y_start - 0.5 + ((ray[i]->tex_big_y_end - ray[i]->tex_big_y_start) * (double)j / (double)WIN_HEIGHT));
+				if (ray[i]->face == 'n' && ray[i]->hit == true)
+				{
+					data->no->index = ray[i]->tex_y * data->no->line_length + ray[i]->tex_x * (data->no->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->no->addr[data->no->index + 2]) << 16) | ((unsigned char)(data->no->addr[data->no->index + 1]) << 8) | (unsigned char)(data->no->addr[data->no->index]);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+				}
+				else if (ray[i]->face == 's' && ray[i]->hit == true)
+				{
+					data->so->index = ray[i]->tex_y * data->so->line_length + ray[i]->tex_x * (data->so->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->so->addr[data->so->index + 2]) << 16) | ((unsigned char)(data->so->addr[data->so->index + 1]) << 8) | (unsigned char)(data->so->addr[data->so->index]);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+				}
+				else if (ray[i]->face == 'e' && ray[i]->hit == true)
+				{
+					data->ea->index = ray[i]->tex_y * data->ea->line_length + ray[i]->tex_x * (data->ea->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->ea->addr[data->ea->index + 2]) << 16) | ((unsigned char)(data->ea->addr[data->ea->index + 1]) << 8) | (unsigned char)(data->ea->addr[data->ea->index]);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+				}
+				else if (ray[i]->face == 'w' && ray[i]->hit == true)
+				{
+					data->we->index = ray[i]->tex_y * data->we->line_length + ray[i]->tex_x * (data->we->bits_per_pixel / 8);
+					ray[i]->color = ((unsigned char)(data->we->addr[data->we->index + 2]) << 16) | ((unsigned char)(data->we->addr[data->we->index + 1]) << 8) | (unsigned char)(data->we->addr[data->we->index]);
+					put_pixel_img(data->cub3d_image, i, j, ray[i]->color);
+				}
 			}
 			if (j < ray[i]->draw_start && ray[i]->line_height <= WIN_HEIGHT)
 				{

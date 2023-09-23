@@ -35,7 +35,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 1
+#  define MOVE_SPEED 25
 # endif
 
 # ifndef TURN_SPEED
@@ -133,8 +133,8 @@ typedef struct s_ray
 	double	wall_x;
 	int		tex_x;
 	int		tex_y;
-	int		tex_big_y_start;
-	int		tex_big_y_end;
+	double		tex_big_y_start;
+	double		tex_big_y_end;
 }	t_ray;
 
 typedef struct s_img
