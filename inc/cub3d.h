@@ -80,7 +80,6 @@ typedef struct s_board {
 	int		is_border;
 	int		jug;
 	int		coll;
-	// int		end;
 }	t_board;
 
 typedef struct s_player
@@ -100,8 +99,6 @@ typedef struct s_player
 	int		sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
 	int		move_speed;		// velocidad desplazamiento en pixeles ¿3?
 	int		turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
-	int		x_view;			// para dibujar hacia dónde mira el jugador, solo para debug, creo
-	int		y_view;
 
 	double	dir_x;
 	double	dir_y;
@@ -133,8 +130,8 @@ typedef struct s_ray
 	double	wall_x;
 	int		tex_x;
 	int		tex_y;
-	double		tex_big_y_start;
-	double		tex_big_y_end;
+	double	tex_big_y_start;
+	double	tex_big_y_end;
 }	t_ray;
 
 typedef struct s_img
@@ -200,14 +197,15 @@ void		init_texture(t_data *data);
 void		put_field(t_board **matrix, int row, int col, t_data *data);
 void		replace_field(t_board **matrix, int row, int col, t_data *data);
 void		draw_full_map(t_board **matrix, int row, int col, t_data *data);
-void		replace_border_img(t_board **matrix, int row, int col, t_data *data);
-void		replace_player_img(t_board **matrix, int row, int col, t_data *data);
+void		replace_border_img(t_board **matrix, int row, int col,
+				t_data *data);
+void		replace_player_img(t_board **matrix, int row, int col,
+				t_data *data);
 void		draw_player(t_data *data);
 void		draw_floor2d(t_data	*data);
-void 		draw_view_point(t_data *data);
+void		draw_view_point(t_data *data);
 
 void		draw_raycast_floor(t_data *data);
-
 
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
@@ -216,26 +214,20 @@ int			key_hook(int keycode, t_data *data);
 void		turn(t_data *data, int keycode);
 void		front_back(t_data *data, int keycode);
 void		side_move(t_data *data, int keycode);
-int			get_future_pos_from_player_pixel(t_data *data, int player_pos_x_temp,
-			int	 player_pos_y_temp);
-int			check_x_collision(t_data *data, int	player_pos_x_temp);
-int			check_y_collision(t_data *data, int	player_pos_y_temp);
+int			get_future_pos_from_player_pixel(t_data *data,
+				int player_pos_x_temp, int player_pos_y_temp);
+int			check_x_collision(t_data *data, int player_pos_x_temp);
+int			check_y_collision(t_data *data, int player_pos_y_temp);
 void		set_current_grid(t_data *data);
 
 //raycast
-
 void		raycast(t_data *data, t_ray **ray, t_player *player);
 t_ray		**initialize_ray(void);
 
-
-
 // visualize
-void	visualize_no_texture(t_data *data, t_ray **ray);
-
-
-
+void		visualize_no_texture(t_data *data, t_ray **ray);
 
 // exit_game.c
-int	exit_game(t_data *data);
+int			exit_game(t_data *data);
 
 #endif
