@@ -69,5 +69,5 @@ int	ft_player_initial_direction(t_board **board, t_player *player)
 		return (EAST);
 	}
 	else
-		return (-1);	//en teoría es ha comprobado que hay player, por lo q devolver -1 es imposible
+		return (-1);
 }

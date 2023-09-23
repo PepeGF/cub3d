@@ -35,7 +35,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 25
+#  define MOVE_SPEED 20
 # endif
 
 # ifndef TURN_SPEED
@@ -151,9 +151,9 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
-	void		*field;
-	void		*obs;
-	void		*border;
+	// void		*field;
+	// void		*obs;
+	// void		*border;
 	int			map_x_tot;
 	int			map_y_tot;
 	int			px;
@@ -192,20 +192,8 @@ int			ft_player_initial_direction(t_board **board, t_player *player);
 // images.c
 void		initialize_images(t_data *data);
 void		init_texture(t_data *data);
+void		texture_malloc(t_data *data);
 
-// window.c
-void		put_field(t_board **matrix, int row, int col, t_data *data);
-void		replace_field(t_board **matrix, int row, int col, t_data *data);
-void		draw_full_map(t_board **matrix, int row, int col, t_data *data);
-void		replace_border_img(t_board **matrix, int row, int col,
-				t_data *data);
-void		replace_player_img(t_board **matrix, int row, int col,
-				t_data *data);
-void		draw_player(t_data *data);
-void		draw_floor2d(t_data	*data);
-void		draw_view_point(t_data *data);
-
-void		draw_raycast_floor(t_data *data);
 
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
@@ -231,3 +219,18 @@ void		visualize_no_texture(t_data *data, t_ray **ray);
 int			exit_game(t_data *data);
 
 #endif
+
+/* // window.c
+// void		put_field(t_board **matrix, int row, int col, t_data *data);
+// void		replace_field(t_board **matrix, int row, int col, t_data *data);
+// void		draw_full_map(t_board **matrix, int row, int col, t_data *data);
+// void		replace_border_img(t_board **matrix, int row, int col,
+// 				t_data *data);
+// void		replace_player_img(t_board **matrix, int row, int col,
+				// t_data *data);
+// void		draw_player(t_data *data);
+// void		draw_floor2d(t_data	*data);
+// void		draw_view_point(t_data *data);
+
+// void		draw_raycast_floor(t_data *data);
+ */

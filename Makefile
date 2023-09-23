@@ -25,13 +25,13 @@ SRCS = main.c \
 		matrix.c \
 		player_function.c \
 		images.c \
-		window.c \
 		key_pressed.c \
 		movement.c \
 		exit_game.c \
 		walls.c \
 		raycast_4.c \
 		visualitation.c
+# window.c \
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

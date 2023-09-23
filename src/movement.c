@@ -20,9 +20,9 @@ void	turn(t_data *data, int keycode)
 	data->player->plane_x = 0.66 * cos(data->player->dir_rad + M_PI_2);
 	data->player->plane_y = -0.66 * sin(data->player->dir_rad + M_PI_2);	
 
-	if (data->debug == true){
+	/* if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
-		draw_view_point(data);}
+		draw_view_point(data);} */
 	raycast(data, data->ray, data->player);
 	// mlx_pixel_put(data->mlx, data->mlx_win, 300, 300, 0x0);
 }
@@ -48,9 +48,9 @@ void	front_back(t_data *data, int keycode)
 	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player->y_position = player_pos_y_temp;//nueva posicion en y //el -1 de antes de sin es xq el sentido positivo de las y es hacia abajo
 	set_current_grid(data);
-	if (data->debug == true){
+	/* if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
-		draw_player(data);}//dibuja al jugador en su nueva posicion
+		draw_player(data);}//dibuja al jugador en su nueva posicion */
 	raycast(data, data->ray, data->player);
 }
 
@@ -73,9 +73,9 @@ void	side_move(t_data *data, int keycode)
 	if (check_y_collision(data, player_pos_y_temp) == 0)
 		data->player->y_position = player_pos_y_temp;
 	set_current_grid(data);
-	if (data->debug == true){
+/* 	if (data->debug == true){
 		draw_full_map(data->board, data->map_y_tot, data->map_x_tot, data);
-		draw_player(data);}//dibuja al jugador en su nueva posicion
+		draw_player(data);}//dibuja al jugador en su nueva posicion */
 	raycast(data, data->ray, data->player);
 }
 
