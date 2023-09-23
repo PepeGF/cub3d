@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 20:55:16 by josgarci          #+#    #+#             */
+/*   Updated: 2023/09/23 20:56:40 by josgarci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -84,22 +96,21 @@ typedef struct s_board {
 
 typedef struct s_player
 {
-	double	x;				//posicion cuadricula
+	double	x;
 	double	y;
-	int		x_fut;			//futura posición x en cuadrícula previa a comprobar colisiones
+	int		x_fut;
 	int		y_fut;
-	int		direction;		//angulo sexagesimal 0 = este, positivo antihorario (anguloRotacion)
-	double	dir_rad;		//está bien
-	int		x_position;		//posicion pixeles
+	int		direction;
+	double	dir_rad;
+	int		x_position;
 	int		y_position;
-	int		x_fut_pos;	//futura posicion x en pixeles previa a comprobar colisiones
+	int		x_fut_pos;
 	int		y_fut_pos;
-	int		move_on;		//0 = parado, 1 = adelante, -1 = atrás
-	int		turn_on;		//-1 = giro Izq, 1 = giro Dcha
-	int		sideway_on;		//0 = parad0, -1 = derecha, 1 = izquierda
-	int		move_speed;		// velocidad desplazamiento en pixeles ¿3?
-	int		turn_speed;		// velocidad rotacion. 3 * PI/180 ¿3? grados pasados a radianes
-
+	int		move_on;
+	int		turn_on;
+	int		sideway_on;
+	int		move_speed;
+	int		turn_speed;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
@@ -151,9 +162,6 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
-	// void		*field;
-	// void		*obs;
-	// void		*border;
 	int			map_x_tot;
 	int			map_y_tot;
 	int			px;
@@ -194,7 +202,6 @@ void		initialize_images(t_data *data);
 void		init_texture(t_data *data);
 void		texture_malloc(t_data *data);
 
-
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
 
@@ -219,18 +226,3 @@ void		visualize_no_texture(t_data *data, t_ray **ray);
 int			exit_game(t_data *data);
 
 #endif
-
-/* // window.c
-// void		put_field(t_board **matrix, int row, int col, t_data *data);
-// void		replace_field(t_board **matrix, int row, int col, t_data *data);
-// void		draw_full_map(t_board **matrix, int row, int col, t_data *data);
-// void		replace_border_img(t_board **matrix, int row, int col,
-// 				t_data *data);
-// void		replace_player_img(t_board **matrix, int row, int col,
-				// t_data *data);
-// void		draw_player(t_data *data);
-// void		draw_floor2d(t_data	*data);
-// void		draw_view_point(t_data *data);
-
-// void		draw_raycast_floor(t_data *data);
- */

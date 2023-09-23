@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_function.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 20:43:09 by josgarci          #+#    #+#             */
+/*   Updated: 2023/09/23 20:43:50 by josgarci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 t_player	*where_is_the_player(t_board **board, int x, int y)
@@ -7,7 +19,7 @@ t_player	*where_is_the_player(t_board **board, int x, int y)
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
-	*player = (t_player){}; //inicializar todo lo de player en 0 o NULL
+	*player = (t_player){};
 	i = -1;
 	while (++i < y)
 	{
@@ -16,14 +28,14 @@ t_player	*where_is_the_player(t_board **board, int x, int y)
 		{
 			if (is_player(board, i, j))
 			{
-				player->x = j + 0.5; //empieza en mitad de una cuadrícula
+				player->x = j + 0.5;
 				player->y = i + 0.5;
 				break ;
 			}	
 			j++;
 		}
 	}
-	return (player);//hay que liberar esto
+	return (player);
 }
 
 int	is_player(t_board **board, int i, int j)
