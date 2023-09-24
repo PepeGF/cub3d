@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:30:48 by josgarci          #+#    #+#             */
-/*   Updated: 2023/09/24 10:10:02 by josgarci         ###   ########.fr       */
+/*   Updated: 2023/09/24 10:37:38 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 	t_list	*list;
-
+atexit(leaks);
 	list = 0;
 	ft_check_argc(argc);
 	data = (t_data *)malloc(sizeof(t_data));
