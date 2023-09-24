@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:55:16 by josgarci          #+#    #+#             */
-/*   Updated: 2023/09/23 20:56:40 by josgarci         ###   ########.fr       */
+/*   Updated: 2023/09/24 10:18:48 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@
 # include <math.h>
 
 # ifndef WIN_2D_WIDTH
-#  define WIN_2D_WIDTH 1536//360//1920
+#  define WIN_2D_WIDTH 1536
 # endif
 
 # ifndef WIN_2D_HEIGHT
-#  define WIN_2D_HEIGHT 896//271//1042
+#  define WIN_2D_HEIGHT 896
 # endif
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1024//320
+#  define WIN_WIDTH 1024
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 820//200
+#  define WIN_HEIGHT 820
 # endif
 
 # ifndef FOV
@@ -168,7 +168,6 @@ typedef struct s_data
 	t_board		**board;
 	t_player	*player;
 	t_ray		**ray;
-	bool		debug;
 	int			floor_color;
 	int			sky_color;
 	t_img		*cub3d_image;
@@ -197,11 +196,6 @@ int			is_player(t_board **board, int i, int j);
 void		set_player_initial_geometry(t_data *data, t_player *player);
 int			ft_player_initial_direction(t_board **board, t_player *player);
 
-// images.c
-void		initialize_images(t_data *data);
-void		init_texture(t_data *data);
-void		texture_malloc(t_data *data);
-
 // key_pressed.c
 int			key_hook(int keycode, t_data *data);
 
@@ -211,16 +205,36 @@ void		front_back(t_data *data, int keycode);
 void		side_move(t_data *data, int keycode);
 int			get_future_pos_from_player_pixel(t_data *data,
 				int player_pos_x_temp, int player_pos_y_temp);
-int			check_x_collision(t_data *data, int player_pos_x_temp);
-int			check_y_collision(t_data *data, int player_pos_y_temp);
 void		set_current_grid(t_data *data);
+
+// images.c
+void		initialize_images(t_data *data);
+void		init_texture(t_data *data);
+void		texture_malloc(t_data *data);
 
 //raycast
 void		raycast(t_data *data, t_ray **ray, t_player *player);
+void		visualitation(t_ray **ray, int i, t_data *data);
+void		visalize_small_wall(t_ray **ray, int i, int j, t_data *data);
+void		visualize_big_walls(t_ray **ray, int i, int j, t_data *data);
+void		calculate_hits(t_ray **ray, int i, t_data *data);
+
+// raycast_aux.c
+void		set_ray_initial_values(t_ray **ray, int i, t_player *player);
+void		calculates_for_textures(t_ray **ray, int i, t_player *player);
+void		set_ray_step_and_dist(t_ray **ray, int i, t_player *player);
+void		put_pixel_img(t_img *game, int x, int y, int color);
 t_ray		**initialize_ray(void);
 
-// visualize
-void		visualize_no_texture(t_data *data, t_ray **ray);
+// collision.c
+int			check_x_collision(t_data *data, int player_pos_x_temp);
+int			check_y_collision(t_data *data, int player_pos_y_temp);
+
+// get_textures_color.c
+void		get_north_color(t_ray **ray, int i, t_data *data);
+void		get_south_color(t_ray **ray, int i, t_data *data);
+void		get_east_color(t_ray **ray, int i, t_data *data);
+void		get_west_color(t_ray **ray, int i, t_data *data);
 
 // exit_game.c
 int			exit_game(t_data *data);

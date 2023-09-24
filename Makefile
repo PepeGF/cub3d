@@ -29,9 +29,9 @@ SRCS = main.c \
 		movement.c \
 		collision.c \
 		exit_game.c \
-		walls.c \
-		raycast_4.c \
-		visualitation.c
+		raycast.c \
+		raycast_aux.c \
+		get_textures_color.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
