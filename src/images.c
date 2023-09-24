@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:08:29 by josgarci          #+#    #+#             */
-/*   Updated: 2023/09/24 18:12:21 by josgarci         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:26:51 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,16 @@ void	texture_malloc(t_data *data)
 	data->ea = (t_img *)malloc(sizeof(t_img));
 	data->we = (t_img *)malloc(sizeof(t_img));
 	// data->no->path = ft_strdup("./img/NO.xpm");
-	data->no->path = ft_strdup("./img/Tiamant.xpm");
+	// data->no->path = ft_strdup("./img/Tiamant.xpm");
+	// data->no->path = ft_strdup("./img/josgarci.xpm");
+	data->no->path = ft_strdup("./img/atm_logo.xpm");
 	// data->so->path = ft_strdup("./img/SO.xpm");
-	data->so->path = ft_strdup("./img/Marventis.xpm");
+	// data->so->path = ft_strdup("./img/Marventis.xpm");
+	data->so->path = ft_strdup("./img/atleti1.xpm");
 	// data->ea->path = ft_strdup("./img/EA.xpm");
-	data->ea->path = ft_strdup("./img/Ignisaria.xpm");
+	// data->ea->path = ft_strdup("./img/Ignisaria.xpm");
+	data->ea->path = ft_strdup("./img/atm.xpm");
 	// data->we->path = ft_strdup("./img/WE.xpm");
-	data->we->path = ft_strdup("./img/Zefiria.xpm");
+	// data->we->path = ft_strdup("./img/Zefiria.xpm");
+	data->we->path = ft_strdup("./img/atm_calderon.xpm");
 }
