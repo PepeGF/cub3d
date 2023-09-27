@@ -6,11 +6,53 @@
 /*   By: josgarci <josgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:40:50 by josgarci          #+#    #+#             */
-/*   Updated: 2023/09/23 20:19:32 by josgarci         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:28:26 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	print_board(t_board **board, int i, int j)
+{
+	char **copy;
+	copy = malloc(sizeof(char *) * (j + 1));
+	int x = 0;
+	while(x <= i){
+		copy[x] = malloc(sizeof(char) * (i + 1));
+		x++;}
+	int y = 0;
+	while (x <= i)
+	{
+		y = 0;
+		while (y <= j)
+		{
+			// printf("%c ", board[x][y].type);
+			// fflush(0);
+			copy[x][y] = board[x][y].type;
+			y++;
+		}
+		copy[x][y] = '\0';
+		// printf("\n");
+		x++;
+	}
+	printf("-------------------------------\n");
+	copy[x] = NULL;
+
+	x = 0;
+	y = 0;
+	while (x <= i)
+	{
+		y = 0;
+		while (y <= j)
+		{
+			printf("%c ", copy[x][y]);
+			fflush(0);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
+}
 
 t_board	**ft_final_matrix(t_list **list, t_data *data)
 {
@@ -34,6 +76,7 @@ t_board	**ft_final_matrix(t_list **list, t_data *data)
 		i++;
 		aux = aux->next;
 	}
+	print_board(board, --i, --j);
 	return (board);
 }
 
